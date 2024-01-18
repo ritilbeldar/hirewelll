@@ -240,7 +240,7 @@ exports.teccontactUs = catchAsyncErrors(async (req, res, next) => {
   });
 });
 exports.contactUsdata = catchAsyncErrors(async (req, res, next) => {
-  const contactUs = new ContactUs(req.body);git push -u origin master
+  const contactUs = new ContactUs(req.body);
 
   await contactUs.save();
   sendmail(req, res, next);
