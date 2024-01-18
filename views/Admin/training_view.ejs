@@ -1,0 +1,156 @@
+<%- include('partials/nav.ejs') %>
+
+   <!----------------->
+   <!-- [ Layout content ] Start -->
+   <div class="layout-content">
+      <!-- [ content ] Start -->
+      <div class="container-fluid flex-grow-1 container-p-y">
+         <h4 class="font-weight-bold py-3 mb-0">Training Details</h4>
+         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+               <li class="breadcrumb-item"><a href="/admin/trainings">Trainings</a></li>
+               <li class="breadcrumb-item active">Training Details</li>
+            </ol>
+         </div>
+         <div class="row">
+            <div class="col-xl-12">
+               <!-- Info Edits -->
+               <div class="card mb-4">
+                  <div class="card-body">
+                     <lable>Training Details</lable>
+                     <a style="float: right;" class="btn btn-primary btn-round"
+                        href="/admin/training_edit/<%= training._id %>">Edit</a>
+                     <hr>
+                     <div class="row mb-2 g-3 justify-content-between">
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>School Name:</div>
+                           <div class="td"><b>
+                                 <%= training.schoolName %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>School Email Id:</div>
+                           <div><b>
+                                 <a href="mailto:<%= training.schoolemail %>">
+                                    <%= training.schoolemail %>
+                                 </a>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>School Contact No:</div>
+                           <div><b>
+                                 <a href="tel:<%= training.contact %>" target="_blank">
+                                    <%= training.schoolcontact %>
+                                 </a>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>School Website:</div>
+                           <div><b>
+                                 <a href="<%= training.schoolWebsite %>" target="_blank">
+                                    <%= training.schoolWebsite %>
+                                 </a>
+                              </b></div>
+                        </div>
+                        
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Training Programs:</div>
+                           <div><b>
+                              <% if (training.trainingProgram === 'Other Training') { %>
+                                 <%= training.otherProgram %>
+                               <% } else { %>
+                                   <%= training.trainingProgram %>
+                               <% } %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Number Of Teachers:</div>
+                           <div><b>
+                              <%= training.numberOfTeachers %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Preffered Date For Training:</div>
+                           <div><b>
+                              <%= training.dateForTraining %>
+                              </b></div>
+                        </div>
+
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Full Name:</div>
+                           <div class="td"><b>
+                                 <%= training.firstname %> <%= training.lastname %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Designation:</div>
+                           <div class="td"><b>
+                                 <%= training.designation %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Phone Number:</div>
+                           <div><b>
+                                 <a href="tel:<%= training.contact %>" target="_blank">
+                                    <%= training.contact %>
+                                 </a>
+
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Working Email address:</div>
+                           <div class="td"><b>
+                                 <%= training.email %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Address:</div>
+                           <div class="td"><b>
+                                 <%= training.address %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>City:</div>
+                           <div class="td"><b>
+                                 <%= training.city %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>State:</div>
+                           <div><b>
+                                 <%= training.state %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Pincode:</div>
+                           <div><b>
+                                 <%= training.pincode %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>School Type:</div>
+                           <div class="td"><b>
+                                 <%= training.schoolType %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-12 gap-2">
+                           <div><b>Remark:</b></div>
+                           <div class="text-justify">
+                              <%= training.remark %>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!------------------------------------------->
+               <!-- Posts -->
+            </div>
+         </div>
+
+         
+
+      </div>
+   </div>
+
+   <%- include('partials/footer.ejs') %>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" class="default-style layout-fixed layout-navbar-fixed">
+
+<head>
+   <title>Hirewell Admin</title>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+   <meta name="description" content="" />
+   <meta name="keywords" content="">
+   <meta name="author" content="" />
+   <link rel="icon" type="image/x-icon" href="/Frontend/newimg/logo.png">
+   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+   <link rel="stylesheet" href="/Admin/assets/fonts/fontawesome.css">
+   <link rel="stylesheet" href="/Admin/assets/fonts/ionicons.css">
+   <link rel="stylesheet" href="/Admin/assets/fonts/linearicons.css">
+   <link rel="stylesheet" href="/Admin/assets/fonts/open-iconic.css">
+   <link rel="stylesheet" href="/Admin/assets/fonts/pe-icon-7-stroke.css">
+   <link rel="stylesheet" href="/Admin/assets/fonts/feather.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+   <link href="/Frontend/assets/frontend/css/style.css" rel="stylesheet" type="text/css" />
+
+   <link rel="stylesheet" href="/Admin/assets/libs/bootstrap-sweetalert/bootstrap-sweetalert.css">
+
+   <link rel="stylesheet" href="/Admin/assets/css/bootstrap-material.css">
+   <link rel="stylesheet" href="/Admin/assets/css/shreerang-material.css">
+   <link rel="stylesheet" href="/Admin/assets/css/uikit.css">
+   <link rel="stylesheet" href="/Admin/assets/libs/perfect-scrollbar/perfect-scrollbar.css">
+   <link rel="stylesheet" href="/Admin/assets/libs/flot/flot.css">
+   <link rel="stylesheet" href="/Admin/assets/libs/morris/morris.css">
+   <link rel="stylesheet" href="/Admin/assets/libs/datatables/datatables.css">
+   <link rel="stylesheet" href="/Admin/assets/css/new.css">
+   <link href="https:/cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+   <link href="/Frontend/stylesheets/style.css" rel="stylesheet" type="text/css" />
+
+
+
+
+   <link rel="stylesheet" href="/Admin/assets/libs/bootstrap-datepicker/bootstrap-datepicker.css">
+   <link rel="stylesheet" href="/Admin/assets/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css">
+
+   <link rel="stylesheet" href="assets/libs/perfect-scrollbar/perfect-scrollbar.css">
+   <link rel="stylesheet" href="assets/libs/bootstrap-table/bootstrap-table.css">
+   <link rel="stylesheet" href="assets/libs/bootstrap-datepicker/bootstrap-datepicker.css">
+
+   <link rel="stylesheet"
+      href="/Admin/assets/libs/bootstrap-material-datetimepicker/bootstrap-material-datetimepicker.css">
+
+   <link rel="stylesheet" href="/Admin/assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css">
+
+
+   <link rel="stylesheet" href="/Admin/assets/libs/bootstrap-select/bootstrap-select.css">
+
+   <!-- <link rel="stylesheet" href="/Admin/assets/libs/bootstrap-multiselect/bootstrap-multiselect.css"> -->
+   <link rel="stylesheet" href="/Admin/assets/libs/select2/select2.css">
+   <!-- jQuery -->
+   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+   <!-- Font Awesome -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+   <!-- MDB -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
+</head>
+<style>
+   .navbar.bg-dark {
+      background-color: #ffffff !important;
+      color: rgb(8 7 7 / 76%);
+   }
+
+   .navbar.bg-dark .navbar-nav .nav-link {
+      color: rgb(17 17 17 / 76%);
+   }
+
+   .sidenav.logo-dark .app-brand {
+      height: 70px;
+      background: #ffffff;
+   }
+
+   .limited-lines {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      -webkit-line-clamp: 2;
+   }
+
+   .dz-media25 {
+      height: 15vmax;
+   }
+
+   .dz-media25 img {
+      object-fit: cover;
+   }
+
+   .modal-bod1{
+      padding: 1vmax;
+   }
+ #button{
+   font-size: 14px;
+ }
+ .fa-circle-dot{
+   font-size:10px;
+   color: blueviolet;
+ }
+ .fa-circle-dot1{
+   color: red;
+ }
+
+</style>
+
+
+
+<body>
+   <div class="page-loader">
+      <div class="bg-primary"></div>
+   </div>
+   <div class="layout-wrapper layout-2">
+      <div class="layout-inner">
+         <!-- Sidebar Start -->
+         <%- include('Sidemenu.ejs') %>
+            <!-- Sidebar End -->
+            <div class="layout-container">
+               <!-- Header Section Start -->
+               <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-dark container-p-x"
+                  id="layout-navbar" style="height: 5vmax;">
+                  <a href="index.html" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
+                     <span class="app-brand-logo demo">
+                        <img src="https://hirewell.co.in/public//newimg/logo.png" alt="Brand Logo"
+                           class="img-responsive" width="50px">
+                     </span>
+                     <span class="app-brand-text demo font-weight-normal ml-2">Culture</span>
+                  </a>
+                  <div class="layout-sidenav-toggle navbar-nav d-lg-none align-items-lg-center mr-auto">
+                     <a class="nav-item nav-link px-0 mr-lg-4" href="javascript:">
+                        <i class="ion ion-md-menu text-large align-middle"></i>
+                     </a>
+                  </div>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse"
+                     data-target="#layout-navbar-collapse">
+                     <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="navbar-collapse collapse" id="layout-navbar-collapse">
+                     <hr class="d-lg-none w-100 my-2">
+                     <div class="navbar-nav align-items-lg-center">
+                        <label class="nav-item navbar-text navbar-search-box p-0 active">
+                           <i class="feather icon-search navbar-icon align-middle"></i>
+                           <span class="navbar-search-input pl-2">
+                              <input type="text" class="form-control navbar-text mx-2" placeholder="Search...">
+                           </span>
+                        </label>
+                     </div>
+                  </div>
+                  
+
+                  <div style="position: absolute; z-index: 99; top: 60%; left: 45%; transform: translate(-50%,-50%);">
+                     <% if (messages.error) { %>
+                        <div class="alert alert-danger" role="alert" style="width: max-content;">
+                           <%= messages.error %>
+                        </div>
+                        <% } else if (messages.warning) { %>
+                           <div class="alert alert-warning" role="alert" style="width: max-content;">
+                              <%= messages.warning %>
+                           </div>
+                           <% } else if (messages.success) { %>
+                              <div class="alert alert-success" role="alert" style="width: max-content;">
+                                 <%= messages.success %>
+                              </div>
+                              <% } %>
+                  </div>
+               </nav>
+               <!-- Header Section End -->

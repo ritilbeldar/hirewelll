@@ -1,0 +1,183 @@
+<%- include('partials/nav.ejs') %>
+    <div class="layout-content">
+        <div class="container-fluid flex-grow-1 container-p-y">
+            <h4 class="font-weight-bold py-3 mb-0">Create Trainings
+                <!-- <?php //echo $_SESSION['division'];?> -->
+            </h4>
+            <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="# ">Create Trainings</a>
+                    </li>
+                </ol>
+            </div>
+            <section class="content-inner position-relative">
+                <div class="container">
+                    <form action="/admin/trainings/addcreatetrainings" method="post"
+                        enctype="multipart/form-data">
+                        <div class="row ">
+                            <div class="col-xl-12 col-lg-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5>Training Banner *</h5>
+                                        <input type="file" name="trainingBanner">
+                                    </div>
+                                    <div class="col-md-3 mt-3">
+                                        <h5>Profile</h5>
+                                        <input type="file" name="trainingProfile">
+                                    </div>
+                                    <div class="col-md-3 gap-3 mt-3">
+                                        Training By*
+                                        <input type="text" name="trainingBy" class="form-control px-2 mt-2"
+                                            placeholder="Enter Name" required>
+                                    </div>
+                                    <div class="col-md-3 mt-3">
+                                        Training Location*
+                                        <input type="text" name="trainingLocation" class="form-control px-2 mt-2"
+                                            placeholder="Enter Location" required>
+                                    </div>
+
+                                    <div class="col-md-3 mt-3">
+                                        Training Type*
+                                        <select class="custom-select" name="trainingProgram"
+                                            onchange="toggleInputField(this)">
+                                            <option value="">-- Select Training Programs--</option>
+                                            <option value="Training1">Training1</option>
+                                            <option value="Training2">Training2</option>
+                                            <option value="Training3">Training3</option>
+                                            <option value="Other Training">Other Training</option>
+                                        </select>
+                                        <input type="text" name="otherTraining" class="form-control px-2 mt-2"
+                                            placeholder="Enter Location" style="display: none;">
+                                    </div>
+                                    <div class="col-md-4 mt-3">
+                                        <h5>Training Date *</h5>
+                                        Start Date
+                                        <input type="date" name="trainingStartDate" class="form-control px-2 mt-2"
+                                            required>
+                                    </div>
+                                    <div class="col-md-4 mt-5">
+                                        End Date
+                                        <input type="date" name="trainingEndDate" class="form-control px-2 mt-2">
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="form-group">
+                                            <h5>Training Heading *</h5>
+                                            <input type="text" name="trainingHeading" class="form-control px-2"
+                                                placeholder="Heading" required>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 mt-3">
+                                        <div class="form-group">
+                                            <h4 class="title">Training Description 1 *</h4>
+                                            <div class="card-body">
+                                                <textarea class="form-control px-2" name="trainingDescription1" rows="5"
+                                                    required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <blockquote class="block-quote  style-1">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <h5>Training Title *</h5>
+                                                <input type="text" name="trainingTitle" class="form-control px-2"
+                                                    placeholder="Title" required>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <cite> By Name </cite>
+                                    </blockquote>
+
+                                    <div class="col-md-12">
+                                        <h4 class="title mt-3">Training Points</h4>
+                                        <ul class="m-b30" id="requirements-list">
+                                            <li class="form-group">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-9">
+                                                        <textarea class="form-control px-2" name="trainingPoints"
+                                                            rows="4" placeholder="Enter Points"></textarea>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <button type="button" class="btn btn-success add-btn"
+                                                            onclick="addInput(this, 'trainingPoints', 'Enter Points')"><span
+                                                                style="font-size: 18px;">+</span></button>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <button type="button" class="btn btn-danger remove-btn"
+                                                            onclick="removeInput(this)"><span
+                                                                style="font-size: 18px;">-</span></button>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-md-12 ">
+                                        <div class="form-group">
+                                            <h4 class="title">Training Description 2</h4>
+                                            <div class="card-body">
+                                                <textarea class="form-control px-2" name="trainingDescription2"
+                                                    rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4 class="title">Add Training Tags</h4>
+                                        <div class="form-group is-invalid">
+                                            <input type="text" name="trainingTags" value="" data-role="tagsinput"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <script>
+            function toggleInputField(selectElement) {
+                var inputField = document.getElementsByName("otherTraining")[0];
+                inputField.style.display = (selectElement.value === "Other Training") ? "block" : "none";
+            }
+        </script>
+
+        <script>
+            function addInput(button, name, placeholder) {
+                const list = button.closest('ul');
+                const newItem = document.createElement('li');
+                newItem.className = 'form-group';
+                newItem.innerHTML = `
+                    <div class="row align-items-center">
+                        <div class="col-md-9">
+                            <textarea class="form-control px-2" name="${name}" rows="4" placeholder="${placeholder}"></textarea>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-success add-btn" onclick="addInput(this, '${name}', '${placeholder}')"><span style="font-size: 18px;">+</span></button>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-danger remove-btn" onclick="removeInput(this)"><span style="font-size: 18px;">-</span></button>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(newItem);
+            }
+
+            function removeInput(button) {
+                const list = button.closest('ul');
+                const item = button.closest('li');
+                if (list.childElementCount > 1) {
+                    list.removeChild(item);
+                }
+            }
+        </script>
+
+
+        <%- include('partials/footer.ejs') %>

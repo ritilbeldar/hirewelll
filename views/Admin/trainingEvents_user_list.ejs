@@ -1,0 +1,325 @@
+<%- include('partials/nav.ejs') %>
+   <link rel="stylesheet" href="/assets/libs/datatables/datatables.css">
+   <div class="layout-content">
+      <div class="container-fluid flex-grow-1 container-p-y">
+         <h4 class="font-weight-bold py-3 mb-0 text-capitalize">
+            <%= opening.trainingHeading %> List
+         </h4>
+         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+               <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+               <li class="breadcrumb-item"><a href="/admin/trainings/current-trainings">Current Trainings</a>
+               </li>
+            </ol>
+         </div>
+         <div class="row">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="row g-3">
+                     <div class="col-md-3">
+
+                        <% const openingStudents=students.filter(student=>
+                           opening.students.includes(student._id.toString())
+                           ); %>
+
+                           <h6 class="card-header">Month</h6>
+                           <div class="home-select">
+                              <span>
+                                 <button id="daterange-4" class="btn btn-default dropdown-toggle md-btn-flat"></button>
+                              </span>
+                           </div>
+                     </div>
+                     <div class="col-md-3">
+                        <h6 class="card-header mb-2">City</h6>
+                        <div class="home-select" id="home-select2">
+                           <select id="cityFilter" class="selectpicker selectpicker1" data-style="btn-default"
+                              data-live-search="true">
+                              <option value="">--select--</option>
+                              <% const uniqueCities=new Set(); openingStudents.reverse().forEach((teacher, index)=> {
+                                 const city = teacher.city;
+                                 if (!uniqueCities.has(city)) {
+                                 uniqueCities.add(city);%>
+                                 <option value="<%= city %>" class="td">
+                                    <%= city %>
+                                 </option>
+                                 <%}});%>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <h6 class="card-header mb-2">School Type</h6>
+                        <div class="home-select" id="home-select3">
+                           <select id="schoolTypeFilter" class="selectpicker" data-style="btn-default"
+                              data-live-search="true">
+                              <option value="">--select--</option>
+                              <option value="CBSE Board School">CBSE Board School</option>
+                              <option value="State Board School">State Board School</option>
+                              <option value="Play School">Play School</option>
+                              <option value="Primary School">Primary School</option>
+                              <option value="Other">Other</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <h6 class="card-header mb-2">Qualification</h6>
+                        <div class="home-select" id="home-select5">
+                           <select id="qualificationFilter" class="selectpicker" data-style="btn-default"
+                              data-live-search="true">
+                              <option value="">--select--</option>
+                              <option value="Diploma">Diploma</option>
+                              <option value="Master Degree">Master Degree</option>
+                              <option value="Bechelor Degree">Bechelor Degree</option>
+                              <option value="Doctorate Degree">Doctorate Degree</option>
+                              <option value="Other">Other</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-12 mt-5">
+                  <div class="row">
+                     <div class="col-xl-6 col-6">
+                        <div class="card mb-4 bg-success text-white">
+                           <div class="card-body">
+                              <div class="d-flex flex-column align-items-center justify-content-between">
+                                 <h2>Total</h2>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h2 class="mt-2">
+                                       <%= openingStudents.length %>
+                                    </h2>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-6">
+                        <div class="card mb-4 text-white" style="background-color: #007BFF;">
+                           <div class="card-body">
+                              <div class="d-flex flex-column align-items-center justify-content-between">
+                                 <h2>Today</h2>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h2 class="mt-2">
+                                       <% let todayCount=0; openingStudents.forEach((teacher)=> {
+                                          const createdAtDate = new Date(teacher.createdAt);
+                                          const today = new Date();
+
+                                          if (
+                                          createdAtDate.getDate() === today.getDate() &&
+                                          createdAtDate.getMonth() === today.getMonth() &&
+                                          createdAtDate.getFullYear() === today.getFullYear()
+                                          ) {
+                                          todayCount++;
+                                          }
+                                          });
+                                          %>
+                                          <%= todayCount %>
+                                    </h2>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-12">
+               <div class="card">
+                  <div class="card-body">
+                     <div id="toolbar">
+                        <button class="btn btn-success mb-3" onclick="exportToExcel()">
+                           <i class="fa fa-file-excel-o"></i> Export to Excel
+                        </button>
+                     </div>
+                     <div class="table-responsive">
+                        <table id="report-table-page1" class="table table-striped table-hover report-table-page1"
+                           data-click-to-select="true" data-toolbar="#toolbar" data-show-toggle="true"
+                           data-show-columns="true" data-url="">
+                           <thead>
+                              <tr>
+                                 <th>S NO.</th>
+                                 <th>Action</th>
+                                 <th>Resume</th>
+                                 <th>Date</th>
+                                 <th>Name</th>
+                                 <th>Gender</th>
+                                 <th>Email</th>
+                                 <th>Number</th>
+                                 <th>Whatsapp No.</th>
+                                 <th>School Type</th>
+                                 <th>Role</th>
+                                 <th>Currently Working</th>
+                                 <th>Relevant Experience</th>
+                                 <th>Qualification Level</th>
+                                 <th>City</th>
+                                 <th>State</th>
+                                 <th>Pincode</th>
+                              </tr>
+                           </thead>
+                           <tbody class="table-new">
+
+                              <% openingStudents.reverse().forEach((teacher, index)=> { %>
+                                 <tr>
+                                    <td>
+                                       <%= index + 1 %>
+                                    </td>
+                                    <td>
+                                       <a href="/admin/teacher_details/<%= teacher._id %>"
+                                          class="btn btn-info btn-sm"><i class="feather icon-eye"></i></a>
+                                    </td>
+                                    <td><a class="btn btn-primary btn-sm" href="<%= teacher.teacherresume.url %>"
+                                          target="_blank">View</a></td>
+                                    <td>
+                                       <%= teacher.createdAt.toLocaleDateString() %>
+                                    </td>
+                                    <td class="td">
+                                       <%= teacher.firstname %>
+                                          <%= teacher.lastname %>
+                                    </td>
+                                    <td class="td">
+                                       <%= teacher.gender %>
+                                    </td>
+                                    <td>
+                                       <%= teacher.email %>
+                                    </td>
+                                    <td>
+                                       <%= teacher.contact %>
+                                    </td>
+                                    <td>
+                                       <%= teacher.whatsappNumber %>
+                                    </td>
+                                    <td class="td">
+                                       <%= teacher.schoolType %>
+                                    </td>
+                                    <td class="td">
+                                       <%= teacher.role %>
+                                    </td>
+                                    <td class="td">
+                                       <%= teacher.isCurrentlyWorking %>
+                                    </td>
+                                    <td>
+                                       <%= teacher.relevantExperience %>
+                                    </td>
+                                    <td class="td">
+                                       <%= teacher.qualificationLevel %>
+                                    </td>
+                                    <td class="td">
+                                       <%= teacher.city %>
+                                    </td>
+                                    <td class="td">
+                                       <%= teacher.state %>
+                                    </td class="td">
+                                    <td>
+                                       <%= teacher.pincode %>
+                                    </td>
+                                 </tr>
+                                 <% }); %>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Add this script tag to include the xlsx library -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
+
+      <script>
+         function exportToExcel() {
+            // Get the table element
+            var table = document.getElementById("report-table-page1");
+
+            // Create a new workbook and add a worksheet
+            var wb = XLSX.utils.book_new();
+            var ws = XLSX.utils.table_to_sheet(table);
+
+            // Add the worksheet to the workbook
+            XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+            // Save the workbook as an Excel file
+            XLSX.writeFile(wb, "exported_data.xlsx");
+         }
+      </script>
+
+
+      <script>
+         $(document).ready(function () {
+            $('#report-table-page1').DataTable();
+
+
+            $('#daterange-4').on('apply.daterangepicker', function (ev, picker) {
+               var startDate = picker.startDate.format('YYYY-MM-DD');
+               var endDate = picker.endDate.format('YYYY-MM-DD');
+               $('.table-new tr').hide();
+               $('.table-new tr').each(function () {
+                  var rowDate = $(this).find('td:eq(3)').text();
+                  var formattedRowDate = new Date(rowDate).toISOString().split('T')[0];
+
+                  if (formattedRowDate >= startDate && formattedRowDate <= endDate) {
+                     $(this).show();
+                  }
+               });
+            });
+
+
+            // City filter script
+            function applyCityFilter() {
+               var selectedCity = $('#cityFilter').val().trim().toLowerCase();
+               $('.table-new tr').each(function () {
+                  var cityInRow = $(this).find('td:eq(14)').text().trim().toLowerCase();
+                  $(this).toggle(selectedCity === '' || cityInRow === selectedCity);
+               });
+            }
+
+            $('#cityFilter').change(applyCityFilter);
+            applyCityFilter();
+
+
+            // School Type filter script
+            function applySchoolTypeFilter() {
+               var selectedSchoolType = $('#schoolTypeFilter').val().trim().toLowerCase();
+               $('.table-new tr').each(function () {
+                  var schoolTypeInRow = $(this).find('td:eq(9)').text().trim().toLowerCase();
+
+                  $(this).toggle(selectedSchoolType === '' || schoolTypeInRow === selectedSchoolType);
+               });
+            }
+
+            $('#schoolTypeFilter').change(applySchoolTypeFilter);
+            applySchoolTypeFilter();
+
+
+            // Role filter script
+            function applyRoleFilter() {
+               var selectedRole = $('#roleFilter').val().trim().toLowerCase();
+               $('.table-new tr').each(function () {
+                  var roleInRow = $(this).find('td:eq(11)').text().trim().toLowerCase();
+
+                  $(this).toggle(selectedRole === '' || roleInRow === selectedRole);
+               });
+            }
+
+            $('#roleFilter').change(applyRoleFilter);
+            applyRoleFilter();
+
+
+
+            // Qualification filter script
+            function applyQualificationFilter() {
+               var selectedQualification = $('#qualificationFilter').val().trim().toLowerCase();
+               $('.table-new tr').each(function () {
+                  var qualificationInRow = $(this).find('td:eq(13)').text().trim().toLowerCase();
+
+                  $(this).toggle(selectedQualification === '' || qualificationInRow === selectedQualification);
+               });
+            }
+
+            $('#qualificationFilter').change(applyQualificationFilter);
+            applyQualificationFilter();
+
+
+         });
+      </script>
+
+      <%- include('partials/footer.ejs') %>

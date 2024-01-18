@@ -1,0 +1,152 @@
+<%- include('partials/nav.ejs') %>
+<div class="layout-content">
+<div class="container-fluid flex-grow-1 container-p-y">
+<h4 class="font-weight-bold py-3 mb-0">Add School</h4>
+<div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+   <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href=""><i class="feather icon-home"></i></a></li>
+      <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/admin/schools">School</a></li>
+      <li class="breadcrumb-item"><a href="">Add School</a></li>
+   </ol>
+</div>
+<div class="card mb-2">
+   <div class="card-header bg-info">
+      <a class="d-flex justify-content-between text-white text-large text-uppercase" data-toggle="collapse" aria-expanded="true" href="#accordion2-2">
+         School Details
+         <div class="collapse-icon"></div>
+      </a>
+   </div>
+   <div id="accordion2-2" class="collapse show" data-parent="#accordion2">
+      <div class="card-body">
+         <form action="/admin/addschool" method="post">
+            <div class="form-row teacher-form">
+               <div class="form-group col-md-3">
+                  <label class="form-label">First Name <sub>(Enquiring on behalf of the school)</sub></label>
+                  <input type="text" name="firstname"  class="form-control px-2" placeholder="Enter name">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">Last Name</label>
+                  <input type="text" name="lastname"  class="form-control px-2" placeholder="Enter name">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">Phone Number</label>
+                  <input type="number" name="contact"  class="form-control px-2" placeholder="Enter number">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" name="email"  class="form-control px-2" placeholder="Enter email">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">School Name</label>
+                  <input type="text" name="schoolName"  class="form-control px-2" placeholder="Enter school name">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">school Type</label>
+                  <select class="custom-select" name="schoolType">
+                     <option value="">-- Select school Type--</option>
+                     <option value="CBSE Board School">CBSE Board School</option>
+                     <option value="State Board School">State Board School</option>
+                     <option value="Play School">Play School</option>
+                     <option value="Primary School">Primary School</option>
+                     <option value="Other">Other</option>
+                  </select>
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">School Email Address</label>
+                  <input type="email" name="schoolemail"  class="form-control px-2" placeholder="Enter email">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">School Number</label>
+                  <input type="number" name="schoolcontact"  class="form-control px-2" placeholder="Enter number">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">Designation</label>
+                  <input type="text" name="designation"  class="form-control px-2" placeholder="Enter designation">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">School Website</label>
+                  <input type="url" name="schoolWebsite"  class="form-control px-2" placeholder="Enter url">
+                  <div class="clearfix"></div>
+               </div>
+
+               <div class="form-group col-md-3">
+                  <label class="form-label">Address</label>
+                  <input type="text" name="address"  class="form-control px-2" placeholder="Enter address">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">City</label>
+                  <input type="text" name="city"  class="form-control px-2" placeholder="Enter city">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">State</label>
+                  <select id="selectOption" name="state" class="custom-select"
+                  aria-label=".form-select-lg example">
+                  <option selected>-- Select State --</option>
+                  <option value="Andhra Pradesh">Andhra Pradesh</option>
+                  <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+                  </option>
+                  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                  <option value="Assam">Assam</option>
+                  <option value="Bihar">Bihar</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Chhattisgarh">Chhattisgarh</option>
+                  <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                  <option value="Daman and Diu">Daman and Diu</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Lakshadweep">Lakshadweep</option>
+                  <option value="Puducherry">Puducherry</option>
+                  <option value="Goa">Goa</option>
+                  <option value="Gujarat">Gujarat</option>
+                  <option value="Haryana">Haryana</option>
+                  <option value="Himachal Pradesh">Himachal Pradesh</option>
+                  <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                  <option value="Jharkhand">Jharkhand</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Kerala">Kerala</option>
+                  <option value="Madhya Pradesh">Madhya Pradesh</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Manipur">Manipur</option>
+                  <option value="Meghalaya">Meghalaya</option>
+                  <option value="Mizoram">Mizoram</option>
+                  <option value="Nagaland">Nagaland</option>
+                  <option value="Odisha">Odisha</option>
+                  <option value="Punjab">Punjab</option>
+                  <option value="Rajasthan">Rajasthan</option>
+                  <option value="Sikkim">Sikkim</option>
+                  <option value="Tamil Nadu">Tamil Nadu</option>
+                  <option value="Telangana">Telangana</option>
+                  <option value="Tripura">Tripura</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="Uttarakhand">Uttarakhand</option>
+                  <option value="West Bengal">West Bengal</option>
+              </select>
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-3">
+                  <label class="form-label">Pincode</label>
+                  <input type="text" name="pincode"  class="form-control px-2" placeholder="Enter pincode">
+                  <div class="clearfix"></div>
+               </div>
+               <div class="form-group col-md-12">
+                  <label class="form-label">Remark</label>
+                  <textarea name="remark" class="form-control px-3" id="" cols="30" rows="10"></textarea>
+               </div>
+            </div>
+            <button class="btn btn-primary" type="submit" name="submit">Update</button>
+         </form>
+      </div>
+   </div>
+</div>
+<%- include('partials/footer.ejs') %>

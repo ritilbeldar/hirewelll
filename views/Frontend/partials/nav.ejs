@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Hirewell <%= title %>
+   </title>
+   <!-- Favicon icon -->
+   <link rel="icon" type="image/png" sizes="16x16" href="/Frontend/newimg/logo.png">
+   <link href="/Frontend/assets/frontend/vendor/animate/animate.css" rel="stylesheet" type="text/css" />
+   <link href="/Frontend/assets/frontend/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+   <link href="/Frontend/assets/frontend/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
+   <link href="/Frontend/assets/frontend/vendor/switcher/switcher.css" rel="stylesheet" type="text/css" />
+   <link href="/Frontend/assets/frontend/vendor/rangeslider/rangeslider.css" rel="stylesheet" type="text/css" />
+   <link href="/Frontend/assets/frontend/css/style.css" rel="stylesheet" type="text/css" />
+   <link href="/Frontend/stylesheets/style.css" rel="stylesheet" type="text/css" />
+   <link class="skin" rel="stylesheet" href="/Frontend/assets/frontend/css/skin/skin-1.css">
+   <link href="https:/cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+   <!-- Google Fonts -->
+   <link rel="preconnect" href="https:/fonts.googleapis.com/">
+   <link rel="preconnect" href="https:/fonts.gstatic.com/" crossorigin>
+
+   <link rel="stylesheet" href="/Admin/assets/libs/bootstrap-select/bootstrap-select.css">
+
+   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+   <link
+      href="https:/fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      rel="stylesheet">
+   <style>
+      .dz-media25 {
+         height: 15vmax;
+      }
+
+      .dz-media25 img {
+         object-fit: cover;
+      }
+
+      .limited-lines {
+         display: -webkit-box;
+         -webkit-box-orient: vertical;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: normal;
+         -webkit-line-clamp: 3;
+      }
+
+   
+   </style>
+</head>
+
+<body id="bg">
+   <!--loader start -->
+   <!-- <div id="loading-area" class="loading-page-1">
+         <div class="loader">
+            <div class="ball one"></div>
+            <div class="ball two"></div>
+            <div class="ball three"></div>
+            <div class="ball four"></div>
+         </div>
+         </div> -->
+   <!--loader start -->
+   <!--**********************************Page wrapper start***********************************-->
+   <div class="page-wraper">
+      <!-- Header -->
+      <header class="site-header mo-left header header-transparent">
+
+
+
+         <!-- Main Header -->
+         <div class="sticky-header main-bar-wraper navbar-expand-lg">
+            <div class="main-bar clearfix ">
+               <div class="container clearfix">
+                  <!-- Website Logo -->
+                  <div class="logo-header">
+                     <a href="/" class="logo-dark"><img src="/Frontend/newimg/logo.png" alt=""></a>
+                  </div>
+                  <!-- Nav Toggle Button -->
+                  <div class="phone-nav-top">
+                     <!-- Extra Nav -->
+                     <div class="extra-nav">
+                        <% if (isAuthenticated) { %>
+                           <div class="extra-cell">
+                              <!-- Render authenticated buttons -->
+                              <a class="btn btn-dark btn-lg btn-shadow singin-phone" href="/teacher/dashboard">
+                                 <i class="fa-solid fa-user"></i>&nbsp;<span></span>
+                              </a>
+                              <a class="btn btn-dark btn-lg btn-shadow singin-phone" href="/teacher/signout">
+                                 <i class="fa-solid fa-right-from-bracket"></i>&nbsp;<span>Sign
+                                    Out</span>
+                              </a>
+                           </div>
+                           <% } else { %>
+                              <div class="extra-cell">
+                                 <!-- Render non-authenticated buttons -->
+                                 <a class="btn btn-dark btn-lg btn-shadow singin-phone" href="#" data-bs-toggle="modal"
+                                    data-bs-target=".bd-example-modal-lg">
+                                    <i class="fa-solid fa-user-plus fa-user1"></i><i
+                                       class="fa-solid fa-right-to-bracket"></i>&nbsp;<span>Sign in</span>
+                                 </a>
+                                 <a class="btn btn-dark btn-lg btn-shadow singup-phone" href="#" data-bs-toggle="modal"
+                                    data-bs-target=".bd-example-modal-lg1">
+                                    <i class="fa-solid fa-user-plus"></i>&nbsp;Sign up
+                                 </a>
+                              </div>
+                              <% } %>
+                     </div>
+
+
+                     
+                     <button class="navbar-toggler collapsed navicon justify-content-end" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                     </button>
+                  </div>
+                  <!-- Search Form -->
+                  <!-- Header Nav -->
+                  <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                     <div class="logo-header logo-header-phone ">
+                        <a href="/" class="logo-dark mb-4"><img src="/Frontend/newimg/logo.png" alt=""></a>
+                        <!-- <a class="btn btn-dark btn-lg btn-shadow mt-5" target="_blank" href="singin">login</a> -->
+                     </div>
+                     <ul class="nav navbar-nav navbar navbar-left">
+                        <li><a href="<%= isAuthenticated ? '/teacher' : '/' %>">Home</a></li>
+                        </li>
+                        <li><a href="<%= isAuthenticated ? '/teacher/aboutUs' : '/aboutUs' %>">About Us</a>
+                        <li class="sub-menu-down">
+                           <a href="javascript:void(0);">Services</a>
+                           <ul class="sub-menu">
+                              <li><a
+                                    href="<%= isAuthenticated ? '/teacher/recruitment' : '/recruitment' %>">Recruitment</a>
+                              </li>
+                              <li><a href="<%= isAuthenticated ? '/teacher/training' : '/training' %>">Training</a></li>
+                              <li><a href="<%= isAuthenticated ? '/teacher/preschoolsetups' : '/preschoolsetups' %>">Preschool
+                                    Setup & Solutions</a>
+                              </li>
+                           </ul>
+                        </li>
+                        <li><a href="<%= isAuthenticated ? '/teacher/openings' : '/openings' %>">Openings</a></li>
+                        <li><a href="<%= isAuthenticated ? '/teacher/trainingtopics' : '/trainingtopics' %>">Training
+                              Topics</a>
+                        </li>
+                        <li><a href="<%= isAuthenticated ? '/teacher/jollyphonics' : '/jollyphonics' %>">Jolly
+                              Phonics</a>
+                        </li>
+                        <li class="sub-menu-down">
+                           <a href="javascript:void(0);">Company</a>
+                           <ul class="sub-menu">
+                              <li><a href="<%= isAuthenticated ? '/teacher/founders' : '/founders' %>">Founders</a></li>
+                              <li><a href="<%= isAuthenticated ? '/teacher/blogGrid' : '/blogGrid' %>">Blogs</a></li>
+                              <li><a href="<%= isAuthenticated ? '/teacher/events' : '/events' %>">Events</a></li>
+                              <li><a href="<%= isAuthenticated ? '/teacher/contactUs' : '/contactUs' %>/">Contact Us</a>
+                              </li>
+                           </ul>
+                        </li>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            
+         </div>
+         <!-- Main Header End -->
+         <!-- <div id="google_translate_element"></div> -->
+      </header>
+
+       
+
+      <!-- all modal start -->
+      <!-- singin-from -->
+      <div class="modal fade bd-example-modal-lg form1-modal" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-form1">
+            <div class="modal-content modal-content-form1">
+               <div class="modal-header">
+                  <h5 class="modal-title">SIGN IN/SIGN UP YOUR PROFILE</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal">
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form action="/teacher/signin/" method="post">
+                     <div class="row align-items-center justify-content-center">
+                        <div class="col-xl-12  col-md-12 mb-4">
+                           <label class="form-label font-w600">Email Address<span
+                                 class="text-danger scale5 ms-2">*</span></label>
+                           <input type="email" name="email" class="form-control solid"
+                              placeholder="Enter Your email address" required>
+                        </div>
+                        <div class="col-xl-12  col-md-12 mb-4">
+                           <label class="form-label font-w600">Password<span
+                                 class="text-danger scale5 ms-2">*</span></label>
+                           <input type="password" name="password" class="form-control solid"
+                              placeholder="Enter Your Password" required>
+                        </div>
+                        <div class="row align-items-center g-2 text-center">
+                           <div class="col-xl-4  col-md-12">
+                              <button class="btn btn-danger btn-primary">Sign</button>
+                           </div>
+                           <div class="col-xl-8  col-md-12 d-flex forget-pass">
+                              <a data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg2"
+                                 href="javascript:void(0);">Forgot Password?</a>&nbsp; |&nbsp;
+                              <a href="javascript:void(0);" data-bs-toggle="modal"
+                                 data-bs-target=".bd-example-modal-lg1">Sign
+                                 UP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <div>
+                                 <input type="checkbox" class="">
+                                 <label class="form-label font-w600">Save Password</label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade bd-example-modal-lg2 form1-modal" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-form1">
+            <div class="modal-content modal-content-form1">
+               <div class="modal-header">
+                  <h5 class="modal-title">Forgot Password</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal">
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form action="/teacher/signin" method="post">
+                     <div class="row align-items-center justify-content-center">
+                        <div class="col-xl-12  col-md-12 mb-4">
+                           <label class="form-label font-w600">Email Address<span
+                                 class="text-danger scale5 ms-2">*</span></label>
+                           <input type="email" name="email" class="form-control solid"
+                              placeholder="Enter Your email address" aria-label="name" required>
+                        </div>
+                        <!-- <div class="col-xl-12  col-md-12 mb-4">
+                           <label class="form-label font-w600">Password<span
+                                   class="text-danger scale5 ms-2">*</span></label>
+                           <input type="password" name="password" class="form-control solid"
+                               placeholder="Enter Your Password" aria-label="name">
+                           </div> -->
+                        <div class="row align-items-center g-2 text-center">
+                           <div class="col-xl-4  col-md-12">
+                              <button class="btn btn-danger btn-primary">Send</button>
+                           </div>
+                           <div class="col-xl-8  col-md-12 d-flex forget-pass">
+                              <a href="javascript:void(0);" data-bs-toggle="modal"
+                                 data-bs-target=".bd-example-modal-lg">Singin</a>&nbsp; |&nbsp;
+                              <a href="javascript:void(0);" data-bs-toggle="modal"
+                                 data-bs-target=".bd-example-modal-lg1">Sign
+                                 UP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- singin-from -->
+      <!-- sinup-from -->
+      <div class="modal fade bd-example-modal-lg1 form1-modal" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-form1">
+            <div class="modal-content modal-content-form1">
+               <div class="modal-header">
+                  <h5 class="modal-title">SIGN UP YOUR PROFILE</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal">
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                     <div class="row w-100 bg-ligh justify-content-between ">
+                        <div class="col-xl-4 col-md-12">
+                           <div class="nav-link sinup-page-tool active" id="pills-home-tab" data-bs-toggle="pill"
+                              data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                              aria-selected="true">
+                              <span>
+                                 <i class="fa-regular fa-user"></i>
+                              </span>
+                              <h5>Job Seekers</h5>
+                              <P>Looking for a Job</P>
+                           </div>
+                        </div>
+                        <div class="col-xl-4 col-md-12">
+                           <div class="nav-link sinup-page-tool" id="pills-profile-tab" data-bs-toggle="pill"
+                              data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                              aria-selected="false">
+                              <span>
+                                 <i class="fa-solid fa-school"></i>
+                              </span>
+                              <h5>School Job Openings</h5>
+                              <P>Looking for a Job Seekers</P>
+                           </div>
+                        </div>
+                        <div class="col-xl-4 col-md-12">
+                           <div class="nav-link sinup-page-tool" id="pills-contact-tab" data-bs-toggle="pill"
+                              data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                              aria-selected="false">
+                              <span>
+                                 <i class="fa-solid fa-chalkboard-user"></i>
+                              </span>
+                              <h5>Training Programs </h5>
+                              <P>Looking for a Training's</P>
+                           </div>
+                        </div>
+                     </div>
+                  </ul>
+                  <div class="tab-content" id="pills-tabContent">
+                     <form action="/teacher/signup" method="post" enctype="multipart/form-data"
+                        class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                        aria-labelledby="pills-home-tab">
+                        <div class="row align-items-center justify-content-center">
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>First Name*</h6>
+                              <div class="input-group">
+                                 <input name="firstname" class="form-control" placeholder="Enter Your First Name"
+                                    required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Last Name*</h6>
+                              <div class="input-group">
+                                 <input name="lastname" type="text" class="form-control"
+                                    placeholder="Enter Your Last Name" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Phone Number*</h6>
+                              <div class="input-group">
+                                 <input name="contact" type="number" class="form-control"
+                                    placeholder="Enter Your Phone Number" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Working Email Address*</h6>
+                              <div class="input-group">
+                                 <input name="email" type="email" class="form-control"
+                                    placeholder="Enter Your Emaill Address" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Create New Password*</h6>
+                              <div class="input-group">
+                                 <input id="password1" type="password" class="form-control"
+                                    placeholder="Enter Your password" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Re Enter Password*</h6>
+                              <div class="input-group">
+                                 <input id="password2" name="password" type="password" class="form-control"
+                                    placeholder="Enter Your password" required>
+                              </div>
+                              <p id="passwordError" style="color: red;margin-top: -1vmax; "></p>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Your Gender*</h6>
+                              <div class="input-group">
+                                 <div class="row ">
+                                    <div class="col-12 d-flex">
+                                       <div class="col-6">
+                                          <input class="form-check-input" type="radio" name="gender" id="Male"
+                                             value="Male" required>
+                                          <label class="form-check-label" for="Male">
+                                             Male
+                                          </label>
+                                       </div>
+                                       <div class="col-10">
+                                          <input class="form-check-input" type="radio" name="gender" id="Female"
+                                             value="Female" required>
+                                          <label class="form-check-label" for="Female">
+                                             Female
+                                          </label>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Date Of Birth*</h6>
+                              <div class="input-group">
+                                 <input name="dateOfBirth" type="date" class="form-control" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Whatsapp Number*</h6>
+                              <div class="input-group">
+                                 <input name="whatsappNumber" type="number" class="form-control"
+                                    placeholder="Enter Your Whatsapp Number" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Where did you hear about Hirewell?</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="hirewellSource" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example">
+                                    <option selected>Select</option>
+                                    <option value="Social Media">Social Media</option>
+                                    <option value="Website">Website</option>
+                                    <option value="Other">Other</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>State*</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="state" required class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example">
+                                    <option selected>Select</option>
+                                    <% uniqueStates.forEach(state => { %>
+                                       <option value="<%= state %>"><%= state %></option>
+                                     <% }); %>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>City *</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="city" required class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example">
+                                    <option selected>Select</option>
+                                    <% addresses.forEach(address => { %>
+                                       <option value="<%= address.city %>" class="text-capitalize"><%= address.city %></option>
+                                     <% }); %>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Area</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="address" required class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example">
+                                    <option selected>Select</option>
+                                    <% addresses.forEach(address => { %>
+                                       <option value="<%= address.area %>"><%= address.area %></option>
+                                     <% }); %>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Pincode *</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="pincode" required class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example">
+                                    <option selected>Select</option>
+                                    <% addresses.forEach(address => { %>
+                                       <option value="<%= address.pincode %>"><%= address.pincode %></option>
+                                     <% }); %>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Type</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="schoolType" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example">
+                                    <option selected>Select</option>
+                                    <option value="CBSE Board School">CBSE Board School</option>
+                                    <option value="State Board School">State Board School</option>
+                                    <option value="Play School">Play School</option>
+                                    <option value="Primary School">Primary School</option>
+                                    <option value="Other">Other</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Role</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="role" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example">
+                                    <option selected>Select</option>
+                                    <option value="PGT Teacher">PGT Teacher</option>
+                                    <option value="TGT Teacher">TGT Teacher</option>
+                                    <option value="Primary or PRT Teacher">Primary or PRT Teacher</option>
+                                    <option value="Pre-Primary Teacher">Pre-Primary Teacher</option>
+                                    <option value="Mother Teacher">Mother Teacher</option>
+                                    <option value="Play School Teacher">Play School Teacher</option>
+                                    <option value="School Principal">School Principal</option>
+                                    <option value="Academic Coordinator">Academic Coordinator</option>
+                                    <option value="Headmistress">Headmistress</option>
+                                    <option value="Headmaster">Headmaster</option>
+                                    <option value="Activity Coordinator">Activity Coordinator</option>
+                                    <option value="Education Counselor">Education Counselor</option>
+                                    <option value="Other">Other</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-12 d-flex mb-4">
+                              <label for="resume-upload" class="file-uplode-box">
+                                 <div class="">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    <h6>Drop a resume file or click to Upload resume</h6>
+                                    <p>To upload file size is <b>(Max 1Mb)</b> and allowed file type are
+                                       <b>(.jpeg,
+                                          .doc, .docx, .pdf)</b>
+                                    </p>
+                                    <h4>Or</h4>
+                                    <div>
+                                       <button type="button">
+                                          <i class="fa-solid fa-upload"></i>
+                                          Upload Resume
+                                       </button>
+                                       <input type="file" name="teacherresume" id="resume-upload" class="form-control"
+                                          required>
+                                    </div>
+                                 </div>
+                              </label>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start" id="organizationNameField">
+                              <h6>Relevant Experience *</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="relevantExperience"
+                                    class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    required>
+                                    <option>Select</option>
+                                    <option value="Fresher">Fresher</option>
+                                    <option value="0-1 YEAR">0-1 YEAR</option>
+                                    <option value="1-2 YEAR">1-2 YEAR</option>
+                                    <option value="2-3 YEAR">2-3 YEAR</option>
+                                    <option value="3-4 YEAR">3-4 YEAR</option>
+                                    <option value="4-5 YEAR">4-5 YEAR</option>
+                                    <option value="More Than 5 YEAR">More Than 5 YEAR</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Currently Working? *</h6>
+                              <div class="input-group">
+                                 <select id="originSelect" name="isCurrentlyWorking"
+                                    class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    required onchange="handleOriginSelect()">
+                                    <option selected>Select</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 flex-column align-items-start" id="otherCityInput1"
+                              style="display: none;">
+                              <h6>Organization Name *</h6>
+                              <div class="input-group">
+                                 <input name="organizationName" type="text" class="form-control"
+                                    placeholder="Enter Organization Name">
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Qualification Level *</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="qualificationLevel"
+                                    class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    required>
+                                    <option selected>Select</option>
+                                    <option value="Diploma">Diploma</option>
+                                    <option value="Bechelor Degree">Bechelor Degree</option>
+                                    <option value="Master Degree">Master Degree</option>
+                                    <option value="Doctorate Degree">Doctorate Degree</option>
+                                    <option value="Other">Other</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start" id="organizationNameField">
+                              <h6>Skills </h6>
+                              <div class="input-group">
+                                 <input name="skills" type="text" class="form-control" placeholder="Enter Skills">
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start" id="organizationNameField">
+                              <h6>Preferred Locations</h6>
+                              <div class="input-group">
+                                 <input name="preferredLocations" type="text" class="form-control"
+                                    placeholder="Enter Locations">
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start" id="organizationNameField">
+                              <h6>Languages Known</h6>
+                              <div class="input-group">
+                                 <input name="languagesKnown" type="text" class="form-control"
+                                    placeholder="Enter Languages">
+                              </div>
+                           </div>
+                           <div class="col-md-12 d-flex flex-column text-start">
+                              <h6>Certifications if any If yes then they can load their certifications
+                                 too.
+                              </h6>
+                              <div class="input-group">
+                                 <input name="certifications" type="file" class="form-contro"
+                                    placeholder="House NoStreet Name">
+                              </div>
+                           </div>
+                           <div class="col-md-12 d-flex align-items-start gap-2">
+                              <input class="form-check-input" type="checkbox" id="flexCheckChecked" required>
+                              <label class="form-check-label text-lg-start" for="flexCheckChecked">
+                                 By clicking checkbox, you agree to our Terms and Conditions and Privacy
+                                 Policy
+                              </label>
+                           </div>
+                           <div class="row align-items-center g-2 text-center">
+                              <div class="col-xl-4  col-md-12">
+                                 <button class="btn btn-danger btn-primary">Sign Up</button>
+                              </div>
+                              <div class="col-xl-8  col-md-12 d-flex">
+                                 <a href="javascript:void(0);" data-bs-toggle="modal"
+                                    data-bs-target=".bd-example-modal-lg">Already
+                                    have an account? Login</a>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                     <form action="/school/signup" method="post" class="tab-pane fade" id="pills-profile"
+                        role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="row align-items-center justify-content-center">
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>First Name* <sub>(Enquiring on behalf of the school)</sub></h6>
+                              <div class="input-group">
+                                 <input name="firstname" type="text" class="form-control"
+                                    placeholder="Enter Your First Name" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Last Name*</h6>
+                              <div class="input-group">
+                                 <input name="lastname" type="text" class="form-control"
+                                    placeholder="Enter Your Last Name" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Phone Number*</h6>
+                              <div class="input-group">
+                                 <input name="contact" type="number" class="form-control"
+                                    placeholder="Enter Your Phone Number" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Working Email Address*</h6>
+                              <div class="input-group">
+                                 <input name="email" type="email" class="form-control"
+                                    placeholder="Enter Your Emaill Address" required>
+                              </div>
+                           </div>
+                           <!-- <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Create New Password*</h6>
+                              <div class="input-group">
+                                  <input id="password3" type="password" class="form-control"
+                                      placeholder="Enter Your password" required>
+                              </div>
+                              </div>
+                              <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Re Enter Password*</h6>
+                              <div class="input-group">
+                                  <input id="password4" name="password" type="password" class="form-control"
+                                      placeholder="Enter Your password" required>
+                              </div>
+                              <p id="passwordError1" style="color: red;margin-top: -1vmax; "></p>
+                              </div> -->
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Name*</h6>
+                              <div class="input-group">
+                                 <input name="schoolName" type="text" class="form-control"
+                                    placeholder="Enter School Name" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Type*</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="schoolType" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example" required>
+                                    <option>Select</option>
+                                    <option value="Board School">CBSE Board School</option>
+                                    <option value="State Board School">State Board School</option>
+                                    <option value="Play School">Play School</option>
+                                    <option value="Primary School">Primary School</option>
+                                    <option value="Other">Other</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Email ID</h6>
+                              <div class="input-group">
+                                 <input name="schoolemail" type="email" class="form-control"
+                                    placeholder="Enter School email ID" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Contact No* </h6>
+                              <div class="input-group">
+                                 <input name="schoolcontact" type="number" class="form-control"
+                                    placeholder="Enter Contact No" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Designation*</h6>
+                              <div class="input-group">
+                                 <input name="designation" type="text" class="form-control"
+                                    placeholder="Enter Your Role At this School" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Website</h6>
+                              <div class="input-group">
+                                 <input name="schoolWebsite" type="url" class="form-control" placeholder="Enter Url">
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Address</h6>
+                              <div class="input-group">
+                                 <input name="address" type="text" class="form-control"
+                                    placeholder="Enter House NoStreet Name">
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>City *</h6>
+                              <div class="input-group">
+                                 <input name="city" type="text" class="form-control" placeholder="Enter City Name"
+                                    required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>State*</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="state" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example" required>
+                                    <option selected>Select</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+                                    </option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                    <option value="Daman and Diu">Daman and Diu</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Lakshadweep">Lakshadweep</option>
+                                    <option value="Puducherry">Puducherry</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Pincode *</h6>
+                              <div class="input-group">
+                                 <input name="pincode" type="number" class="form-control"
+                                    placeholder="Enter Pincode Number" required>
+                              </div>
+                           </div>
+                           <div class="row align-items-center g-2 text-center">
+                              <div class="col-xl-4  col-md-12">
+                                 <button class="btn btn-danger btn-primary">Sign Up</button>
+                              </div>
+                              <div class="col-xl-8  col-md-12 d-flex">
+                                 <a href="javascript:void(0);" data-bs-toggle="modal"
+                                    data-bs-target=".bd-example-modal-lg">Already
+                                    have an account? Login</a>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                     <form action="/training/signup" method="post" class="tab-pane fade" id="pills-contact"
+                        role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <div class="row align-items-center justify-content-center">
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>First Name* <SUb>(Enquiring on behalf of the school)</SUb></h6>
+                              <div class="input-group">
+                                 <input name="firstname" type="text" class="form-control"
+                                    placeholder="Enter Your First Name" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Last Name*</h6>
+                              <div class="input-group">
+                                 <input name="lastname" type="text" class="form-control"
+                                    placeholder="Enter Your Last Name" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Phone Number* <sub>(OTP will be sent on this)</sub></h6>
+                              <div class="input-group">
+                                 <input name="contact" type="number" class="form-control"
+                                    placeholder="Enter Your Phone Number" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Working Email Address*</h6>
+                              <div class="input-group">
+                                 <input name="email" type="email" class="form-control"
+                                    placeholder="Enter Your emaill Address" required>
+                              </div>
+                           </div>
+                           <!-- <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Create New Password*</h6>
+                              <div class="input-group">
+                                  <input id="password5" type="password" class="form-control"
+                                      placeholder="Enter Your password" required>
+                              </div>
+                              </div>
+                              <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Re Enter Password*</h6>
+                              <div class="input-group">
+                                  <input id="password6" name="password" type="password" class="form-control"
+                                      placeholder="Enter Your password" required>
+                              </div>
+                              <p id="passwordError2" style="color: red;margin-top: -1vmax; "></p>
+                              </div> -->
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Name*</h6>
+                              <div class="input-group">
+                                 <input name="schoolName" type="text" class="form-control"
+                                    placeholder="Enter School Name" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Type*</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="schoolType" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example" required>
+                                    <option>Select</option>
+                                    <option value="Board School">CBSE Board School</option>
+                                    <option value="State Board School">State Board School</option>
+                                    <option value="Play School">Play School</option>
+                                    <option value="Primary School">Primary School</option>
+                                    <option value="Other">Other</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Email ID</h6>
+                              <div class="input-group">
+                                 <input name="schoolemail" type="email" class="form-control"
+                                    placeholder="Enter School email ID" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Contact No </h6>
+                              <div class="input-group">
+                                 <input name="schoolcontact" type="number" class="form-control"
+                                    placeholder="Enter Contact No" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Designation*</h6>
+                              <div class="input-group">
+                                 <input name="designation" type="text" class="form-control"
+                                    placeholder="Enter Your Role At this School" required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>School Website</h6>
+                              <div class="input-group">
+                                 <input name="schoolWebsite" type="url" class="form-control" placeholder="Enter Url">
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Training Programs*</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="trainingProgram"
+                                    class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    required>
+                                    <option>Select</option>
+                                    <option value="Training1">Training1</option>
+                                    <option value="Training2">Training2</option>
+                                    <option value="Training3">Training3</option>
+                                    <option value="Other Training">Other Training</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Other Programs*</h6>
+                              <div class="input-group">
+                                 <input name="otherProgram" type="text" class="form-control" placeholder="Enter Program"
+                                    required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Number Of Teachers*</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="numberOfTeachers"
+                                    class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    required>
+                                    <option>Select</option>
+                                    <option value="1-5">1-5</option>
+                                    <option value="5-10">5-10</option>
+                                    <option value="10-15">10-15</option>
+                                    <option value="15-20">15-20</option>
+                                    <option value="More than 20">More than 20</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Preffered Date For Training</h6>
+                              <div class="input-group">
+                                 <input name="dateForTraining" type="date" class="form-control"
+                                    placeholder="Enter Program">
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Address</h6>
+                              <div class="input-group">
+                                 <input name="address" type="text" class="form-control"
+                                    placeholder="Enter House NoStreet Name">
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>City*</h6>
+                              <div class="input-group">
+                                 <input name="city" type="text" class="form-control" placeholder="Enter City Name"
+                                    required>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>State*</h6>
+                              <div class="input-group">
+                                 <select id="selectOption" name="state" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example" required>
+                                    <option selected>Select</option>
+                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+                                    </option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chandigarh">Chandigarh</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                    <option value="Daman and Diu">Daman and Diu</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Lakshadweep">Lakshadweep</option>
+                                    <option value="Puducherry">Puducherry</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Odisha">Odisha</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-md-6 d-flex flex-column align-items-start">
+                              <h6>Pincode*</h6>
+                              <div class="input-group">
+                                 <input name="pincode" type="number" class="form-control"
+                                    placeholder="Enter Pincode Number" required>
+                              </div>
+                           </div>
+                           <div class="row align-items-center g-2 text-center">
+                              <div class="col-xl-4  col-md-12">
+                                 <button class="btn btn-danger btn-primary">Sign Up</button>
+                              </div>
+                              <div class="col-xl-8  col-md-12 d-flex">
+                                 <a href="javascript:void(0);" data-bs-toggle="modal"
+                                    data-bs-target=".bd-example-modal-lg">Already
+                                    have an account? Login</a>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+
+
+     
+      <!-- singup-from -->
+      <!-- all modal end -->
+      <!-- Header End -->

@@ -1,0 +1,239 @@
+<%- include('partials/nav.ejs') %>
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/libs/datatables/datatables.css">
+    <div class="layout-content">
+        <div class="container-fluid flex-grow-1 container-p-y">
+            <h4 class="font-weight-bold py-3 mb-0">
+                Enquires
+                <!-- <?php //echo $_SESSION['division'];?> -->
+            </h4>
+            <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="/admin/enquires">Enquires</a></li>
+                </ol>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6 class="card-header mb-2">Month</h6>
+                                <div class="home-select">
+                                    <span>
+                                        <button id="daterange-4"
+                                            class="btn btn-default dropdown-toggle md-btn-flat"></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 mt-5">
+                        <div class="row">
+                            <div class="col-md-6 col-6">
+                                <div class="card mb-4 bg-success text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column align-items-center justify-content-between">
+                                            <h2>Total</h2>
+                                            <div class="d-flex flex-column align-items-center">
+                                                <h2 class="mt-2">
+                                                    <%= enquires.length %>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <div class="card mb-4 text-white" style="background-color: #007BFF;">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column align-items-center justify-content-between">
+                                            <h2>Today</h2>
+                                            <div class="d-flex flex-column align-items-center">
+                                                <h2 class="mt-2">
+                                                    <% let todayCount=0; enquires.forEach((teacher)=> {
+                                                        const createdAtDate = new Date(teacher.createdAt);
+                                                        const today = new Date();
+
+                                                        if (
+                                                        createdAtDate.getDate() === today.getDate() &&
+                                                        createdAtDate.getMonth() === today.getMonth() &&
+                                                        createdAtDate.getFullYear() === today.getFullYear()
+                                                        ) {
+                                                        todayCount++;
+                                                        }
+                                                        });
+                                                        %>
+                                                        <%= todayCount %>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center m-l-0">
+                                <div class="col-sm-6">
+                                </div>
+                                <!-- <div class="col-sm-6 text-right">
+                                    <a href="/training_add"><button class="btn btn-success btn-sm mb-3"><i
+                                                class="feather icon-plus"></i> Add Training</button></a>
+                                </div> -->
+                            </div>
+
+                            <div id="toolbar">
+                                <button class="btn btn-success mb-3" onclick="exportToExcel()">
+                                    <i class="fa fa-file-excel-o"></i> Export to Excel
+                                </button>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table id="report-table-page4" class="table table-striped table-hover"
+                                    data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar"
+                                    data-show-toggle="true" data-show-columns="true" data-url="">
+                                    <thead>
+                                        <tr>
+                                            <th>S NO.</th>
+                                            <th>Action</th>
+                                            <th>Date</th>
+                                            <th>Name</th>
+                                            <th>Number</th>
+                                            <th>Email Id</th>
+                                            <th>Message</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-new">
+                                        <% enquires.reverse().forEach((training, index)=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%= index + 1 %>
+                                                </td>
+                                                <td>
+                                                    <a href="/admin/enquireDelete/<%= training._id %>"
+                                                        class="btn btn-danger btn-sm delete-btn"
+                                                        data-training-id="<%= training._id %>"><i
+                                                            class="feather icon-trash-2"></i></a>
+                                                </td>
+                                                <td>
+                                                    <%= training.createdAt.toLocaleDateString() %>
+                                                </td>
+                                                <td class="td">
+                                                    <%= training.firstname %>
+                                                        <%= training.lastname %>
+                                                </td>
+                                                <td class="td">
+                                                    <%= training.contact %>
+                                                </td>
+                                                <td>
+                                                    <%= training.email %>
+                                                </td>
+                                                <td>
+
+                                                    <%= training.massage %>
+                                                </td>
+
+                                                <div class="modal fade" id="<%= training.id %>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Massage
+                                                                </h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <%= training.massage %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+        <script>
+           document.addEventListener('DOMContentLoaded', function () {
+              var deleteButtons = document.querySelectorAll('.delete-btn');
+              deleteButtons.forEach(function (button) {
+                 button.addEventListener('click', function (event) {
+                    event.preventDefault();
+  
+                    var blogId = button.getAttribute('data-training-id');
+  
+                    // Show SweetAlert confirmation
+                    Swal.fire({
+                       title: 'Are you sure?',
+                       text: 'You won\'t be able to revert this!',
+                       icon: 'warning',
+                       showCancelButton: true,
+                       confirmButtonColor: '#d33',
+                       cancelButtonColor: '#3085d6',
+                       confirmButtonText: 'Yes, delete it!'
+                    }).then(function (result) {
+                       if (result.isConfirmed) {
+                          window.location.href = '/admin/enquireDelete/' + blogId;
+                       }
+                    });
+                 });
+              });
+           });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#report-table-page4').table({
+                    exportDataType: 'all',
+                    exportTypes: ['excel'],
+                    exportOptions: {
+                        fileName: 'teacher_data',
+                        ignoreColumn: [0],
+                    },
+                });
+            });
+
+            function exportToExcel() {
+                $('#report-table-page4').tableExport({ type: 'excel', escape: 'false' });
+            }
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#report-table-page4').DataTable();
+
+
+                $('#daterange-4').on('apply.daterangepicker', function (ev, picker) {
+    var startDate = picker.startDate.toDate();
+    var endDate = picker.endDate.toDate();
+    $('.table-new tr').hide();
+
+    $('.table-new tr').each(function () {
+        var rowDate = new Date($(this).find('td:eq(2)').text());
+
+        if (rowDate >= startDate && rowDate <= endDate) {
+            $(this).show();
+        }
+    });
+});
+
+            });
+        </script>
+
+        <%- include('partials/footer.ejs') %>

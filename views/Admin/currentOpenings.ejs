@@ -1,0 +1,375 @@
+<%- include('partials/nav.ejs') %>
+   <link rel="stylesheet" href="<?php echo base_url();?>assets/libs/datatables/datatables.css">
+   <div class="layout-content">
+      <div class="container-fluid flex-grow-1 container-p-y">
+         <h4 class="font-weight-bold py-3 mb-0">Current Openings
+         </h4>
+         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+               <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+               <li class="breadcrumb-item"><a href="">Current Openings</a></li>
+            </ol>
+         </div>
+         <section class="content-inner position-relative">
+
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="row g-3">
+                     <div class="col-md-3">
+                        <h6 class="card-header">Month</h6>
+                        <div class="home-select">
+                           <span>
+                              <button id="daterange-4" class="btn btn-default dropdown-toggle md-btn-flat"></button>
+                           </span>
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <h6 class="card-header mb-2">City</h6>
+                        <div class="home-select" id="home-select2">
+                           <select id="cityFilter" class="selectpicker selectpicker1" data-style="btn-default"
+                              data-live-search="true">
+                              <option value="">--select--</option>
+                              <% const uniqueCities=new Set(); openings.reverse().forEach((teacher, index)=> {
+                                 const city = teacher.opnLnocation;
+                                 if (!uniqueCities.has(city)) {
+                                 uniqueCities.add(city);%>
+                                 <option value="<%= city %>" class="td">
+                                    <%= city %>
+                                 </option>
+                                 <%}});%>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <h6 class="card-header mb-2">Job Title</h6>
+                        <div class="home-select" id="home-select3">
+                           <select id="schoolTypeFilter" class="selectpicker" data-style="btn-default"
+                              data-live-search="true">
+                              <option value="">--select--</option>
+                              <% const uniqueCities1=new Set(); openings.reverse().forEach((teacher, index)=> {
+                                 const city = teacher.opnTitle;
+                                 if (!uniqueCities1.has(city)) {
+                                 uniqueCities1.add(city);%>
+                                 <option value="<%= city %>" class="td">
+                                    <%= city %>
+                                 </option>
+                                 <%}});%>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <h6 class="card-header mb-2">School Name</h6>
+                        <div class="home-select" id="home-select4">
+                           <select id="roleFilter" class="selectpicker" data-style="btn-default"
+                              data-live-search="true">
+                              <option value="">--select--</option>
+                              <% const uniqueCities2=new Set(); openings.reverse().forEach((teacher, index)=> {
+                                 const city = teacher.opnCompney;
+                                 if (!uniqueCities2.has(city)) {
+                                 uniqueCities2.add(city);%>
+                                 <option value="<%= city %>" class="td">
+                                    <%= city %>
+                                 </option>
+                                 <%}});%>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="col-md-2">
+                        <h6 class="card-header mb-2">JOB TYPE</h6>
+                        <div class="home-select" id="home-select5">
+                           <select id="qualificationFilter" class="selectpicker" data-style="btn-default"
+                              data-live-search="true">
+                              <option value="">--select--</option>
+                              <option value="Full Time">Full Time</option>
+                              <option value="Part Time">Part Time</option>
+                              <option value="Internship">Internship</option>
+                           </select>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-12 mt-5">
+                  <div class="row">
+                     <div class="col-xl-3 col-6">
+                        <div class="card mb-4 bg-success text-white">
+                           <div class="card-body">
+                              <div class="d-flex flex-column align-items-center justify-content-between">
+                                 <h2>Total</h2>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h2 class="mt-2">
+                                       <%= openings.length %>
+                                    </h2>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-3 col-6">
+                        <div class="card mb-4 text-white" style="background-color: #007BFF;">
+                           <div class="card-body">
+                              <div class="d-flex flex-column align-items-center justify-content-between">
+                                 <h2>Today</h2>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h2 class="mt-2">
+                                       <% let todayCount=0; openings.forEach((teacher)=> {
+                                          const createdAtDate = new Date(teacher.createdAt);
+                                          const today = new Date();
+
+                                          if (
+                                          createdAtDate.getDate() === today.getDate() &&
+                                          createdAtDate.getMonth() === today.getMonth() &&
+                                          createdAtDate.getFullYear() === today.getFullYear()
+                                          ) {
+                                          todayCount++;
+                                          }
+                                          });
+                                          %>
+                                          <%= todayCount %>
+                                    </h2>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-3 col-6">
+                        <div class="card mb-4 bg-warning text-white">
+                           <div class="card-body">
+                              <div class="d-flex flex-column align-items-center justify-content-between">
+                                 <h2>Active</h2>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h2 class="mt-2">
+                                       <% const desiredStatusActive='Active' ; %>
+                                          <% const studentsWithActiveStatus=openings.filter(student=> student.status ===
+                                             desiredStatusActive); %>
+                                             <%= studentsWithActiveStatus.length %>
+                                    </h2>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-3 col-6">
+                        <div class="card mb-4 bg-danger text-white">
+                           <div class="card-body">
+                              <div class="d-flex flex-column align-items-center justify-content-between">
+                                 <h2>Inactive</h2>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h2 class="mt-2">
+                                       <% const desiredStatusInactive='Inactive' ; %>
+                                          <% const studentsWithInactiveStatus=openings.filter(student=> student.status
+                                             === desiredStatusInactive); %>
+                                             <%= studentsWithInactiveStatus.length %>
+                                    </h2>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-sm-12 text-right">
+               <a href="/admin/dashboard/openings/create-openings"><button class="btn btn-success btn-sm mb-3"><i
+                        class="feather icon-plus"></i> Add Openings</button></a>
+            </div>
+            <div class="container">
+               <div class="row">
+                  <% openings.forEach((opening, index)=> { %>
+                     <div class="col-xl-4 col-md-6 m-b30">
+                        <div class="career-open-card wow fadeInUp" data-wow-delay="1.0s">
+                           <div class="d-flex justify-content-end mt-2 gap-2">
+                              <a href="/admin/dashboard/openings/create-details/<%= opening._id %>"
+                                 class="btn btn-info btn-sm">
+                                 <i class="feather icon-eye"></i>
+                              </a>
+                              <a href="/admin/opening_edit/<%= opening._id %>" class="btn btn-info btn-sm">
+                                 <i class="feather icon-edit"></i>
+                              </a>
+                              <a href="/admin/opening_delete/<%= opening._id %>"
+                                 class="btn btn-danger btn-sm delete-btn" data-opening-id="<%= opening._id %>">
+                                 <i class="feather icon-trash-2"></i>
+                              </a>
+                           </div>
+                           <span id="career-img">
+                              <img src="<%= opening.opnlogo.url %>" alt="">
+                              <div class="important">
+                                 <% if (opening.opnPreference==='on' ) { %>
+                                    <img src="/Frontend/newimg/important.png" alt="">
+                                    <h5>urgent</h5>
+                                    <% } %>
+                              </div>
+                           </span>
+                           <div class="bottom-career-center">
+                              <h4>
+                                 <%= opening.opnTitle %>
+                              </h4>
+                              <h5>
+                                 <%= opening.opnCompney %>
+                              </h5>
+                              <h6><i class="ri-map-pin-fill"></i>
+                                 <%= opening.opnLnocation %>
+                              </h6>
+                           </div>
+                           <span id="post-date" class="post-date">
+                              <p>Posted day: <span>
+                                    <%= opening.createdAt.toLocaleDateString() %>
+                                 </span>
+                              </p>
+                              <p>Last day: <span>
+                                    <%= opening.opnLastDate.toLocaleDateString() %>
+                                 </span>
+                              </p>
+                           </span>
+                           <div class="bottom-career-card">
+                              <p><i class="ri-bar-chart-line"></i>
+                                 <%= opening.opnExp %>
+                              </p>
+                              <p><i class="ri-time-line"></i>
+                                 <%= opening.opnType %>
+                              </p>
+                              <p><i class="ri-wallet-3-line"></i>₹<%= opening.opnMaxPrice %> / <%= opening.opnPriceType
+                                       %>
+                              </p>
+                              <p><i class="ri-door-open-fill"></i>Total Openings (<%= opening.opnTotalOpenings %>)</p>
+                           </div>
+                           <span id="career-img" class="mb-3">
+
+                              
+                              <% const openingStudents=students.filter(student=> opening.students.includes(student.id));
+                              %>
+                              
+                              <a class="btn btn-primary <%= openingStudents.length === 0 ? 'disabled' : '' %>"
+                                 href="/admin/dashboard/openings/current-openings/<%= opening._id %>">
+                                 Application (<%= openingStudents.length %>)
+                              </a>
+                              
+
+                                 <form action="/admin/openings_status" method="post">
+                                    <input type="hidden" name="openingId" value="<%= opening._id %>">
+                                    <button type="submit"
+                                       class="btn <%= opening.status === 'Active' ? 'btn-success' : 'btn-danger' %> toggle-status"
+                                       name="status">
+                                       <%= opening.status %>
+                                    </button>
+                                 </form>
+                           </span>
+                        </div>
+                     </div>
+                     <% }); %>
+               </div>
+            </div>
+         </section>
+      </div>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+      <script>
+         document.addEventListener('DOMContentLoaded', function () {
+            var deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(function (button) {
+               button.addEventListener('click', function (event) {
+                  event.preventDefault();
+
+                  var blogId = button.getAttribute('data-opening-id');
+
+                  // Show SweetAlert confirmation
+                  Swal.fire({
+                     title: 'Are you sure?',
+                     text: 'You won\'t be able to revert this!',
+                     icon: 'warning',
+                     showCancelButton: true,
+                     confirmButtonColor: '#d33',
+                     cancelButtonColor: '#3085d6',
+                     confirmButtonText: 'Yes, delete it!'
+                  }).then(function (result) {
+                     if (result.isConfirmed) {
+                        window.location.href = '/admin/opening_delete/' + blogId;
+                     }
+                  });
+               });
+            });
+         });
+      </script>
+
+
+
+
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+      <script>
+         $(document).ready(function () {
+            $('#statusCheckbox').change(function () {
+               var isChecked = $(this).prop('checked');
+               var openingId = $(this).val();
+
+               // Make an AJAX request to update the status on the server
+               $.ajax({
+                  type: 'POST',
+                  url: '/admin/openings_status',
+                  data: { openingId: openingId, isChecked: isChecked },
+                  success: function (response) {
+                     console.log(response); // Log the server response
+                  },
+                  error: function (error) {
+                     console.error(error); // Log any errors
+                  }
+               });
+            });
+         });
+      </script>
+
+
+
+      <script>
+         $(document).ready(function () {
+            // Function to filter openings based on selected criteria
+            function filterOpenings() {
+               var selectedMonth = $("#daterange-4").val();
+               var selectedCity = $("#cityFilter").val();
+               var selectedJobTitle = $("#schoolTypeFilter").val();
+               var selectedSchoolName = $("#roleFilter").val();
+               var selectedJobType = $("#qualificationFilter").val();
+
+               // Loop through each opening card and show/hide based on the selected criteria
+               $(".career-open-card").each(function () {
+                  var postingMonth = $(this).find(".post-date span:eq(0)").text().trim();
+                  var city = $(this).find(".bottom-career-center h6:eq(0)").text().trim();
+                  var jobTitle = $(this).find(".bottom-career-center h4").text().trim();
+                  var schoolName = $(this).find(".bottom-career-center h5").text().trim();
+                  var jobType = $(this).find(".bottom-career-card p:eq(1)").text().trim();
+
+                  var shouldShow = true;
+
+                  if (selectedMonth && postingMonth !== selectedMonth) {
+                     shouldShow = false;
+                  }
+                  if (selectedCity && city !== selectedCity) {
+                     shouldShow = false;
+                  }
+                  if (selectedJobTitle && jobTitle !== selectedJobTitle) {
+                     shouldShow = false;
+                  }
+                  if (selectedSchoolName && schoolName !== selectedSchoolName) {
+                     shouldShow = false;
+                  }
+                  if (selectedJobType && jobType !== selectedJobType) {
+                     shouldShow = false;
+                  }
+
+                  if (shouldShow) {
+                     $(this).show();
+                  } else {
+                     $(this).hide();
+                  }
+               });
+               $(".original-container").replaceWith(originalContainer);
+            }
+            $("#daterange-4, #cityFilter, #schoolTypeFilter, #roleFilter, #qualificationFilter").on("change", function () {
+               filterOpenings();
+            });
+         });
+      </script>
+
+      <%- include('partials/footer.ejs') %>

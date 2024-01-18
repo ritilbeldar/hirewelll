@@ -1,0 +1,127 @@
+<!-- Sidebar Start -->
+<div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-white logo-dark">
+    <div class="app-brand demo mt-3">
+        <span class="app-brand-logo demo">
+            <!--<img src="<?php echo base_url();?>assets/img/logo/<?php echo $admin->logo;?>" alt="Brand Logo" class="img-responsive" width="50px">-->
+            <center><img src="https://hirewell.co.in/public//newimg/logo.png" alt="Brand Logo" class="img-responsive"
+                    width="80px" style="margin-left: 32px"></center>
+        </span>
+        <a href="" class="app-brand-text demo sidenav-text font-weight-normal ml-2"></a>
+        <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
+            <i class="ion ion-md-menu align-middle"></i>
+        </a>
+    </div>
+    <div class="sidenav-divider mt-0"></div>
+    <div class="side-bar-name text-center">
+        <h3>Admin Dashboard</h3>
+    </div>
+    <ul class="sidenav-inner py-1">
+        <li class="sidenav-item <%= currentPath === '/admin/dashboard' ? 'active' : '' %>">
+            <a href="/admin/dashboard" class="sidenav-link">
+                <i class="sidenav-icon feather ion-md-home text-info"></i>
+                <div>Dashboard</div>
+            </a>
+        </li>
+
+        <!--  -->
+        <li class="sidenav-item <%= currentPath === '/admin/teachers' ? 'active' : '' %>">
+            <a href="/admin/teachers" class="sidenav-link">
+                <!-- <i class="sidenav-icon feather icon-grid text-info"></i> -->
+                <i class="fa-solid fa-chalkboard-user text-info sidenav-icon"></i>
+                <div>All Teachers</div>
+            </a>
+        </li>
+        <li class="sidenav-item <%= currentPath === '/admin/schools' ? 'active' : '' %>">
+            <a href="/admin/schools" class="sidenav-link">
+                <i class="sidenav-icon fa-solid fa-school text-info"></i>
+                <div>All Schools</div>
+            </a>
+        </li>
+
+        <li class="sidenav-item <%= currentPath.startsWith('/admin/trainings') ? 'open' : '' %>">
+            <a href="javascript:" class="sidenav-link sidenav-toggle">
+                <i class="fa-solid fa-ticket sidenav-icon text-info"></i>
+                <div>All Trainings</div>
+            </a>
+            <ul class="sidenav-menu">
+                <li
+                    class="sidenav-item <%= currentPath === '/admin/trainings' ? 'active' : '' %>">
+                    <a href="/admin/trainings" class="sidenav-link">
+                        <div>Training Form</div>
+                    </a>
+                </li>
+                <li
+                class="sidenav-item <%= currentPath === '/admin/trainings/current-trainings' ? 'active' : '' %>">
+                <a href="/admin/trainings/current-trainings" class="sidenav-link">
+                    <div>Current Trainings</div>
+                </a>
+            </li>
+                <li
+                    class="sidenav-item <%= currentPath === '/admin/trainings/create-trainings' ? 'active' : '' %>">
+                    <a href="/admin/trainings/create-trainings" class="sidenav-link">
+                        <div>Create Trainings</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="sidenav-item <%= currentPath === '/admin/enquiry' ? 'active' : '' %>">
+            <a href="/admin/enquiry" class="sidenav-link">
+                <i class="sidenav-icon fa-solid fa-address-book text-info"></i>
+                <div>All Enquirys</div>
+            </a>
+        </li>
+
+
+        <li class="sidenav-item <%= currentPath.startsWith('/admin/dashboard/openings') ? 'open' : '' %>">
+            <a href="javascript:" class="sidenav-link sidenav-toggle">
+                <i class="fa-solid fa-briefcase sidenav-icon text-info"></i>
+                <div>All Openings</div>
+            </a>
+            <ul class="sidenav-menu">
+                <li
+                    class="sidenav-item <%= currentPath === '/admin/dashboard/openings/current-openings' ? 'active' : '' %>">
+                    <a href="/admin/dashboard/openings/current-openings" class="sidenav-link">
+                        <div>Current Openings</div>
+                    </a>
+                </li>
+                <li
+                    class="sidenav-item <%= currentPath === '/admin/dashboard/openings/create-openings' ? 'active' : '' %>">
+                    <a href="/admin/dashboard/openings/create-openings" class="sidenav-link">
+                        <div>Create Openings</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+        <li class="sidenav-item <%= currentPath.startsWith('/admin/dashboard/blogs') ? 'open' : '' %>">
+            <a href="javascript:" class="sidenav-link sidenav-toggle">
+                <i class="fa-brands fa-microblog sidenav-icon text-info"></i>
+                <div>All Blogs</div>
+            </a>
+            <ul class="sidenav-menu">
+                <li class="sidenav-item <%= currentPath === '/admin/dashboard/blogs/all-blogs' ? 'active' : '' %>">
+                    <a href="/admin/dashboard/blogs/all-blogs" class="sidenav-link">
+                        <div>All Blogs</div>
+                    </a>
+                </li>
+                <li class="sidenav-item <%= currentPath === '/admin/dashboard/blogs/create_blogs' ? 'active' : '' %>">
+                    <a href="/admin/dashboard/blogs/create_blogs" class="sidenav-link">
+                        <div>Create Blogs</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="sidenav-item">
+            <a href="/admin/dashboard/signout" class="sidenav-link">
+                <i class="fa-solid fa-right-from-bracket text-info sidenav-icon"></i>
+                <div>Logout</div>
+            </a>
+        </li>
+    </ul>
+    </li>
+    </ul>
+</div>
+<!-- Sidebar End -->

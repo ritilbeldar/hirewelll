@@ -1,0 +1,143 @@
+<%- include('partials/nav.ejs') %>
+   <div class="layout-content">
+      <div class="container-fluid flex-grow-1 container-p-y">
+         <h4 class="font-weight-bold py-3 mb-0">
+            Training Details
+            <!-- <?php //echo $_SESSION['division'];?> -->
+         </h4>
+         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+               <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+               <li class="breadcrumb-item"><a href="/admin/dashboard/event/all-event">All Training</a></li>
+               <li class="breadcrumb-item"><a href="# ">Training Details</a>
+               </li>
+            </ol>
+         </div>
+         <section class="content-inner position-relative">
+            <div class="container">
+               <div class="row ">
+                  <div class="col-xl-8 col-lg-8">
+                     <div class="blog-single pt-20 sidebar dz-card">
+                        <div class="dz-media dz-media-rounded rounded">
+                           <img src="<%= event.trainingBanner.url %>" alt="">
+                        </div>
+                        <div class="dz-info m-b30">
+                           <div class="dz-meta">
+                              <ul>
+                                 <li class="post-author">
+                                    <a href="javascript:void(0);">
+                                       <img src="<%= event.trainingProfile.url %>" alt="">
+                                       <span>By <span class="text-capitalize">
+                                             <%= event.trainingBy %>
+                                          </span></span>
+                                    </a>
+                                 </li>
+                                 <li class="post-author text-primary text-capitalize">
+                                    <span>
+                                       <i class="fa-solid fa-location-dot"></i>
+                                    </span>
+                                    <%= event.trainingLocation %>
+                                 </li>
+
+                                 <li class="post-date text-primary">
+                                    <span>
+                                       <i class="fa-solid fa-calendar-days"></i>
+                                    </span>
+                                    <%= new Date(event.trainingStartDate).toLocaleDateString('en-US', { day: 'numeric' ,
+                                       month: 'short' , year: 'numeric' }) %>
+                                       -
+                                       <%= new Date(event.trainingEndDate).toLocaleDateString('en-US', { month: 'short'
+                                          , day: 'numeric' , year: 'numeric' }) %>
+                                 </li>
+                                 <li class="post-date text-primary text-capitalize">
+                                    <span>
+                                       <i class="fa-solid fa-chalkboard-user"></i>
+                                    </span>
+                                    <% if (event.trainingProgram==='Other Training' ) { %>
+                                       <%= event.otherTraining %>
+                                          <% } else { %>
+                                             <%= event.trainingProgram %>
+                                                <% } %>
+                                 </li>
+                              </ul>
+                           </div>
+                           <h3 class="dz-title">
+                              <%= event.trainingHeading %>
+                           </h3>
+                           <div class="dz-post-text">
+                              <p>
+                                 <%= event.trainingDescription1 %>
+                              </p>
+                              <blockquote class="block-quote  style-1">
+                                 <p>“<%= event.trainingTitle %>”
+                                 </p>
+                                 <cite> <span class="text-capitalize">
+                                       <%= event.trainingBy %>
+                                    </span> </cite>
+                              </blockquote>
+                              <ul class="m-b30">
+                                 <% event.trainingPoints.forEach(function(blogPoints) { %>
+                                    <li class="mt-1">
+                                       <%= blogPoints %>
+                                    </li>
+                                    <% }); %>
+                              </ul>
+                              <p>
+                                 <%= event.trainingDescription2 %>
+                              </p>
+                           </div>
+                           <div class="dz-share-post">
+                              <div class="post-tags">
+                                 <h6 class="m-b0 m-r10 d-inline">Tags:</h6>
+                                 <% var tagArray=event.trainingTags.split(','); %>
+                                    <% tagArray.forEach(function(tag, index) { %>
+                                       <a href="javascript:void(0);">
+                                          <span class="text-capitalize">
+                                             <%= tag.trim() %>
+                                          </span>
+                                       </a>
+                                       <% }); %>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-4 col-lg-4">
+                     <aside class="side-bar sticky-top right">
+                        <div class="widget recent-posts-entry">
+                           <div class="widget-title">
+                              <h4 class="title">Recent Training</h4>
+                           </div>
+                           <div class="widget-post-bx">
+                              <% trainingEvents.reverse().forEach((event)=> { %>
+                                 <div class="widget-post clearfix">
+                                    <div class="dz-media dz-media1">
+                                       <img src="<%= event.trainingBanner.url %>" alt="">
+                                    </div>
+                                    <div class="dz-info">
+                                       <h6 class="title"><a
+                                             href="/admin/trainings/current-trainings/trainings_details/<%= event._id %>">
+                                             <%= event.trainingHeading %>
+                                          </a>
+                                       </h6>
+                                       <div class="dz-meta">
+                                          <ul>
+                                             <li class="post-date"><a href="javascript:void(0);">
+                                                   <%= event.createdAt.toLocaleDateString() %>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <% }); %>
+                           </div>
+                        </div>
+                     </aside>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </div>
+      <%- include('partials/footer.ejs') %>

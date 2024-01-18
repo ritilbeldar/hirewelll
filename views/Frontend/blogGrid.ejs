@@ -1,0 +1,69 @@
+<%- include('partials/nav.ejs') %>
+<!-- Page Content Start -->
+<div class="page-content user-dash-board">
+   <!-- Banner  -->
+   <div class="dz-bnr-inr dz-bnr-inr-sm text-center overlay-primary-dark"
+      style="background-image: url(/Frontend/assets/frontend/images/banner/bnr1.jpg);">
+      <div class="container">
+         <div class="dz-bnr-inr-entry">
+            <h1>Blog Grid</h1>
+            <!-- Breadcrumb Row -->
+            <nav aria-label="breadcrumb" class="breadcrumb-row m-t15">
+               <ul class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="admin/index">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Blog Grid</li>
+               </ul>
+            </nav>
+            <!-- Breadcrumb Row End -->
+         </div>
+      </div>
+   </div>
+   <!-- Banner End -->
+   <!-- Blog Grid Starts -->
+   <section class="content-inner position-relative">
+      <div class="container">
+         <div class="row">
+            <% const hasActiveOpenings = blogs.some(blog => blog.status === 'Active'); %>
+            <% if (blogs.length === 0 || !hasActiveOpenings) { %>
+            <div class="col-12 d-flex justify-content-center">
+               <h2 class="text-danger">No Blogs</h2>
+            </div>
+            <% } else { %>
+            <% blogs.reverse().forEach((blog, index) => { %>
+            <% if (blog.status === 'Active') { %>
+            <div class="col-xl-4 col-md-6 m-b30">
+               <div class="dz-card style-1 overlay-shine wow fadeInUp blog-main-card" data-wow-delay="1.0s">
+                  <div class="dz-media dz-media1">
+                     <a href="<%= isAuthenticated ? '/teacher/blogDetails/' + blog._id : '/blogDetails/' + blog._id %>">
+                     <img src="<%= blog.blogimg.url %>" alt="">
+                     </a>
+                     <span class="date">
+                     <a href="javascript:void(0)">
+                     <%= new Date(blog.createdAt).toLocaleDateString() %>
+                     </a>
+                     </span>
+                  </div>
+                  <div class="dz-info">
+                     <h4 class="dz-title">
+                        <a href="<%= isAuthenticated ? '/teacher/blogDetails/' + blog._id : '/blogDetails/' + blog._id %>">
+                        <%= blog.blogHeading %>
+                        </a>
+                     </h4>
+                     <a href="<%= isAuthenticated ? '/teacher/blogDetails/' + blog._id : '/blogDetails/' + blog._id %>"
+                        class="btn btn-primary mt-2">Read More</a>
+                  </div>
+               </div>
+            </div>
+            <% } %>
+            <% }); %>
+            <% } %>
+         </div>
+      </div>
+   </section>
+   <!-- blog grid code starts from here -->
+   <!--footer-action -->
+   <%- include('partials/letsGet.ejs') %>
+   <!-- footer-action -->
+</div>
+<!-- Page Content End -->
+<%- include('partials/footer.ejs') %>

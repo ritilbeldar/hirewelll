@@ -1,0 +1,268 @@
+<%- include('partials/nav.ejs') %>
+   <div class="layout-content">
+      <div class="container-fluid flex-grow-1 container-p-y">
+         <h4 class="font-weight-bold py-3 mb-0">Edit Training</h4>
+         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+               <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+               <li class="breadcrumb-item"><a href="/admin/trainings">Training</a></li>
+               <li class="breadcrumb-item ">Edit Training</a></li>
+            </ol>
+         </div>
+         <div class="card mb-2">
+            <div class="card-header bg-info">
+               <a class="d-flex justify-content-between text-white text-large text-uppercase" data-toggle="collapse"
+                  aria-expanded="true" href="#accordion2-2">
+                  Teacher Training
+                  <div class="collapse-icon"></div>
+               </a>
+            </div>
+            <div id="accordion2-2" class="collapse show" data-parent="#accordion2">
+               <div class="card-body">
+                  <form action="/admin/training_update/<%= training._id %>" method="post" enctype="multipart/form-data">
+                     <div class="form-row teacher-form">
+                        <div class="form-group col-md-3">
+                           <label class="form-label">First Name</label>
+                           <input type="text" name="firstname" value="<%= training.firstname %>"
+                              class="form-control px-2" placeholder="Enter name">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Last Name</label>
+                           <input type="text" name="lastname" value="<%= training.lastname %>" class="form-control px-2"
+                              placeholder="Enter name">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Phone Number</label>
+                           <input type="number" name="contact" value="<%= training.contact %>" class="form-control px-2"
+                              placeholder="Enter number">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Email Address</label>
+                           <input type="email" name="email" value=" <%= training.email %>" class="form-control px-2"
+                              placeholder="Enter email dsbale" readonly>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">School Name </label>
+                           <input type="text" name="schoolName" value="<%= training.schoolName %>"
+                              class="form-control px-2" placeholder="Enter amount">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">School Type</label>
+                           <select class="custom-select" name="schoolType">
+                              <option value="">-- Select school Type--</option>
+                              <option value="CBSE Board School" <% if (training.schoolType==='CBSE Board School' ) { %>
+                                 selected <% } %>>CBSE Board School</option>
+                              <option value="State Board School" <% if (training.schoolType==='State Board School' ) { %>
+                                 selected <% } %>>State Board School</option>
+                              <option value="Play School" <% if (training.schoolType==='PlaySchool' ) { %> selected <% }
+                                    %>>Play School</option>
+                              <option value="Primary School" <% if (training.schoolType==='Primary School' ) { %>
+                                 selected
+                                 <% } %>>Primary School
+                              </option>
+                              <option value="Other" <% if (training.schoolType==='Other' ) { %> selected <% } %>>Other
+                              </option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">School Email Id </label>
+                           <input type="email" name="schoolemail" value="<%= training.schoolemail %>"
+                              class="form-control px-2" placeholder="Enter amount">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">School Contact No</label>
+                           <input type="number" name="schoolcontact" value="<%= training.schoolcontact %>"
+                              class="form-control px-2" placeholder="Enter amount">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Designation</label>
+                           <input type="text" name="designation" value="<%= training.designation %>"
+                              class="form-control px-2" placeholder="Enter amount">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">School Website</label>
+                           <input type="url" name="schoolWebsite" value="<%= training.schoolWebsite %>"
+                              class="form-control px-2" placeholder="Enter amount">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Training Programs</label>
+                           <select class="custom-select" name="trainingProgram">
+                              <option value="">-- Select Training Programs--</option>
+                              <option value="Training1" <% if (training.trainingProgram==='Training1' ) { %>
+                                 selected <% } %>>Training1</option>
+                              <option value="Training2" <% if (training.trainingProgram==='Training2' ) { %>
+                                 selected <% } %>>Training2</option>
+                              <option value="Training3" <% if (training.trainingProgram==='Training3' ) { %> selected <% }
+                                    %>>Training3</option>
+                              <option value="Primary School" <% if (training.trainingProgram==='Other Training' ) { %>
+                                 selected
+                                 <% } %>>Primary School
+                              </option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Other Programs</label>
+                           <input type="text" name="otherProgram" value="<%= training.otherProgram %>" class="form-control px-2"
+                              placeholder="Enter address">
+                           <div class="clearfix"></div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Number Of Teachers</label>
+                           <select class="custom-select" name="numberOfTeachers">
+                              <option value="">-- Select Number Of Teachers--</option>
+                              <option value="1-5" <% if (training.numberOfTeachers==='1-5' ) { %>
+                                 selected <% } %>>1-5</option>
+                              <option value="5-10" <% if (training.numberOfTeachers==='5-10' ) { %>
+                                 selected <% } %>>5-10</option>
+                              <option value="10-15" <% if (training.numberOfTeachers==='10-15' ) { %> selected <% }
+                                    %>>10-15</option>
+                              <option value="15-20" <% if (training.numberOfTeachers==='15-20' ) { %>
+                                 selected
+                                 <% } %>>15-20
+                              </option>
+                              <option value="More than 20" <% if (training.numberOfTeachers==='More than 20' ) { %>
+                                 selected
+                                 <% } %>>More than 20
+                              </option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Preffered Date For Training</label>
+                           <% const formattedDate = training.dateForTraining.toString().split('T')[0]; %>
+                              <input type="date" name="dateForTraining" value="<%= formattedDate %>"
+                                 class="form-control px-2" placeholder="Enter DOB">
+                              <div class="clearfix"></div>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Address</label>
+                           <input type="text" name="address" value="<%= training.address %>" class="form-control px-2"
+                              placeholder="Enter address">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">City</label>
+                           <input type="text" name="city" value="<%= training.city %>" class="form-control px-2"
+                              placeholder="Enter city">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">State</label>
+                           <select class="custom-select" name="state">
+                              <option>--Select--</option>
+                              <option value="Andaman and Nicobar Islands" <% if
+                                 (training.state==='Andaman and Nicobar Islands' ) { %> selected <% } %> value=""<%
+                                       if(training.state==='' ) { %> selected <% } %>> Andaman and Nicobar Islands
+                              </option>
+                              <option value="Andhra Pradesh" <% if (training.state==='Andhra Pradesh' ) { %> selected <%
+                                    } %>> Andhra Pradesh </option>
+                              <option value="Arunachal Pradesh" <% if (training.state==='Arunachal Pradesh' ) { %>
+                                 selected <% } %>> Arunachal Pradesh </option>
+                              <option value="Assam" <% if (training.state==='Assam' ) { %> selected <% } %>> Assam
+                              </option>
+                              <option value="Bihar" <% if (training.state==='Bihar' ) { %> selected <% } %>> Bihar
+                              </option>
+                              <option value="Chandigarh" <% if (training.state==='Chandigarh' ) { %> selected <% } %>>
+                                    Chandigarh </option>
+                              <option value="Chhattisgarh" <% if (training.state==='Chhattisgarh' ) { %> selected <% } %>
+                                    > Chhattisgarh </option>
+                              <option value="Dadra and Nagar Haveli" <% if (training.state==='Dadra and Nagar Haveli' ) {
+                                 %> selected <% } %>> Dadra and Nagar Haveli </option>
+                              <option value="Daman Diu" <% if (training.state==='Daman Diu' ) { %> selected <% } %>>
+                                    Daman &amp; Diu </option>
+                              <option value="Delhi" <% if (training.state==='Delhi' ) { %> selected <% } %>> Delhi
+                              </option>
+                              <option value="Goa" <% if (training.state==='Goa' ) { %> selected <% } %>> Goa </option>
+                              <option value="Gujrat" <% if (training.state==='Gujrat' ) { %> selected <% } %>> Gujrat
+                              </option>
+                              <option value="Haryana" <% if (training.state==='Haryana' ) { %> selected <% } %>> Haryana
+                              </option>
+                              <option value="Himachal Pradesh" <% if (training.state==='Himachal Pradesh' ) { %> selected
+                                 <% } %>> Himachal Pradesh
+                              </option>
+                              <option value="Jammu &amp; Kashmir" <% if (training.state==='Jammu Kashmir' ) { %> selected
+                                 <% } %>> Jammu &amp; Kashmir
+                              </option>
+                              <option value="Jharkhand" <% if (training.state==='Jharkhand' ) { %> selected <% } %>>
+                                    Jharkhand </option>
+                              <option value="Karnataka" <% if (training.state==='Karnataka' ) { %> selected <% } %>>
+                                    Karnataka </option>
+                              <option value="Kerala" <% if (training.state==='Kerala' ) { %> selected <% } %>> Kerala
+                              </option>
+                              <option value="Ladakh" <% if (training.state==='Ladakh' ) { %> selected <% } %>> Ladakh
+                              </option>
+                              <option value="Lakshadweep" <% if (training.state==='Lakshadweep' ) { %> selected <% } %>>
+                                    Lakshadweep </option>
+                              <option value="Madhya Pradesh" <% if (training.state==='Madhya Pradesh' ) { %> selected <%
+                                    } %>> Madhya Pradesh </option>
+                              <option value="Maharashtra" <% if (training.state==='Maharashtra' ) { %> selected <% } %>>
+                                    Maharashtra </option>
+                              <option value="Manipur" <% if (training.state==='Manipur' ) { %> selected <% } %>> Manipur
+                              </option>
+                              <option value="Meghalaya" <% if (training.state==='Meghalaya' ) { %> selected <% } %>>
+                                    Meghalaya </option>
+                              <option value="Mizoram" <% if (training.state==='Mizoram' ) { %> selected <% } %>> Mizoram
+                              </option>
+                              <option value="Nagaland" <% if (training.state==='Nagaland' ) { %> selected <% } %>>
+                                    Nagaland </option>
+                              <option value="Odisha" <% if (training.state==='Odisha' ) { %> selected <% } %>> Odisha
+                              </option>
+                              <option value="Puducherry" <% if (training.state==='Puducherry' ) { %> selected <% } %>>
+                                    Puducherry </option>
+                              <option value="Punjab" <% if (training.state==='Punjab' ) { %> selected <% } %>> Punjab
+                              </option>
+                              <option value="Rajasthan" <% if (training.state==='Rajasthan' ) { %> selected <% } %>>
+                                    Rajasthan </option>
+                              <option value="Sikkim" <% if (training.state==='Sikkim' ) { %> selected <% } %>> Sikkim
+                              </option>
+                              <option value="Tamil Nadu" <% if (training.state==='Tamil Nadu' ) { %> selected <% } %>>
+                                    Tamil Nadu </option>
+                              <option value="Telangana" <% if (training.state==='Telangana' ) { %> selected <% } %>>
+                                    Telangana </option>
+                              <option value="Tripura" <% if (training.state==='Tripura' ) { %> selected <% } %>> Tripura
+                              </option>
+                              <option value="Uttarakhand" <% if (training.state==='Uttarakhand' ) { %> selected <% } %>>
+                                    Uttarakhand </option>
+                              <option value="Utttar Pradesh" <% if (training.state==='Utttar Pradesh' ) { %> selected <%
+                                    } %>> Utttar Pradesh </option>
+                              <option value="West Bengal" <% if (training.state==='West Bengal' ) { %> selected <% } %>>
+                                    West Bengal </option>
+                              <option value="Non Indian" <% if (training.state==='Non Indian' ) { %> selected <% } %>>Non
+                                    Indian</option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Pincode</label>
+                           <input type="text" name="pincode" value="<%= training.pincode %>" class="form-control px-2"
+                              placeholder="Enter pincode">
+                           <div class="clearfix"></div>
+                        </div>
+                       
+                        <div class="form-group col-md-12">
+                           <label class="form-label">Remark</label>
+                           <textarea name="remark" class="form-control px-3" id="" cols="30"
+                              rows="10"><%= training.remark %></textarea>
+                        </div>
+                     </div>
+                     <button class="btn btn-primary" name="submit">Update</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+         <%- include('partials/footer.ejs') %>

@@ -1,0 +1,160 @@
+<%- include('partials/nav.ejs') %>
+   <div class="layout-content">
+      <div class="container-fluid flex-grow-1 container-p-y">
+         <div class="row">
+            <div class="col-md-6">
+               <h4 class="font-weight-bold py-3 mb-0">
+                  Address
+               </h4>
+               <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+                  <ol class="breadcrumb">
+                     <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+                     <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+                     <li class="breadcrumb-item"><a href="/admin/teachers">Teachers</a></li>
+                     <li class="breadcrumb-item"><a href="">Add Address</a></li>
+                  </ol>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="row px-4">
+               <div class="card">
+                  <div class="card-body">
+                     <div class="row">
+                        <h5>Add Address</h5>
+                        <div class="col-lg-12">
+                           <form action="/admin/addressSave" method="post">
+                              <div class="row">
+                                 <div class="col-md-3">
+                                    <h6>State*</h6>
+                                    <div class="is-invalid">
+                                       <select class="select2-demo form-control" style="width: 100%" name="state">
+                                          <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                          <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+                                          </option>
+                                          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                          <option value="Assam">Assam</option>
+                                          <option value="Bihar">Bihar</option>
+                                          <option value="Chandigarh">Chandigarh</option>
+                                          <option value="Chhattisgarh">Chhattisgarh</option>
+                                          <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                          <option value="Daman and Diu">Daman and Diu</option>
+                                          <option value="Delhi">Delhi</option>
+                                          <option value="Lakshadweep">Lakshadweep</option>
+                                          <option value="Puducherry">Puducherry</option>
+                                          <option value="Goa">Goa</option>
+                                          <option value="Gujarat">Gujarat</option>
+                                          <option value="Haryana">Haryana</option>
+                                          <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                          <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                          <option value="Jharkhand">Jharkhand</option>
+                                          <option value="Karnataka">Karnataka</option>
+                                          <option value="Kerala">Kerala</option>
+                                          <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                          <option value="Maharashtra">Maharashtra</option>
+                                          <option value="Manipur">Manipur</option>
+                                          <option value="Meghalaya">Meghalaya</option>
+                                          <option value="Mizoram">Mizoram</option>
+                                          <option value="Nagaland">Nagaland</option>
+                                          <option value="Odisha">Odisha</option>
+                                          <option value="Punjab">Punjab</option>
+                                          <option value="Rajasthan">Rajasthan</option>
+                                          <option value="Sikkim">Sikkim</option>
+                                          <option value="Tamil Nadu">Tamil Nadu</option>
+                                          <option value="Telangana">Telangana</option>
+                                          <option value="Tripura">Tripura</option>
+                                          <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                          <option value="Uttarakhand">Uttarakhand</option>
+                                          <option value="West Bengal">West Bengal</option>
+                                       </select>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                    <h6>City*</h6>
+                                    <div class="input-group">
+                                       <input type="text" name="city" class="form-control px-2"
+                                          placeholder="Enter City">
+                                    </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                    <h6>Area*</h6>
+                                    <div class="input-group">
+                                       <input type="text" name="area" class="form-control px-2"
+                                          placeholder="Enter area">
+                                    </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                    <h6>Pincode*</h6>
+                                    <div class="input-group">
+                                       <input type="number" name="pincode" class="form-control px-2"
+                                          placeholder="Enter Pincode">
+                                    </div>
+                                 </div>
+                              </div>
+                              <button class="btn btn-primary">Save</button>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="card">
+                  <div class="card-body">
+                     <div class="row">
+                        <h5>All Address</h5>
+                        <div class="col-lg-12">
+                           <form action="/admin/addressSave" method="post">
+                              <div class="row">
+                                 <div class="col-md-3">
+                                   <h6>State*</h6>
+                                   <div class="is-invalid">
+                                     <select class="select2-demo form-control" style="width: 100%" name="state">
+                                       <% uniqueStates.forEach(state => { %>
+                                         <option value="<%= state %>"><%= state %></option>
+                                       <% }); %>
+                                     </select>
+                                   </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                   <h6>City*</h6>
+                                   <div class="is-invalid">
+                                     <select class="select2-demo form-control" style="width: 100%" name="city">
+                                       <% addresses.forEach(address => { %>
+                                         <option value="<%= address.city %>" class="text-capitalize"><%= address.city %></option>
+                                       <% }); %>
+                                     </select>
+                                   </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                   <h6>Area*</h6>
+                                   <div class="is-invalid">
+                                     <select class="select2-demo form-control" style="width: 100%" name="area">
+                                       <% addresses.forEach(address => { %>
+                                         <option value="<%= address.area %>"><%= address.area %></option>
+                                       <% }); %>
+                                     </select>
+                                   </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                   <h6>Pincode*</h6>
+                                   <div class="is-invalid">
+                                     <select class="select2-demo form-control" style="width: 100%" name="pincode">
+                                       <% addresses.forEach(address => { %>
+                                         <option value="<%= address.pincode %>"><%= address.pincode %></option>
+                                       <% }); %>
+                                     </select>
+                                   </div>
+                                 </div>
+                               </div>
+                              <button class="btn btn-primary mt-3">Save</button>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Include jQuery -->
+      <%- include('partials/footer.ejs') %>

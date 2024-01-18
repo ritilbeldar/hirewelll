@@ -1,0 +1,163 @@
+<%- include('partials/nav.ejs') %>
+<!-- Page Content Start -->
+<div class="page-content user-dash-board">
+   <!-- Banner  -->
+   <div class="dz-bnr-inr dz-bnr-inr-sm text-center overlay-primary-dark"
+      style="background-image: url(/Frontend/assets/frontend/images/banner/bnr3.jpg);">
+      <div class="container">
+         <div class="dz-bnr-inr-entry">
+            <h1>Trainings Events Details</h1>
+            <nav aria-label="breadcrumb" class="breadcrumb-row m-t15">
+               <ul class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="admin/index">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Trainings Events Details</li>
+               </ul>
+            </nav>
+         </div>
+      </div>
+   </div>
+   <!-- Banner End -->
+   <!-- Blog Details -->
+   <section class="content-inner position-relative" style="background: white;">
+      <div class="container">
+         <div class="row ">
+            <div class="col-xl-8 col-lg-8">
+               <div class="blog-single pt-20 sidebar dz-card">
+                  <div class="dz-media dz-media-rounded rounded">
+                     <img src="<%= event.trainingBanner.url %>" alt="">
+                  </div>
+                  <div class="dz-info m-b30">
+                     <div class="dz-meta">
+                        <ul>
+                           <li class="post-author">
+                              <a href="javascript:void(0);">
+                              <img src="<%= event.trainingProfile.url %>" alt="">
+                              <span>By <span class="text-capitalize">
+                              <%= event.trainingBy %>
+                              </span></span>
+                              </a>
+                           </li>
+                           <li class="post-author text-primary text-capitalize">
+                              <span>
+                              <i class="fa-solid fa-location-dot"></i>
+                              </span>
+                              <%= event.trainingLocation %>
+                           </li>
+                           <li class="post-date text-primary">
+                              <span>
+                              <i class="fa-solid fa-calendar-days"></i>
+                              </span>
+                              <%= new Date(event.trainingStartDate).toLocaleDateString('en-US', { day: 'numeric' ,
+                                 month: 'short' , year: 'numeric' }) %>
+                              -
+                              <%= new Date(event.trainingEndDate).toLocaleDateString('en-US', { month: 'short' ,
+                                 day: 'numeric' , year: 'numeric' }) %>
+                           </li>
+                           <li class="post-date text-primary text-capitalize">
+                              <span>
+                              <i class="fa-solid fa-chalkboard-user"></i>
+                              </span>
+                              <% if (event.trainingProgram==='Other Training' ) { %>
+                              <%= event.otherTraining %>
+                              <% } else { %>
+                              <%= event.trainingProgram %>
+                              <% } %>
+                           </li>
+                        </ul>
+                     </div>
+                     <h3 class="dz-title">
+                        <%= event.trainingHeading %>
+                     </h3>
+                     <div class="dz-post-text">
+                        <p>
+                           <%= event.trainingDescription1 %>
+                        </p>
+                        <blockquote class="block-quote  style-1">
+                           <p>“<%= event.trainingTitle %>”
+                           </p>
+                           <cite> <span class="text-capitalize">
+                           <%= event.trainingBy %>
+                           </span> </cite>
+                        </blockquote>
+                        <ul class="m-b30">
+                           <% event.trainingPoints.forEach(function(blogPoints) { %>
+                           <li class="mt-1">
+                              <%= blogPoints %>
+                           </li>
+                           <% }); %>
+                        </ul>
+                        <p>
+                           <%= event.trainingDescription2 %>
+                        </p>
+                     </div>
+                     <div class="dz-share-post">
+                        <div class="post-tags">
+                           <h6 class="m-b0 m-r10 d-inline">Tags:</h6>
+                           <% var tagArray=event.trainingTags.split(','); %>
+                           <% tagArray.forEach(function(tag, index) { %>
+                           <a href="javascript:void(0);">
+                           <span class="text-capitalize">
+                           <%= tag.trim() %>
+                           </span>
+                           </a>
+                           <% }); %>
+                        </div>
+                     </div>
+                     <div class="main-apply-now">
+                        <% if (isAuthenticated) { %>
+                          <a class="btn <%= appliedOpeningsIds.includes(event._id.toString()) ? 'btn-primary disabled' : 'btn-success' %>"
+                            href="<%= isAuthenticated ? '/teacher/apply/event/' + event._id : '/teacher/apply/job/' + event._id %>">
+                            <%= appliedOpeningsIds.includes(event._id.toString()) ? 'Applied' : 'Apply Now' %>
+                          </a>
+                        <% } else { %>
+                          <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">Apply Now</a>
+                        <% } %>
+                      </div>
+
+
+                  </div>
+               </div>
+            </div>
+            <div class="col-xl-4 col-lg-4">
+               <aside class="side-bar sticky-top right">
+                  <div class="widget recent-posts-entry">
+                     <div class="widget-title">
+                        <h4 class="title">Recent Blogs</h4>
+                     </div>
+                     <div class="widget-post-bx">
+                        <% events.reverse().forEach((event)=> { %>
+                        <div class="widget-post clearfix">
+                           <div class="dz-media dz-media1">
+                              <img src="<%= event.trainingBanner.url %>" alt="">
+                           </div>
+                           <div class="dz-info">
+                              <h6 class="title"><a
+                                 href="<%= isAuthenticated ? '/trainings-Events-Detailss/' + event._id : '/trainings-Events-Detailss/' + event._id %>">
+                                 <%= event.trainingHeading %>
+                                 </a>
+                              </h6>
+                              <div class="dz-meta">
+                                 <ul>
+                                    <li class="post-date"><a href="javascript:void(0);">
+                                       <%= event.createdAt.toLocaleDateString() %>
+                                       </a>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <% }); %>
+                     </div>
+                  </div>
+               </aside>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- Blog Details -->
+   <!--footer-action -->
+   <%- include('partials/letsGet.ejs') %>
+   <!-- footer-action -->
+</div>
+<!-- Page Content End -->
+<%- include('partials/footer.ejs') %>

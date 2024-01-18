@@ -1,0 +1,540 @@
+<%- include('partials/nav.ejs') %>
+<div class="layout-content">
+   <div class="container-fluid flex-grow-1 container-p-y">
+      <h4 class="font-weight-bold py-3 mb-0">Dashboard</h4>
+      <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+            <li class="breadcrumb-item active"><a href="/admin/dashboard">Dashboard</a></li>
+         </ol>
+      </div>
+
+
+
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="col-lg-12">
+               <div class="row">
+                  <div class="col-md-3">
+                     <div class="card mb-4">
+                        <div class="card-body">
+                           <div class="d-flex flex-column align-items-center justify-content-between">
+                              <h2>Teacher's</h2>
+                              <div class="d-flex w-100 justify-content-between justify-content-center">
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h5 class="text-muted mb-0"><span class="badge text-white"
+                                       style="background-color: #007BFF;">Today</span> </h5>
+                                    <h2 class="mt-2">
+                                       <% let todayCount=0; students.forEach((teacher)=> {
+                                          const createdAtDate = new Date(teacher.createdAt);
+                                          const today = new Date();
+                                          
+                                          if (
+                                          createdAtDate.getDate() === today.getDate() &&
+                                          createdAtDate.getMonth() === today.getMonth() &&
+                                          createdAtDate.getFullYear() === today.getFullYear()
+                                          ) {
+                                          todayCount++;
+                                          }
+                                          });
+                                          %>
+                                       <%= todayCount %>
+                                    </h2>
+                                 </div>
+                                 <div class="feather icon-user display-4 text-warning"></div>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h5 class="text-muted mb-0"><span class="badge badge-primary">Total</span> </h5>
+                                    <h2 class="mt-2">
+                                       <%= students.length %>
+                                    </h2>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="card mb-4">
+                        <div class="card-body">
+                           <div class="d-flex flex-column align-items-center justify-content-between">
+                              <h2>School's</h2>
+                              <div class="d-flex w-100 justify-content-between justify-content-center">
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h5 class="text-muted mb-0"><span class="badge text-white"
+                                       style="background-color: #007BFF;">Today</span> </h5>
+                                    <h2 class="mt-2">
+                                       <% let todayCount1=0; schools.forEach((teacher)=> {
+                                          const createdAtDate = new Date(teacher.createdAt);
+                                          const today = new Date();
+                                          
+                                          if (
+                                          createdAtDate.getDate() === today.getDate() &&
+                                          createdAtDate.getMonth() === today.getMonth() &&
+                                          createdAtDate.getFullYear() === today.getFullYear()
+                                          ) {
+                                          todayCount1++;
+                                          }
+                                          });
+                                          %>
+                                       <%= todayCount1 %>
+                                    </h2>
+                                 </div>
+                                 <i class="fa-solid fa-school text-warning mt-2" style="font-size:48px;"></i>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h5 class="text-muted mb-0"><span class="badge badge-primary">Total</span> </h5>
+                                    <h2 class="mt-2">
+                                       <%= schools.length %>
+                                    </h2>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="card mb-4">
+                        <div class="card-body">
+                           <div class="d-flex flex-column align-items-center justify-content-between">
+                              <h2>Trainings</h2>
+                              <div class="d-flex w-100 justify-content-between justify-content-center des-icon">
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h5 class="text-muted mb-0"><span class="badge text-white"
+                                       style="background-color: #007BFF;">Today</span> </h5>
+                                    <h2 class="mt-2">
+                                       <% let todayCount2=0; trainings.forEach((teacher)=> {
+                                          const createdAtDate = new Date(teacher.createdAt);
+                                          const today = new Date();
+                                          
+                                          if (
+                                          createdAtDate.getDate() === today.getDate() &&
+                                          createdAtDate.getMonth() === today.getMonth() &&
+                                          createdAtDate.getFullYear() === today.getFullYear()
+                                          ) {
+                                          todayCount2++;
+                                          }
+                                          });
+                                          %>
+                                       <%= todayCount2 %>
+                                    </h2>
+                                 </div>
+                                 <div class="feather icon-grid display-4 text-warning"></div>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h5 class="text-muted mb-0"><span class="badge badge-primary">Total</span> </h5>
+                                    <h2 class="mt-2">
+                                       <%= trainings.length %>
+                                    </h2>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="card mb-4">
+                        <div class="card-body">
+                           <div class="d-flex flex-column align-items-center justify-content-between">
+                              <h2>Enquiry</h2>
+                              <div class="d-flex w-100 justify-content-between justify-content-center">
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h5 class="text-muted mb-0"><span class="badge text-white"
+                                       style="background-color: #007BFF;">Today</span> </h5>
+                                    <h2 class="mt-2">
+                                       <% let totalCount=0; enquires.forEach((enquire, index)=> {
+                                          const createdAtDate = new Date(enquire.createdAt);
+                                          const today = new Date();
+                                          
+                                          if (
+                                          createdAtDate.getDate() === today.getDate() &&
+                                          createdAtDate.getMonth() === today.getMonth() &&
+                                          createdAtDate.getFullYear() === today.getFullYear()
+                                          ) {
+                                          totalCount++;
+                                          }
+                                          });
+                                          %>
+                                       <%= totalCount %>
+                                    </h2>
+                                 </div>
+                                 <i class="fa-solid display-4 text-warning  fa-address-book "></i>
+                                 <div class="d-flex flex-column align-items-center">
+                                    <h5 class="text-muted mb-0"><span class="badge badge-primary">Total</span> </h5>
+                                    <h2 class="mt-2">
+                                       <%= enquires.length %>
+                                    </h2>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12">
+                  <div id="accordion2">
+                     <div class="card mb-2">
+                        <div class="card-header">
+                           <a class="d-flex justify-content-between text-dark" data-toggle="collapse"
+                              aria-expanded="true" href="#accordion2-1">
+                              Latest Teacher
+                              <div class="collapse-icon"></div>
+                           </a>
+                        </div>
+                        <div id="accordion2-1" class="collapse show" data-parent="#accordion2">
+                           <div class="card-body">
+                              <div class="table-responsive">
+                                 <table id="" class="table card-table" data-url="">
+                                    <thead>
+                                       <tr>
+                                          <th>S NO.</th>
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                          <th>Resume</th>
+                                          <th>Date</th>
+                                          <th>Name</th>
+                                          <th>Gender</th>
+                                          <th>Email</th>
+                                          <th>Number</th>
+                                          <th>Whatsapp No.</th>
+                                          <th>School Type</th>
+                                          <th>Role</th>
+                                          <th>Currently Working</th>
+                                          <th>Relevant Experience</th>
+                                          <th>Qualification Level</th>
+                                          <th>City</th>
+                                          <th>State</th>
+                                          <th>Pincode</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody class="table-new">
+                                       <% const teacher=students.length> 0 ? students.reverse()[0] : {}; %>
+                                       <% if (Object.keys(teacher).length===0) { %>
+                                       <% } else { %>
+                                       <tr>
+                                          <td>
+                                             1
+                                          </td>
+                                          <td>
+                                             <form action="/admin/teacher_status" method="post">
+                                                <input type="hidden" name="student"
+                                                   value="<%= teacher._id %>">
+                                                <button type="submit"
+                                                   class="btn <%= teacher.status === 'Active' ? 'btn-success' : 'btn-danger' %> toggle-status"
+                                                   name="status">
+                                                <%= teacher.status %>
+                                                </button>
+                                             </form>
+                                          </td>
+                                          <td>
+                                             <a href="/admin/teacher_details/<%= teacher._id %>"
+                                                class="btn btn-info btn-sm"><i
+                                                class="feather icon-eye"></i></a>
+                                             <a href="/admin/teacher_edit/<%= teacher._id %>"
+                                                class="btn btn-info btn-sm"><i
+                                                class="feather icon-edit"></i> </a>
+                                             <a href="/admin/teacher_delete/<%= teacher._id %>"
+                                                class="btn btn-danger btn-sm"><i
+                                                class="feather icon-trash-2"></i></a>
+                                          </td>
+                                          <td><a class="btn btn-primary btn-sm"
+                                             href="<%= teacher.teacherresume.url %>"
+                                             target="_blank">View</a>
+                                          </td>
+                                          <td>
+                                             <%= teacher.createdAt.toLocaleDateString() %>
+                                          </td>
+                                          <td class="td">
+                                             <%= teacher.firstname %>
+                                             <%= teacher.lastname %>
+                                          </td>
+                                          <td class="td">
+                                             <%= teacher.gender %>
+                                          </td>
+                                          <td>
+                                             <%= teacher.email %>
+                                          </td>
+                                          <td>
+                                             <%= teacher.contact %>
+                                          </td>
+                                          <td>
+                                             <%= teacher.whatsappNumber %>
+                                          </td>
+                                          <td class="td">
+                                             <%= teacher.schoolType %>
+                                          </td>
+                                          <td class="td">
+                                             <%= teacher.role %>
+                                          </td>
+                                          <td class="td">
+                                             <%= teacher.isCurrentlyWorking %>
+                                          </td>
+                                          <td>
+                                             <%= teacher.relevantExperience %>
+                                          </td>
+                                          <td class="td">
+                                             <%= teacher.qualificationLevel %>
+                                          </td>
+                                          <td class="td">
+                                             <%= teacher.city %>
+                                          </td>
+                                          <td class="td">
+                                             <%= teacher.state %>
+                                             </td class="td">
+                                          <td>
+                                             <%= teacher.pincode %>
+                                          </td>
+                                       </tr>
+                                       <% } %>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card mb-2">
+                        <div class="card-header">
+                           <a class="collapsed d-flex justify-content-between text-dark" data-toggle="collapse"
+                              href="#accordion2-2">
+                              Latest School
+                              <div class="collapse-icon"></div>
+                           </a>
+                        </div>
+                        <div id="accordion2-2" class="collapse" data-parent="#accordion2">
+                           <div class="card-body">
+                              <div class="table-responsive">
+                                 <table id="" class="table card-table" data-url="">
+                                    <thead>
+                                       <tr>
+                                          <th>S NO.</th>
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                          <th>Date</th>
+                                          <th>School Name</th>
+                                          <th>School email Id</th>
+                                          <th>School Contact No</th>
+                                          <th>Name</th>
+                                          <th>Designation</th>
+                                          <th>Number</th>
+                                          <th>Working Email Id</th>
+                                          <th>School Type</th>
+                                          <th>City</th>
+                                          <th>State</th>
+                                          <th>Pincode</th>
+                                          <th>School Website</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody class="table-new">
+                                       <% const school=schools.length> 0 ? schools.reverse()[0] : {}; %>
+                                       <% if (Object.keys(school).length===0) { %>
+                                       <% } else { %>
+                                       <tr>
+                                          <td>
+                                             1
+                                          </td>
+                                          <td>
+                                             <form action="/admin/school_status" method="post">
+                                                <input type="hidden" name="school"
+                                                   value="<%= school._id %>">
+                                                <button type="submit"
+                                                   class="btn <%= school.status === 'Active' ? 'btn-success' : 'btn-danger' %> toggle-status"
+                                                   name="status">
+                                                <%= school.status %>
+                                                </button>
+                                             </form>
+                                          </td>
+                                          <td>
+                                             <a href="/admin/school_details/<%= school._id %>"
+                                                class="btn btn-info btn-sm"><i
+                                                class="feather icon-eye"></i></a>
+                                             <a href="/admin/school_edit/<%= school._id %>"
+                                                class="btn btn-info btn-sm"><i
+                                                class="feather icon-edit"></i> </a>
+                                             <a href="/admin/school_delete/<%= school._id %>"
+                                                class="btn btn-danger btn-sm"><i
+                                                class="feather icon-trash-2"></i></a>
+                                          </td>
+                                          <td>
+                                             <%= school.createdAt.toLocaleDateString() %>
+                                          </td>
+                                          <td class="td">
+                                             <%= school.schoolName %>
+                                          </td>
+                                          <td class="td">
+                                             <%= school.schoolemail %>
+                                          </td>
+                                          <td class="td">
+                                             <%= school.schoolcontact %>
+                                          </td>
+                                          <td class="td">
+                                             <%= school.firstname %>
+                                             <%= school.lastname %>
+                                          </td>
+                                          <td class="td">
+                                             <%= school.designation %>
+                                          </td>
+                                          <td class="td">
+                                             <%= school.contact %>
+                                          </td>
+                                          <td>
+                                             <%= school.email %>
+                                          </td>
+                                          <td class="td">
+                                             <%= school.schoolType %>
+                                          </td>
+                                          <td class="td">
+                                             <%= school.city %>
+                                          </td>
+                                          <td class="td">
+                                             <%= school.state %>
+                                             </td class="td">
+                                          <td>
+                                             <%= school.pincode %>
+                                          </td>
+                                          <td>
+                                             <a href="<%= school.schoolWebsite %>" target="_blank">
+                                             <%= school.schoolWebsite %>
+                                             </a>
+                                          </td>
+                                       </tr>
+                                       <% } %>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card mb-2">
+                        <div class="card-header">
+                           <a class="collapsed d-flex justify-content-between text-dark" data-toggle="collapse"
+                              href="#accordion2-3">
+                              Latest Training
+                              <div class="collapse-icon"></div>
+                           </a>
+                        </div>
+                        <div id="accordion2-3" class="collapse" data-parent="#accordion2">
+                           <div class="card-body">
+                              <div class="table-responsive">
+                                 <table id="" class="table card-table" data-url="">
+                                    <thead>
+                                       <tr>
+                                          <th>S NO.</th>
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                          <th>Date</th>
+                                          <th>School Name</th>
+                                          <th>School email Id</th>
+                                          <th>School Contact No</th>
+                                          <th>Name</th>
+                                          <th>Designation</th>
+                                          <th>Number</th>
+                                          <th>Working Email Id</th>
+                                          <th>School Type</th>
+                                          <th>Training Programs</th>
+                                          <th>Number Of Teachers</th>
+                                          <th>Preffered Date For Training</th>
+                                          <th>City</th>
+                                          <th>State</th>
+                                          <th>Pincode</th>
+                                          <th>School Website</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody class="table-new">
+                                       <% const training=trainings.length> 0 ? trainings.reverse()[0] : {}; %>
+                                       <% if (Object.keys(training).length===0) { %>
+                                       <% } else { %>
+                                       <tr>
+                                          <td>
+                                             1
+                                          </td>
+                                          <td>
+                                             <form action="/admin/training_status" method="post">
+                                                <input type="hidden" name="training"
+                                                   value="<%= training._id %>">
+                                                <button type="submit"
+                                                   class="btn <%= training.status === 'Active' ? 'btn-success' : 'btn-danger' %> toggle-status"
+                                                   name="status">
+                                                <%= training.status %>
+                                                </button>
+                                             </form>
+                                          </td>
+                                          <td>
+                                             <a href="/admin/training_details/<%= training._id %>"
+                                                class="btn btn-info btn-sm"><i
+                                                class="feather icon-eye"></i></a>
+                                             <a href="/admin/training_edit/<%= training._id %>"
+                                                class="btn btn-info btn-sm"><i
+                                                class="feather icon-edit"></i>
+                                             </a>
+                                             <a href="/admin/training_delete/<%= training._id %>"
+                                                class="btn btn-danger btn-sm"><i
+                                                class="feather icon-trash-2"></i></a>
+                                          </td>
+                                          <td>
+                                             <%= training.createdAt.toLocaleDateString() %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.schoolName %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.schoolemail %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.schoolcontact %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.firstname %>
+                                             <%= training.lastname %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.designation %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.contact %>
+                                          </td>
+                                          <td>
+                                             <%= training.email %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.schoolType %>
+                                          </td>
+                                          <td class="td">
+                                             <% if (training.trainingProgram==='Other Training' ) { %>
+                                             <%= training.otherProgram %>
+                                             <% } else { %>
+                                             <%= training.trainingProgram %>
+                                             <% } %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.numberOfTeachers %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.dateForTraining %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.city %>
+                                          </td>
+                                          <td class="td">
+                                             <%= training.state %>
+                                             </td class="td">
+                                          <td>
+                                             <%= training.pincode %>
+                                          </td>
+                                          <td>
+                                             <a href="<%= training.trainingWebsite %>" target="_blank">
+                                             <%= training.schoolWebsite %>
+                                             </a>
+                                          </td>
+                                       </tr>
+                                       <% } %>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<%- include('partials/footer.ejs') %>

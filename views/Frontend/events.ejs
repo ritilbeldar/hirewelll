@@ -1,0 +1,119 @@
+<%- include('partials/nav.ejs') %>
+   <!-- Page Content Start -->
+   <div class="page-content user-dash-board">
+      <!-- Banner  -->
+      <div class="dz-bnr-inr dz-bnr-inr-sm text-center overlay-primary-dark"
+         style="background-image: url(/Frontend/assets/frontend/images/banner/bnr1.jpg);">
+         <div class="container">
+            <div class="dz-bnr-inr-entry">
+               <h1>Training Events</h1>
+               <!-- Breadcrumb Row -->
+               <nav aria-label="breadcrumb" class="breadcrumb-row m-t15">
+                  <ul class="breadcrumb">
+                     <li class="breadcrumb-item"><a href="admin/index">Home</a></li>
+                     <li class="breadcrumb-item active" aria-current="page">Training Events</li>
+                  </ul>
+               </nav>
+               <!-- Breadcrumb Row End -->
+            </div>
+         </div>
+      </div>
+      <!-- Banner End -->
+      <!-- Blog Grid Starts -->
+      <section class="content-inner position-relative">
+         <div class="container">
+            <div class="row">
+
+               <% const hasActiveOpenings=trainingEvents.some(blog=> blog.status === 'Active'); %>
+                  <% if (trainingEvents.length===0 || !hasActiveOpenings) { %>
+                     <div class="col-12 d-flex justify-content-center">
+                        <h2 class="text-danger">No Training Events</h2>
+                     </div>
+                     <% } else { %>
+                        <% trainingEvents.reverse().forEach((blog, index)=> { %>
+                           <% if (blog.status==='Active' ) { %>
+                              <div class="col-xl-4 col-md-6 m-b30">
+                                 <div class="dz-card style-1 overlay-shine wow fadeInUp blog-main-card">
+                                    <div class="dz-media dz-media1 dz-media25">
+                                       <img src="<%= blog.trainingBanner.url %>" alt="">
+                                       <span class="date"><a href="javascript:void(0)">
+                                             <%= new Date(blog.createdAt).toLocaleDateString('en-US', { day: 'numeric' ,
+                                                month: 'short' , year: 'numeric' }) %>
+                                          </a></span>
+                                    </div>
+                                    <div class="dz-info">
+                                       <h4 class="dz-title">
+                                          <%= blog.trainingHeading %>
+                                       </h4>
+                                       <p class="limited-lines">
+                                          <%= blog.trainingDescription1 %>
+                                       </p>
+                                       <div class="dz-meta mb-4" style="margin-top: -1vmax;">
+                                          <ul>
+                                             <li class="post-author text-primary text-capitalize">
+                                                <span>
+                                                   <i class="fa-solid fa-location-dot"></i>
+                                                </span>
+                                                <%= blog.trainingLocation %>
+                                             </li>
+                                             <li class="post-date text-primary">
+                                                <span>
+                                                   <i class="fa-solid fa-calendar-days"></i>
+                                                </span>
+                                                <%= new Date(blog.trainingStartDate).toLocaleDateString('en-US', {
+                                                   day: 'numeric' , month: 'short' , year: 'numeric' }) %>
+                                                   -
+                                                   <%= new Date(blog.trainingEndDate).toLocaleDateString('en-US', {
+                                                      month: 'short' , day: 'numeric' , year: 'numeric' }) %>
+                                             </li>
+                                             <li class="post-date text-primary text-capitalize">
+                                                <span>
+                                                   <i class="fa-solid fa-chalkboard-user"></i>
+                                                </span>
+                                                <% if (blog.trainingProgram==='Other Training' ) { %>
+                                                   <%= blog.otherTraining %>
+                                                      <% } else { %>
+                                                         <%= blog.trainingProgram %>
+                                                            <% } %>
+                                             </li>
+                                          </ul>
+                                       </div>
+
+                                       <div class="row">
+                                          <div class="col-md-12 d-flex">
+                                             <div class="col-md-6">
+                                                <img class="invisible" src="/Frontend/newimg/React.webp" alt="">
+                                             </div>
+                                             <div class="col-md-6 text-end">
+                                                <% if (isAuthenticated) { %>
+                                                   <a class="btn <%= appliedTrainingIds.includes(blog._id.toString()) ? 'btn-primary disabled' : 'btn-success' %>"
+                                                      href="<%= '/teacher/trainings-Events-Detailss/' + blog._id %>">
+                                                      <%= appliedTrainingIds.includes(blog._id.toString()) ? 'Applied'
+                                                         : 'Apply Now' %>
+                                                   </a>
+                                                   <% } else { %>
+                                                      <a class="btn btn-success"
+                                                         href="<%= '/trainings-Events-Detailss/' + blog._id %>">
+                                                         Apply Now
+                                                      </a>
+                                                      <% } %>
+                                             </div>
+                                          </div>
+                                       </div>
+
+                                    </div>
+                                 </div>
+                              </div>
+                              <% } %>
+                                 <% }); %>
+                                    <% } %>
+            </div>
+         </div>
+      </section>
+      <!-- blog grid code starts from here -->
+      <!--footer-action -->
+      <%- include('partials/letsGet.ejs') %>
+         <!-- footer-action -->
+   </div>
+   <!-- Page Content End -->
+   <%- include('partials/footer.ejs') %>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="en" class="default-style layout-fixed layout-navbar-fixed">
+
+<head>
+    <title>Hirewell Admin Login</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://hirewell.co.in/public//newimg/logo.png">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+    <!-- Icon fonts -->
+    <link rel="stylesheet" href="/Admin/assets/fonts/fontawesome.css">
+    <link rel="stylesheet" href="/Admin/assets/fonts/ionicons.css">
+    <link rel="stylesheet" href="/Admin/assets/fonts/linearicons.css">
+    <link rel="stylesheet" href="/Admin/assets/fonts/open-iconic.css">
+    <link rel="stylesheet" href="/Admin/assets/fonts/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="/Admin/assets/fonts/feather.css">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="/Admin/assets/css/bootstrap-material.css">
+    <link rel="stylesheet" href="/Admin/assets/css/shreerang-material.css">
+    <link rel="stylesheet" href="/Admin/assets/css/uikit.css">
+
+    <!-- Libs -->
+    <link rel="stylesheet" href="/Admin/assets/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <!-- Page -->
+    <link rel="stylesheet" href="/Admin/assets/css/pages/authentication.css">
+</head>
+
+<body>
+    <!-- [ Preloader ] Start -->
+    <div class="page-loader">
+        <div class="bg-primary"></div>
+    </div>
+    <!-- [ Preloader ] End -->
+
+    <!-- [ Content ] Start -->
+    <div class="authentication-wrapper authentication-2 ui-bg-cover ui-bg-overlay-container px-4"
+        style="background-image: url('');">
+        <div class="ui-bg-overlay bg-dark opacity-25"></div>
+
+        <div class="authentication-inner py-5">
+
+            <div class="card">
+                <div class="p-4 p-sm-5">
+                    <!-- [ Logo ] Start -->
+                    <div class="d-flex justify-content-center align-items-center pb-2 mb-4">
+                        <div class="ui-w-60">
+                            <div class="w-100 position-relative">
+                                <img src="https://hirewell.co.in/public//newimg/logo.png" alt="Brand Logo"
+                                    class="img-fluid">
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ Logo ] End -->
+
+                    <h5 class="text-center text-muted font-weight-normal mb-4">Login to Your Account</h5>
+
+                    <!-- Form -->
+                    <form id="loginForm" action="/admin/signin" method="post">
+                        <div class="form-group">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control" placeholder="Enter Username"
+                                required>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label d-flex justify-content-between align-items-end">
+                                <span>Password</span>
+                            </label>
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="Enter Password" required>
+                            <div class="clearfix"></div>
+                            <input type="checkbox" class="mt-2" id="showPassword"> Show Password
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center m-0">
+                            <label class="custom-control custom-checkbox m-0">
+                                <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                <span class="custom-control-label">Remember me</span>
+                            </label>
+                            <button class="btn btn-primary" onclick="saveLogin()">Sign In</button>
+                        </div>
+                    </form>
+                    <!-- [ Form ] End -->
+
+                </div>
+                <!-- <div class="card-footer py-3 px-4 px-sm-5">
+                    <div class="text-center text-muted">
+                        Don't have an account yet?
+                        <a href="pages_authentication_register-v2.html">Sign Up</a>
+                    </div>
+                </div> -->
+            </div>
+
+        </div>
+
+        <div style="position: absolute; z-index: 99; right: 0; top: 23%; left: 59%; transform: translate(-50%,-50%);">
+            <% if (messages.error) { %>
+              <div class="alert alert-danger" role="alert" style="width: max-content;">
+                 <%= messages.error %>
+              </div>
+              <% } else if (messages.warning) { %>
+              <div class="alert alert-warning" role="alert" style="width: max-content;">
+                 <%= messages.warning %>
+              </div>
+              <% } else if (messages.success) { %>
+              <div class="alert alert-success" role="alert" style="width: max-content;">
+                 <%= messages.success %>
+              </div>
+              <% } %>
+          </div>
+    </div>
+    <!-- / Content -->
+
+    <!-- Core scripts -->
+    <script src="/Admin/assets/js/pace.js"></script>
+    <script src="/Admin/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/Admin/assets/libs/popper/popper.js"></script>
+    <script src="/Admin/assets/js/bootstrap.js"></script>
+    <script src="/Admin/assets/js/sidenav.js"></script>
+    <script src="/Admin/assets/js/layout-helpers.js"></script>
+    <script src="/Admin/assets/js/material-ripple.js"></script>
+
+    <script>
+        // Function to save login information when the "Remember me" checkbox is checked
+        function saveLogin() {
+            var username = document.getElementsByName("username")[0].value;
+            var password = document.getElementsByName("password")[0].value;
+            var rememberMe = document.getElementById("rememberMe").checked;
+
+            if (rememberMe) {
+                // Save the username and password in cookies with an expiration date
+                document.cookie = "username=" + username + "; expires=Thu, 31 Dec 2025 12:00:00 UTC; path=/";
+                document.cookie = "password=" + password + "; expires=Thu, 31 Dec 2025 12:00:00 UTC; path=/";
+            } else {
+                // Clear the cookies if "Remember me" is unchecked
+                document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            }
+        }
+
+        // Function to populate the form with saved login information on page load
+        window.onload = function () {
+            var usernameCookie = getCookie("username");
+            var passwordCookie = getCookie("password");
+
+            if (usernameCookie && passwordCookie) {
+                document.getElementsByName("username")[0].value = usernameCookie;
+                document.getElementsByName("password")[0].value = passwordCookie;
+            }
+        };
+
+        // Function to get the value of a cookie by name
+        function getCookie(name) {
+            var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            if (match) return match[2];
+        }
+    </script>
+
+    <script>
+        document.getElementById('showPassword').addEventListener('change', function () {
+            var passwordInput = document.getElementById('password');
+
+            // Check if the checkbox is checked
+            if (this.checked) {
+                passwordInput.type = 'text'; // Show password
+            } else {
+                passwordInput.type = 'password'; // Hide password
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,287 @@
+<%- include('partials/nav.ejs') %>
+<div class="layout-content">
+<div class="container-fluid flex-grow-1 container-p-y">
+   <h4 class="font-weight-bold py-3 mb-0">
+      Edit Openings
+      <!-- <?php //echo $_SESSION['division'];?> -->
+   </h4>
+   <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+      <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+         <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+         <li class="breadcrumb-item"><a href="/admin/dashboard/openings/current-openings">Current Openings</a></li>
+         <li class="breadcrumb-item"><a href="">Edit Openings</a>
+         </li>
+      </ol>
+   </div>
+   <section class="content-inner position-relative">
+      <div class="container">
+         <form action="/admin/opening_update/<%= opening._id %>" method="post" enctype="multipart/form-data">
+            <div class="row">
+               <div class="col-xl-8 col-lg-8 m-b30">
+                  <div class="blog-single pt-20 sidebar dz-card">
+                     <div class="row mb-3 align-items-center">
+                        <div class="col-md-4">
+                           <div>
+                              <h5>Logo</h5>
+                              <input type="file" value="<%= opening.opnCompney %>" name="opnlogo">
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <h5>School Name</h5>
+                              <input type="text" name="opnCompney" value="<%= opening.opnCompney %>"
+                                 class="form-control px-2" placeholder="School Name">
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <h5>Preference</h5>
+                           <select class="selectpicker" name="opnPreference" data-style="btn-default">
+                              <option>--select--</option>
+                              <option value="on" <% if (opening.opnPreference==='on' ) { %>
+                                 selected <% } %>>ON</option>
+                              <option value="off" <% if (opening.opnPreference==='off' ) { %>
+                                 selected <% } %>>OFF</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="dz-inf m-b30">
+                        <div class="job-detail-content">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <div class="form-group">
+                                    <h5>Title</h5>
+                                    <input type="text" value="<%= opening.opnTitle %>"
+                                       name="opnTitle" class="form-control px-2"
+                                       placeholder="Title">
+                                    <div class="clearfix"></div>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <h5><i class="fa-solid fa-location-dot text-primary"></i>
+                                       Location
+                                    </h5>
+                                    <input type="text" value="<%= opening.opnLnocation %>"
+                                       name="opnLnocation" class="form-control px-2"
+                                       placeholder="Location">
+                                    <div class="clearfix"></div>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <% const
+                                       formattedDate=opening.opnLastDate.toISOString().split('T')[0];
+                                       %>
+                                    <h5>Application ends</h5>
+                                    <input type="date" value="<%= formattedDate %>"
+                                       name="opnLastDate" class="form-control px-2"
+                                       placeholder="Location">
+                                    <div class="clearfix"></div>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <h5>Min Salary</h5>
+                                    <input type="text" value="<%= opening.opnMinPrice %>"
+                                       name="opnMinPrice" class="form-control px-2"
+                                       placeholder="Min Salary">
+                                    <div class="clearfix"></div>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <div class="form-group">
+                                    <h5>Max Salary</h5>
+                                    <input type="text" value="<%= opening.opnMaxPrice %>"
+                                       name="opnMaxPrice" class="form-control px-2"
+                                       placeholder="Max Salary">
+                                    <div class="clearfix"></div>
+                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                 <h5>Salary Type</h5>
+                                 <select class="selectpicker" name="opnPriceType"
+                                    data-style="btn-default">
+                                    <option>--select--</option>
+                                    <option value="Month" <% if (opening.opnPriceType==='Month' ) {
+                                       %>
+                                       selected <% } %>>MONTH</option>
+                                    <option value="Year" <% if (opening.opnPriceType==='Year' ) { %>
+                                       selected <% } %>>YEAR</option>
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="dz-post-text">
+                           <h4 class="title">Job Description:</h4>
+                           <div class="card-body">
+                              <textarea class="form-control px-2" name="opnDescription"
+                                 rows="5"><%= opening.opnDescription %></textarea>
+                           </div>
+                           <h4 class="title mt-4">Requirements:</h4>
+                           <ul class="m-b30" id="requirements-list">
+                              <li class="form-group">
+                                 <div class="row align-items-center">
+                                    <div class="col-md-9">
+                                       <% for (let i=0; i < opening.opmRequirements.length; i++) {
+                                          %>
+                                       <input type="text"
+                                          value="<%= opening.opmRequirements[i] %>"
+                                          name="opmRequirements" class="form-control px-2"
+                                          placeholder="Enter Requirement">
+                                       <% } %>
+                                    </div>
+                                    <div class="col-md-1">
+                                       <button type="button" class="btn btn-success add-btn"
+                                          onclick="addInput(this)"><span
+                                          style="font-size: 18px;">+</span></button>
+                                    </div>
+                                    <div class="col-md-1">
+                                       <button type="button" class="btn btn-danger remove-btn"
+                                          onclick="removeInput(this)"><span
+                                          style="font-size: 18px;">-</span></button>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                           <h4 class="title">Responsibilities:</h4>
+                           <ul class="m-b30" id="responsibilities-list">
+                              <li class="form-group">
+                                 <div class="row align-items-center">
+                                    <div class="col-md-9">
+                                       <% for (let i=0; i < opening.opmResponsibilities.length;
+                                          i++) { %>
+                                       <input type="text"
+                                          value="<%= opening.opmResponsibilities[i] %>"
+                                          name="opmResponsibilities" class="form-control px-2"
+                                          placeholder="Enter Requirement">
+                                       <% } %>
+                                    </div>
+                                    <div class="col-md-1">
+                                       <button type="button" class="btn btn-success add-btn"
+                                          onclick="addInput(this)"><span
+                                          style="font-size: 18px;">+</span></button>
+                                    </div>
+                                    <div class="col-md-1">
+                                       <button type="button" class="btn btn-danger remove-btn"
+                                          onclick="removeInput(this)"><span
+                                          style="font-size: 18px;">-</span></button>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xl-4 col-lg-4">
+                  <aside class="side-bar sticky-top right ">
+                     <div class="widget-title">
+                        <h4 class="title">Job Information</h4>
+                     </div>
+                     <div class="widget widget_categories style-2">
+                        <ul>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-eye"></i>
+                                 <span class="title">Total Openings</span>
+                                 <input type="text" value="<%= opening.opnTotalOpenings %>"
+                                    name="opnTotalOpenings" class="form-control px-2"
+                                    placeholder="Enter Total Openings">
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-clock"></i>
+                                 <span class="title">EXPERIENCE</span>
+                                 <input type="text" value="<%= opening.opnExp %>" name="opnExp"
+                                    class="form-control px-2" placeholder="Enter Experience">
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fa-solid fa-timeline"></i>
+                                 <span class="title">Job Type</span>
+                                 <select class="selectpicker" name="opnType"
+                                    data-style="btn-default">
+                                    <option>--select--</option>
+                                    <option value="Full Time" <% if (opening.opnType==='Full Time' )
+                                       { %>
+                                       selected <% } %>>Full Time</option>
+                                    <option value="Part Time" <% if (opening.opnType==='Part Time' )
+                                       { %>
+                                       selected <% } %>>Part Time</option>
+                                    <option value="Internship" <% if (opening.opnType==='Internship'
+                                       ) { %>
+                                       selected <% } %>>Internship</option>
+                                 </select>
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-suitcase"></i>
+                                 <span class="title">QUALIFICATION</span>
+                                 <input type="text" value="<%= opening.opnQualification %>"
+                                    name="opnQualification" class="form-control px-2"
+                                    placeholder="Enter Qualification">
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-venus-mars"></i>
+                                 <span class="title">GENDER</span>
+                                 <select class="selectpicker" value="<%= opening.opnGender %>"
+                                    name="opnGender" data-style="btn-default">
+                                    <option>--select--</option>
+                                    <option value="Male" <% if (opening.opnGender==='Male' )
+                                       { %>
+                                       selected <% } %>>MALE</option>
+                                    <option value="Female" <% if (opening.opnGender==='Female' )
+                                       { %>
+                                       selected <% } %>>FEMALE</option>
+                                    <option value="Both" <% if (opening.opnGender==='Both' )
+                                       { %>
+                                       selected <% } %>>BOTH</option>
+                                 </select>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </aside>
+               </div>
+            </div>
+            <button class="btn btn-primary">Save</button>
+         </form>
+      </div>
+   </section>
+</div>
+<script>
+   function addInput(button) {
+       const list = button.closest('ul');
+       const newItem = document.createElement('li');
+       newItem.className = 'form-group';
+       newItem.innerHTML = `
+           <div class="row align-items-center">
+               <div class="col-md-9">
+                   <input type="text" class="form-control px-2" value="" name="${list.id === 'requirements-list' ? 'opmRequirements' : 'opmResponsibilities'}" placeholder="${list.id === 'requirements-list' ? 'Enter Requirement' : 'Enter Responsibility'}">
+               </div>
+               <div class="col-md-1">
+                   <button type="button" class="btn btn-success add-btn" onclick="addInput(this)"><span style="font-size: 18px;">+</span></button>
+               </div>
+               <div class="col-md-1">
+                   <button type="button" class="btn btn-danger remove-btn" onclick="removeInput(this)"><span style="font-size: 18px;">-</span></button>
+               </div>
+           </div>
+       `;
+       list.appendChild(newItem);
+   }
+   
+   function removeInput(button) {
+       const list = button.closest('ul');
+       const item = button.closest('li');
+       if (list.childElementCount > 1) {
+           list.removeChild(item);
+       }
+   }
+</script>
+<%- include('partials/footer.ejs') %>

@@ -1,0 +1,374 @@
+<%- include('partials/nav.ejs') %>
+   <div class="layout-content">
+      <div class="container-fluid flex-grow-1 container-p-y">
+         <h4 class="font-weight-bold py-3 mb-0">Edit Teacher</h4>
+         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+               <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+               <li class="breadcrumb-item"><a href="/admin/teachers">Teacher</a></li>
+               <li class="breadcrumb-item"><ahref="">Edit Teacher</ahref=></li>
+            </ol>
+         </div>
+         <div class="card mb-2">
+            <div class="card-header bg-info">
+               <a class="d-flex justify-content-between text-white text-large text-uppercase" data-toggle="collapse"
+                  aria-expanded="true" href="#accordion2-2">
+                  Teacher Details
+                  <div class="collapse-icon"></div>
+               </a>
+            </div>
+            <div id="accordion2-2" class="collapse show" data-parent="#accordion2">
+               <div class="card-body">
+                  <form action="/admin/teacher_update/<%= student._id %>" method="post">
+                     <div class="form-row teacher-form">
+                        <div class="form-group col-md-3">
+                           <label class="form-label">First Name</label>
+                           <input type="text" name="firstname" value="<%= student.firstname %>"
+                              class="form-control px-2" placeholder="Enter name">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Last Name</label>
+                           <input type="text" name="lastname" value="<%= student.lastname %>" class="form-control px-2"
+                              placeholder="Enter name">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Phone Number</label>
+                           <input type="number" name="contact" value="<%= student.contact %>" class="form-control px-2"
+                              placeholder="Enter number">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Email Address</label>
+                           <input type="email" name="email" value=" <%= student.email %>" class="form-control px-2"
+                              placeholder="Enter email dsbale" readonly>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Gender</label>
+                           <select class="custom-select" name="gender">
+                              <option value="">-- Select Gender --</option>
+                              <option value="Male" <% if (student.gender==='Male' ) { %> selected <% } %>>Male</option>
+                              <option value="Female" <% if (student.gender==='Female' ) { %> selected <% } %>>Female
+                              </option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Date Of Birth</label>
+                           <% const formattedDate=student.dateOfBirth.toISOString().split('T')[0]; %>
+                              <input type="date" name="dateOfBirth" value="<%= formattedDate %>"
+                                 class="form-control px-2" placeholder="Enter DOB">
+                              <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Whatsapp Number</label>
+                           <input type="number" name="whatsappNumber" value="<%= student.whatsappNumber %>"
+                              class="form-control px-2" placeholder="Enter number">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Where did you hear about Hirewell?</label>
+                           <select class="custom-select" name="hirewellSource">
+                              <option value="">-- Select --</option>
+                              <option value="Social Media" <% if (student.hirewellSource==='Social Media' ) { %>
+                                 selected
+                                 <% } %>>Social Media
+                              </option>
+                              <option value="Website" <% if (student.hirewellSource==='Website' ) { %> selected <% } %>
+                                    >Website</option>
+                              <option value="Other" <% if (student.hirewellSource==='Other' ) { %> selected <% } %>
+                                    >Other</option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Address</label>
+                           <input type="text" name="address" value="<%= student.address %>" class="form-control px-2"
+                              placeholder="Enter address">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">City</label>
+                           <input type="text" name="city" value="<%= student.city %>" class="form-control px-2"
+                              placeholder="Enter city">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">State</label>
+                           <select class="custom-select" name="state">
+                              <option>--Select--</option>
+                              <option value="Andaman and Nicobar Islands" <% if
+                                 (student.state==='Andaman and Nicobar Islands' ) { %> selected <% } %> value=""<%
+                                       if(student.state==='' ) { %> selected <% } %>> Andaman and Nicobar Islands
+                              </option>
+                              <option value="Andhra Pradesh" <% if (student.state==='Andhra Pradesh' ) { %> selected <%
+                                    } %>> Andhra Pradesh </option>
+                              <option value="Arunachal Pradesh" <% if (student.state==='Arunachal Pradesh' ) { %>
+                                 selected <% } %>> Arunachal Pradesh </option>
+                              <option value="Assam" <% if (student.state==='Assam' ) { %> selected <% } %>> Assam
+                              </option>
+                              <option value="Bihar" <% if (student.state==='Bihar' ) { %> selected <% } %>> Bihar
+                              </option>
+                              <option value="Chandigarh" <% if (student.state==='Chandigarh' ) { %> selected <% } %>>
+                                    Chandigarh </option>
+                              <option value="Chhattisgarh" <% if (student.state==='Chhattisgarh' ) { %> selected <% } %>
+                                    > Chhattisgarh </option>
+                              <option value="Dadra and Nagar Haveli" <% if (student.state==='Dadra and Nagar Haveli' ) {
+                                 %> selected <% } %>> Dadra and Nagar Haveli </option>
+                              <option value="Daman Diu" <% if (student.state==='Daman Diu' ) { %> selected <% } %>>
+                                    Daman &amp; Diu </option>
+                              <option value="Delhi" <% if (student.state==='Delhi' ) { %> selected <% } %>> Delhi
+                              </option>
+                              <option value="Goa" <% if (student.state==='Goa' ) { %> selected <% } %>> Goa </option>
+                              <option value="Gujrat" <% if (student.state==='Gujrat' ) { %> selected <% } %>> Gujrat
+                              </option>
+                              <option value="Haryana" <% if (student.state==='Haryana' ) { %> selected <% } %>> Haryana
+                              </option>
+                              <option value="Himachal Pradesh" <% if (student.state==='Himachal Pradesh' ) { %> selected
+                                 <% } %>> Himachal Pradesh
+                              </option>
+                              <option value="Jammu &amp; Kashmir" <% if (student.state==='Jammu Kashmir' ) { %> selected
+                                 <% } %>> Jammu &amp; Kashmir
+                              </option>
+                              <option value="Jharkhand" <% if (student.state==='Jharkhand' ) { %> selected <% } %>>
+                                    Jharkhand </option>
+                              <option value="Karnataka" <% if (student.state==='Karnataka' ) { %> selected <% } %>>
+                                    Karnataka </option>
+                              <option value="Kerala" <% if (student.state==='Kerala' ) { %> selected <% } %>> Kerala
+                              </option>
+                              <option value="Ladakh" <% if (student.state==='Ladakh' ) { %> selected <% } %>> Ladakh
+                              </option>
+                              <option value="Lakshadweep" <% if (student.state==='Lakshadweep' ) { %> selected <% } %>>
+                                    Lakshadweep </option>
+                              <option value="Madhya Pradesh" <% if (student.state==='Madhya Pradesh' ) { %> selected <%
+                                    } %>> Madhya Pradesh </option>
+                              <option value="Maharashtra" <% if (student.state==='Maharashtra' ) { %> selected <% } %>>
+                                    Maharashtra </option>
+                              <option value="Manipur" <% if (student.state==='Manipur' ) { %> selected <% } %>> Manipur
+                              </option>
+                              <option value="Meghalaya" <% if (student.state==='Meghalaya' ) { %> selected <% } %>>
+                                    Meghalaya </option>
+                              <option value="Mizoram" <% if (student.state==='Mizoram' ) { %> selected <% } %>> Mizoram
+                              </option>
+                              <option value="Nagaland" <% if (student.state==='Nagaland' ) { %> selected <% } %>>
+                                    Nagaland </option>
+                              <option value="Odisha" <% if (student.state==='Odisha' ) { %> selected <% } %>> Odisha
+                              </option>
+                              <option value="Puducherry" <% if (student.state==='Puducherry' ) { %> selected <% } %>>
+                                    Puducherry </option>
+                              <option value="Punjab" <% if (student.state==='Punjab' ) { %> selected <% } %>> Punjab
+                              </option>
+                              <option value="Rajasthan" <% if (student.state==='Rajasthan' ) { %> selected <% } %>>
+                                    Rajasthan </option>
+                              <option value="Sikkim" <% if (student.state==='Sikkim' ) { %> selected <% } %>> Sikkim
+                              </option>
+                              <option value="Tamil Nadu" <% if (student.state==='Tamil Nadu' ) { %> selected <% } %>>
+                                    Tamil Nadu </option>
+                              <option value="Telangana" <% if (student.state==='Telangana' ) { %> selected <% } %>>
+                                    Telangana </option>
+                              <option value="Tripura" <% if (student.state==='Tripura' ) { %> selected <% } %>> Tripura
+                              </option>
+                              <option value="Uttarakhand" <% if (student.state==='Uttarakhand' ) { %> selected <% } %>>
+                                    Uttarakhand </option>
+                              <option value="Utttar Pradesh" <% if (student.state==='Utttar Pradesh' ) { %> selected <%
+                                    } %>> Utttar Pradesh </option>
+                              <option value="West Bengal" <% if (student.state==='West Bengal' ) { %> selected <% } %>>
+                                    West Bengal </option>
+                              <option value="Non Indian" <% if (student.state==='Non Indian' ) { %> selected <% } %>>Non
+                                    Indian</option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Pincode</label>
+                           <input type="text" name="pincode" value="<%= student.pincode %>" class="form-control px-2"
+                              placeholder="Enter pincode">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">School Type</label>
+                           <select class="custom-select" name="schoolType">
+                              <option value="">-- Select school Type--</option>
+                              <option value="CBSE Board School" <% if (student.schoolType==='CBSE Board School' ) { %>
+                                 selected <% } %>>CBSE Board School</option>
+                              <option value="State Board School" <% if (student.schoolType==='State Board School' ) { %>
+                                 selected <% } %>>State Board School</option>
+                              <option value="Play School" <% if (student.schoolType==='Play School' ) { %> selected <% }
+                                    %>>Play School</option>
+                              <option value="Primary School" <% if (student.schoolType==='Primary School' ) { %>
+                                 selected
+                                 <% } %>>Primary School
+                              </option>
+                              <option value="Other" <% if (student.schoolType==='Other' ) { %> selected <% } %>>Other
+                              </option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Role</label>
+                           <select class="custom-select" name="role">
+                              <option value="">-- Select Role--</option>
+                              <option value="PGT Teacher" <% if (student.role==='PGT Teacher' ) { %> selected <% } %>
+                                    >PGT
+                                    Teacher</option>
+                              <option value="TGT Teacher" <% if (student.role==='TGT Teacher' ) { %> selected <% } %>
+                                    >TGT
+                                    Teacher</option>
+                              <option value="Primary or PRT Teacher" <% if (student.role==='Primary or PRT Teacher' ) {
+                                 %> selected <% } %>>Primary or PRT Teacher</option>
+                              <option value="Pre-Primary Teacher" <% if (student.role==='Pre-Primary Teacher' ) { %>
+                                 selected <% } %>>Pre-Primary Teacher</option>
+                              <option value="Mother Teacher" <% if (student.role==='Mother Teacher' ) { %> selected <% }
+                                    %>>Mother Teacher</option>
+                              <option value="Play School Teacher" <% if (student.role==='Play School Teacher' ) { %>
+                                 selected <% } %>>Play School Teacher</option>
+                              <option value="School Principal" <% if (student.role==='School Principal' ) { %> selected
+                                 <% } %>>School Principal
+                              </option>
+                              <option value="Academic Coordinator" <% if (student.role==='Academic Coordinator' ) { %>
+                                 selected <% } %>>Academic Coordinator</option>
+                              <option value="Headmistress" <% if (student.role==='Headmistress' ) { %> selected <% } %>
+                                    >Headmistress</option>
+                              <option value="Headmaster" <% if (student.role==='Headmaster' ) { %> selected <% } %>
+                                    >Headmaster</option>
+                              <option value="Activity Coordinator" <% if (student.role==='Activity Coordinator' ) { %>
+                                 selected <% } %>>Activity Coordinator</option>
+                              <option value="Education Counselor" <% if (student.role==='Education Counselor' ) { %>
+                                 selected <% } %>>Education Counselor</option>
+                              <option value="Other" <% if (student.role==='Other' ) { %> selected <% } %>>Other</option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Currently Working?</label>
+                           <select class="custom-select" name="isCurrentlyWorking">
+                              <option value="">-- Select--</option>
+                              <option value="Yes" <% if (student.isCurrentlyWorking==='Yes' ) { %> selected <% } %>>Yes
+                              </option>
+                              <option value="No" <% if (student.isCurrentlyWorking==='No' ) { %> selected <% } %>>No
+                              </option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Organization Name</label>
+                           <input type="text" name="organizationName" value="<%= student.organizationName %>"
+                              class="form-control px-2" placeholder="Enter name">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Relevant Experience</label>
+                           <select class="custom-select" name="relevantExperience">
+                              <option value="">-- Select Role--</option>
+                              <option value="0-1 YEAR" <% if (student.relevantExperience==='0-1 YEAR' ) { %> selected <%
+                                    } %>>0-1 YEAR</option>
+                              <option value="1-2 YEAR" <% if (student.relevantExperience==='1-2 YEAR' ) { %> selected <%
+                                    } %>>1-2 YEAR</option>
+                              <option value="2-3 YEAR" <% if (student.relevantExperience==='2-3 YEAR' ) { %> selected <%
+                                    } %>>2-3 YEAR</option>
+                              <option value="3-4 YEAR" <% if (student.relevantExperience==='3-4 YEAR' ) { %> selected <%
+                                    } %>>3-4 YEAR</option>
+                              <option value="4-5 YEAR" <% if (student.relevantExperience==='4-5 YEAR' ) { %> selected <%
+                                    } %>>4-5 YEAR</option>
+                              <option value="More Than 5 Year" <% if (student.relevantExperience==='More Than 5 Year' )
+                                 { %> selected <% } %>>More Than 5 Year </option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Skills </label>
+                           <input type="text" name="skills" value="<%= student.skills %>" class="form-control px-2"
+                              placeholder="Enter slills">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Qualification Level</label>
+                           <select class="custom-select" name="qualificationLevel">
+                              <option value="">-- Select--</option>
+                              <option value="Diploma" <% if (student.qualificationLevel==='Diploma' ) { %> selected <% }
+                                    %>>Diploma</option>
+                              <option value="Bechelor Degree" <% if (student.qualificationLevel==='Bechelor Degree' ) {
+                                 %> selected <% } %>>Bechelor Degree</option>
+                              <option value="Master Degree" <% if (student.qualificationLevel==='Master Degree' ) { %>
+                                 selected <% } %>>Master Degree</option>
+                              <option value="Doctorate Degree" <% if (student.qualificationLevel==='Doctorate Degree' )
+                                 { %> selected <% } %>>Doctorate Degree</option>
+                              <option value="Other" <% if (student.qualificationLevel==='Other' ) { %> selected <% } %>
+                                    >Other</option>
+                           </select>
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Preferred Locations</label>
+                           <input type="text" name="preferredLocations" value="<%= student.preferredLocations %>"
+                              class="form-control px-2" placeholder="Enter name">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Languages Known</label>
+                           <input type="text" name="languagesKnown" value="<%= student.languagesKnown %>"
+                              class="form-control px-2" placeholder="Enter Languages">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Current CTC </label>
+                           <input type="text" name="currentctc" value="<%= student.currentctc %>"
+                              class="form-control px-2" placeholder="Enter amount">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Expected CTC </label>
+                           <input type="text" name="expectedctc" value="<%= student.expectedctc %>"
+                              class="form-control px-2" placeholder="Enter amount">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-3">
+                           <label class="form-label">Notice Period </label>
+                           <input type="text" name="noticePeriod" value="<%= student.noticePeriod %>"
+                              class="form-control px-2" placeholder="Enter amount">
+                           <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group col-md-12">
+                           <label class="form-label">Remark</label>
+                           <textarea name="remark" class="form-control px-3" id="" cols="30"
+                              rows="10"><%= student.remark %></textarea>
+                        </div>
+                     </div>
+                     <button class="btn btn-primary" name="submit">Update</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+         
+
+
+         <div class="card mb-2 mt-5">
+            <div class="card-header bg-info">
+               <a class="d-flex justify-content-between text-white text-large text-uppercase" data-toggle="collapse"
+                  aria-expanded="true" href="#accordion2-2">
+                  Resume & Other Documents
+                  <div class="collapse-icon"></div>
+               </a>
+            </div>
+            <div id="accordion2-2" class="collapse show" data-parent="#accordion2">
+               <div class="card-body">
+                  <form action="/admin/teacher_resume_update/<%= student._id %>" method="post" enctype="multipart/form-data">
+                     <div class="form-row teacher-form">
+                        <div class="form-group col-md-6">
+                           <label class="form-label">Resume</label>
+                           <input type="file" name="teacherresume" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                           <label class="form-label">Other Documents</label>
+                           <input type="file" name="certifications" class="form-control">
+                        </div>
+                     </div>
+                     <button class="btn btn-primary" name="submit">Update</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+         <%- include('partials/footer.ejs') %>

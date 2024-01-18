@@ -1,0 +1,215 @@
+<%- include('partials/nav.ejs') %>
+
+   <!-- Page Content Start -->
+   <div class="page-content user-dash-board">
+
+      <!-- Blog Details -->
+      <section class="content-inner position-relative">
+         <div class="container">
+            <div class="row ">
+               <div class="col-xl-8 col-lg-8 m-b30">
+                  <div class="blog-single pt-20 sidebar dz-card">
+                     <div class="">
+                        <img src="<%= opening.opnlogo.url %>" alt="" style="height: 5vmax; object-fit: cover;">
+                     </div>
+                     <div class="dz-inf m-b30">
+                        <div class="job-detail-content">
+                           <h3 class="dz-title">
+                              <%= opening.opnTitle %><span class="job-duration">/</span></span><span
+                                    class="job-duration" id="createdAt"></span>
+                           </h3>
+                           <h5 style="text-transform: capitalize;">
+                              <%= opening.opnCompney %>
+                           </h5>
+                           <p class="job-address"><i class="fa-solid fa-location-dot text-primary"></i>
+                              <%= opening.opnLnocation %>
+                           </p>
+                           <div class="income">
+                              <div class="jobs-amount">₹<%= opening.opnMinPrice %> - ₹<%= opening.opnMaxPrice %> <span>/
+                                          <%= opening.opnPriceType %>
+                                       </span></div>
+                              <div class="apllication-area">Application ends:<span class="apllication-date">
+                                    <%= opening.opnLastDate.toLocaleDateString() %>
+                                 </span></div>
+                           </div>
+                        </div>
+
+                        <div class="dz-post-text">
+                           <h4 class="title">Job Description:</h4>
+                           <p>
+                              <%= opening.opnDescription %>
+                           </p>
+
+                           <h4 class="title">Requirements:</h4>
+                           <ul class="m-b30">
+                              <% opening.opmRequirements.forEach(function(requirement) { %>
+                                 <li>
+                                    <%= requirement %>
+                                 </li>
+                                 <% }); %>
+                           </ul>
+                           <h4 class="title">Responsibilities:</h4>
+                           <ul class="m-b30">
+                              <% opening.opmResponsibilities.forEach(function(requirement) { %>
+                                 <li>
+                                    <%= requirement %>
+                                 </li>
+                                 <% }); %>
+                           </ul>
+                        </div>
+                        <div class="main-apply-now">
+                           <% if (isAuthenticated) { %>
+                              <a class="btn <%= appliedOpeningsIds.includes(opening._id.toString()) ? 'btn-primary disabled' : 'btn-success' %>"
+                                 href="<%= isAuthenticated ? '/teacher/apply/job/' + opening._id : '/teacher/apply/job/' + opening._id %>">
+                                 <%= appliedOpeningsIds.includes(opening._id.toString()) ? 'Applied' : 'Apply Now' %>
+                              </a>
+
+                              <% } else { %>
+                                 <a href="javascript:void(0);" data-bs-toggle="modal"
+                                    data-bs-target=".bd-example-modal-lg">Apply Now</a>
+                                 <% } %>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+               <div class="col-xl-4 col-lg-4">
+                  <aside class="side-bar sticky-top right ">
+
+                     <div class="widget-title">
+                        <h4 class="title">Job Information</h4>
+                     </div>
+
+                     <div class="widget widget_categories style-2">
+                        <ul>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-eye"></i>
+                                 <span class="title">Total Openings</span>
+                                 <div class="info-discription">
+                                    <%= opening.opnTotalOpenings %>
+                                 </div>
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-calendar-alt"></i>
+                                 <span class="title">DATE POSTED</span>
+                                 <div class="info-discription">
+                                    <%= opening.createdAt.toLocaleDateString() %>
+                                 </div>
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-map-marker-alt"></i>
+                                 <span class="title">LOCATION</span>
+                                 <div class="info-discription">
+                                    <%= opening.opnLnocation %>
+                                 </div>
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-user-tie"></i>
+                                 <span class="title">JOB TITLE</span>
+                                 <div class="info-discription">
+                                    <%= opening.opnTitle %>
+                                 </div>
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                  <i class="fa-solid fa-timeline"></i>
+                                  <span class="title">Job Type</span>
+                                  <div class="info-discription"><%= opening.opnType %></div>
+                              </div>
+                          </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-clock"></i>
+                                 <span class="title">EXPERIENCE</span>
+                                 <div class="info-discription">
+                                    <%= opening.opnExp %>
+                                 </div>
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-suitcase"></i>
+                                 <span class="title">QUALIFICATION</span>
+                                 <div class="info-discription">
+                                    <%= opening.opnQualification %>
+                                 </div>
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-venus-mars"></i>
+                                 <span class="title">GENDER</span>
+                                 <div class="info-discription">
+                                    <%= opening.opnGender %>
+                                 </div>
+                              </div>
+                           </li>
+                           <li>
+                              <div class="info-inner">
+                                 <i class="fas fa-money-bill-wave"></i>
+                                 <span class="title">OFFERED SALARY</span>
+                                 <div class="info-discription">₹<%= opening.opnMinPrice %>/ <%= opening.opnPriceType %>
+                                 </div>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </aside>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- Blog Details -->
+
+
+      <!-- Map Iframe -->
+      <%- include('partials/contactForm.ejs') %>
+         <!-- Map Iframe End -->
+         <!--footer-action -->
+         <%- include('partials/letsGet.ejs') %>
+            <!-- footer-action -->
+   </div>
+   <!-- Page Content End -->
+
+   <script src="https://cdn.jsdelivr.net/momentjs/2.29.1/moment.min.js"></script>
+
+
+   <script>
+      function formatRelativeDate(date) {
+         const now = new Date();
+         const diffInMilliseconds = now - date;
+
+         const seconds = Math.floor(diffInMilliseconds / 1000);
+         const minutes = Math.floor(seconds / 60);
+         const hours = Math.floor(minutes / 60);
+         const days = Math.floor(hours / 24);
+         const months = Math.floor(days / 30);
+         const years = Math.floor(months / 12);
+
+         if (years > 0) return `${years}y ago`;
+         if (months > 0) return `${months}mo ago`;
+         if (days > 0) return `${days}d ago`;
+         if (hours > 0) return `${hours}h ago`;
+         if (minutes > 0) return `${minutes}m ago`;
+         if (seconds > 0) return `${seconds}s ago`;
+
+         return 'just now';
+      }
+
+      // Assuming opening.createdAt is a Date object
+      var openingCreatedAt = new Date("<%= opening.createdAt %>");
+      var formattedDate = formatRelativeDate(openingCreatedAt);
+      document.getElementById('createdAt').innerText = formattedDate;
+   </script>
+
+
+
+   <%- include('partials/footer.ejs') %>

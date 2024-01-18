@@ -1,0 +1,226 @@
+<%- include('partials/nav.ejs') %>
+    <div class="layout-content">
+        <div class="container-fluid flex-grow-1 container-p-y">
+            <h4 class="font-weight-bold py-3 mb-0">Create Blog
+                <!-- <?php //echo $_SESSION['division'];?> -->
+            </h4>
+            <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="# ">Create Blog</a>
+                    </li>
+                </ol>
+            </div>
+            <section class="content-inner position-relative">
+                <div class="container">
+
+                    <form action="/admin/event_img_update/<%= event._id %>" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Training Banner *</h5>
+                                <input type="file" name="trainingBanner">
+                            </div>
+                            <div class="col-md-4">
+                                <h5>Profile</h5>
+                                <input type="file" name="trainingProfile">
+                            </div>
+                            <div class="col-md-4 mt-3">
+                                <button class="btn btn-primary">image update</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                    <form action="/admin/event_update/<%= event._id %>" method="post" enctype="multipart/form-data">
+                        <div class="row ">
+                            <div class="col-xl-8 col-lg-8">
+                                <div class="row ">
+                                    <div class="col-xl-12 col-lg-12">
+                                        <div class="row">
+                                            <div class="col-md-4 gap-3 mt-3">
+                                                Training By*
+                                                <input type="text" name="trainingBy" class="form-control px-2 mt-2"
+                                                    value="<%= event.trainingBy%>" placeholder="Enter Name" required>
+                                            </div>
+                                            <div class="col-md-4 mt-3">
+                                                Training Location*
+                                                <input type="text" name="trainingLocation"
+                                                    class="form-control px-2 mt-2" value="<%= event.trainingLocation %>"
+                                                    placeholder="Enter Location" required>
+                                            </div>
+
+
+
+                                            <div class="col-md-4 mt-4">
+                                                Training Type*
+                                                <select class="custom-select" name="trainingProgram"
+                                                    onchange="toggleInputField(this)">
+                                                    <option>-- Select Training Programs--</option>
+                                                    <option value="Training1" <% if (event.trainingProgram==='Training1'
+                                                        ) { %> selected <% } %>>Training1</option>
+                                                    <option value="Training2" <% if (event.trainingProgram==='Training2'
+                                                        ) { %> selected <% } %>>Training2</option>
+                                                    <option value="Training3" <% if (event.trainingProgram==='Training3'
+                                                        ) { %> selected <% } %>>Training3</option>
+                                                    <option value="Other Training" <% if
+                                                        (event.trainingProgram==='Other Training' ) { %> selected <% }
+                                                            %>>Other Training</option>
+                                                </select>
+                                                <input type="text" name="otherTraining" class="form-control px-2 mt-2"
+                                                    placeholder="Enter Location" value="<%= event.otherTraining %>"
+                                                    style="display: <%= event.trainingProgram==='Other Training' ? 'block' : 'none' %>;">
+                                            </div>
+                                            <div class="col-md-4 mt-3">
+                                                <h5>Training Date *</h5>
+                                                Start Date
+                                                <% const
+                                                    formattedDate=event.trainingStartDate.toISOString().split('T')[0];
+                                                    %>
+                                                    <input type="date" name="trainingStartDate"
+                                                        value="<%= formattedDate %>" class="form-control px-2 mt-2"
+                                                        required>
+                                            </div>
+                                            <div class="col-md-4 mt-5">
+                                                End Date
+                                                <% const
+                                                    formattedDateend=event.trainingStartDate.toISOString().split('T')[0];
+                                                    %>
+                                                    <input type="date" name="trainingEndDate"
+                                                        value="<%= formattedDateend %>" class="form-control px-2 mt-2">
+                                            </div>
+                                            <div class="col-md-12 mt-3">
+                                                <div class="form-group">
+                                                    <h5>Training Heading *</h5>
+                                                    <input type="text" name="trainingHeading" class="form-control px-2"
+                                                        value="<%= event.trainingHeading %>" placeholder="Heading"
+                                                        required>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 mt-3">
+                                                <div class="form-group">
+                                                    <h4 class="title">Training Description 1 *</h4>
+                                                    <div class="card-body">
+                                                        <textarea class="form-control px-2" name="trainingDescription1"
+                                                            rows="5"
+                                                            required><%= event.trainingDescription1 %>"</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <blockquote class="block-quote  style-1">
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        <h5>Training Title *</h5>
+                                                        <input type="text" name="trainingTitle"
+                                                            class="form-control px-2" value="<%= event.trainingTitle %>"
+                                                            placeholder="Title" required>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                                <cite> By Name </cite>
+                                            </blockquote>
+
+                                            <div class="col-md-12">
+                                                <h4 class="title mt-3">Training Points</h4>
+                                                <ul class="m-b30" id="requirements-list">
+                                                    <li class="form-group">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-9">
+                                                                <% for (let i=0; i < event.trainingPoints.length; i++) {
+                                                                    %>
+                                                                    <textarea class="form-control px-2"
+                                                                        name="trainingPoints" rows="4"
+                                                                        placeholder="Enter Points"><%= event.trainingPoints[i] %></textarea>
+                                                                    <% } %>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <button type="button" class="btn btn-success add-btn"
+                                                                    onclick="addInput(this, 'trainingPoints', 'Enter Points')"><span
+                                                                        style="font-size: 18px;">+</span></button>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <button type="button" class="btn btn-danger remove-btn"
+                                                                    onclick="removeInput(this)"><span
+                                                                        style="font-size: 18px;">-</span></button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="col-md-12 ">
+                                                <div class="form-group">
+                                                    <h4 class="title">Training Description 2</h4>
+                                                    <div class="card-body">
+                                                        <textarea class="form-control px-2" name="trainingDescription2"
+                                                            rows="5"><%= event.trainingDescription2 %></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h4 class="title">Add Training Tags</h4>
+                                                <div class="form-group is-invalid">
+                                                    <input type="text" name="trainingTags"
+                                                        value="<%= event.trainingTags %>" data-role="tagsinput"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Update</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <script>
+            var inputField = document.getElementsByName("otherTraining")[0];
+            inputField.style.display = (event.trainingProgram === "Other Training") ? "block" : "none";
+
+            function toggleInputField(selectElement) {
+                var inputField = document.getElementsByName("otherTraining")[0];
+                inputField.style.display = (selectElement.value === "Other Training") ? "block" : "none";
+            }
+        </script>
+
+
+        <script>
+            function addInput(button, name, placeholder) {
+                const list = button.closest('ul');
+                const newItem = document.createElement('li');
+                newItem.className = 'form-group';
+                newItem.innerHTML = `
+                    <div class="row align-items-center">
+                        <div class="col-md-9">
+                            <textarea class="form-control px-2" name="${name}" rows="4" placeholder="${placeholder}"></textarea>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-success add-btn" onclick="addInput(this, '${name}', '${placeholder}')"><span style="font-size: 18px;">+</span></button>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-danger remove-btn" onclick="removeInput(this)"><span style="font-size: 18px;">-</span></button>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(newItem);
+            }
+
+            function removeInput(button) {
+                const list = button.closest('ul');
+                const item = button.closest('li');
+                if (list.childElementCount > 1) {
+                    list.removeChild(item);
+                }
+            }
+        </script>
+
+
+        <%- include('partials/footer.ejs') %>

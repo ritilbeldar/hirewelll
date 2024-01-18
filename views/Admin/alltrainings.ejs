@@ -1,0 +1,239 @@
+<%- include('partials/nav.ejs') %>
+   <link rel="stylesheet" href="<?php echo base_url();?>assets/libs/datatables/datatables.css">
+   <div class="layout-content">
+      <div class="container-fluid flex-grow-1 container-p-y">
+         <h4 class="font-weight-bold py-3 mb-0">Current Trainings
+         </h4>
+         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+               <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+               <li class="breadcrumb-item"><a href="">Current Trainings</a></li>
+            </ol>
+         </div>
+         <section class="content-inner position-relative">
+            <div class="col-sm-12 text-right">
+               <a href="/admin/trainings/create-trainings"><button class="btn btn-success btn-sm mb-3"><i
+                        class="feather icon-plus"></i>Create Trainings</button></a>
+            </div>
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-12 mt-3">
+                     <div class="row">
+                        <div class="col-xl-3 col-6">
+                           <div class="card mb-4 bg-success text-white">
+                              <div class="card-body">
+                                 <div class="d-flex flex-column align-items-center justify-content-between">
+                                    <h2>Total</h2>
+                                    <div class="d-flex flex-column align-items-center">
+                                       <h2 class="mt-2">
+                                          <%= trainingEvents.length %>
+                                       </h2>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                           <div class="card mb-4 text-white" style="background-color: #007BFF;">
+                              <div class="card-body">
+                                 <div class="d-flex flex-column align-items-center justify-content-between">
+                                    <h2>Today</h2>
+                                    <div class="d-flex flex-column align-items-center">
+                                       <h2 class="mt-2">
+                                          <% let todayCount=0; trainingEvents.forEach((teacher)=> {
+                                             const createdAtDate = new Date(teacher.createdAt);
+                                             const today = new Date();
+
+                                             if (
+                                             createdAtDate.getDate() === today.getDate() &&
+                                             createdAtDate.getMonth() === today.getMonth() &&
+                                             createdAtDate.getFullYear() === today.getFullYear()
+                                             ) {
+                                             todayCount++;
+                                             }
+                                             });
+                                             %>
+                                             <%= todayCount %>
+                                       </h2>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                           <div class="card mb-4 bg-warning text-white">
+                              <div class="card-body">
+                                 <div class="d-flex flex-column align-items-center justify-content-between">
+                                    <h2>Active</h2>
+                                    <div class="d-flex flex-column align-items-center">
+                                       <h2 class="mt-2">
+                                          <% const desiredStatusActive='Active' ; %>
+                                             <% const studentsWithActiveStatus=trainingEvents.filter(student=>
+                                                student.status ===
+                                                desiredStatusActive); %>
+                                                <%= studentsWithActiveStatus.length %>
+                                       </h2>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-3 col-6">
+                           <div class="card mb-4 bg-danger text-white">
+                              <div class="card-body">
+                                 <div class="d-flex flex-column align-items-center justify-content-between">
+                                    <h2>Inactive</h2>
+                                    <div class="d-flex flex-column align-items-center">
+                                       <h2 class="mt-2">
+                                          <% const desiredStatusInactive='Inactive' ; %>
+                                             <% const studentsWithInactiveStatus=trainingEvents.filter(student=>
+                                                student.status
+                                                === desiredStatusInactive); %>
+                                                <%= studentsWithInactiveStatus.length %>
+                                       </h2>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <% trainingEvents.reverse().forEach((blog,index)=> { %>
+                     <div class="col-xl-4 col-md-6 m-b30">
+                        <div class="dz-card style-1 overlay-shine wow fadeInUp blog-main-card">
+                           <div class="dz-media dz-media1 dz-media25">
+                              <img src="<%= blog.trainingBanner.url %>" alt="">
+                              <span class="date"><a href="javascript:void(0)">
+                                    <%= new Date(blog.createdAt).toLocaleDateString('en-US', { day: 'numeric' ,
+                                       month: 'short' , year: 'numeric' }) %>
+                                 </a></span>
+                           </div>
+                           <div class="dz-info">
+                              <h4 class="dz-title">
+                                 <%= blog.trainingHeading %>
+                              </h4>
+                              <p class="limited-lines">
+                                 <%= blog.trainingDescription1 %>
+                              </p>
+                              <div class="dz-meta mb-4" style="margin-top: -1vmax;">
+                                 <ul>
+                                    <li class="post-author text-primary text-capitalize">
+                                       <span>
+                                          <i class="fa-solid fa-location-dot"></i>
+                                       </span>
+                                       <%= blog.trainingLocation %>
+                                    </li>
+                                    <li class="post-date text-primary">
+                                       <span>
+                                          <i class="fa-solid fa-calendar-days"></i>
+                                       </span>
+                                       <%= new Date(blog.trainingStartDate).toLocaleDateString('en-US', { day: 'numeric'
+                                          , month: 'short' , year: 'numeric' }) %>
+                                          -
+                                          <%= new Date(blog.trainingEndDate).toLocaleDateString('en-US', {
+                                             month: 'short' , day: 'numeric' , year: 'numeric' }) %>
+                                    </li>
+                                    <li class="post-date text-primary text-capitalize">
+                                       <span>
+                                           <i class="fa-solid fa-chalkboard-user"></i>
+                                       </span>
+                                       <% if (blog.trainingProgram === 'Other Training') { %>
+                                          <%= blog.otherTraining %>
+                                      <% } else { %>
+                                          <%= blog.trainingProgram %>
+                                      <% } %>
+                                   </li>
+                                 </ul>
+                              </div>
+
+                           </div>
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <form action="/admin/event_status" method="post">
+                                    <input type="hidden" name="blog" value="<%= blog._id %>">
+                                    <button type="submit"
+                                       class="btn <%= blog.status === 'Active' ? 'btn-success' : 'btn-danger' %> toggle-status"
+                                       name="status">
+                                       <%= blog.status %>
+                                    </button>
+                                 </form>
+                              </div>
+                              <div class="col-md-6">
+                                 <a href="/admin/trainings/current-trainings/trainings_details/<%= blog._id %>"
+                                    class="btn btn-info btn-sm"><i class="feather icon-eye"></i></a>
+                                 <a href="/admin/event_edit/<%= blog._id %>" class="btn btn-info btn-sm"><i
+                                       class="feather icon-edit"></i> </a>
+                                 <a href="/admin/event_delete/<%= blog._id %>" class="btn btn-danger btn-sm delete-btn"
+                                    data-event-id="<%= blog._id %>"><i class="feather icon-trash-2"></i></a>
+                              </div>
+
+                              <div class="col-md-6 mt-3">
+                                 <% const openingStudents=students.filter(student=> blog.students.includes(student.id));
+                                 %>
+                                 
+                                 <a class="btn btn-primary <%= openingStudents.length === 0 ? 'disabled' : '' %>"
+                                    href="/admin/dashboard/trainings/current-trainings/<%= blog._id %>">
+                                    Application (<%= openingStudents.length %>)
+                                 </a>
+                              </div>
+
+                           </div>
+                        </div>
+                     </div>
+                     <% }); %>
+               </div>
+            </div>
+         </section>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+      <script>
+         document.addEventListener('DOMContentLoaded', function () {
+            var deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(function (button) {
+               button.addEventListener('click', function (event) {
+                  event.preventDefault();
+
+                  var blogId = button.getAttribute('data-event-id');
+
+                  // Show SweetAlert confirmation
+                  Swal.fire({
+                     title: 'Are you sure?',
+                     text: 'You won\'t be able to revert this!',
+                     icon: 'warning',
+                     showCancelButton: true,
+                     confirmButtonColor: '#d33',
+                     cancelButtonColor: '#3085d6',
+                     confirmButtonText: 'Yes, delete it!'
+                  }).then(function (result) {
+                     if (result.isConfirmed) {
+                        window.location.href = '/admin/event_delete/' + blogId;
+                     }
+                  });
+               });
+            });
+         });
+      </script>
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+      <script>
+         $(document).ready(function () {
+            $('#statusCheckbox').change(function () {
+               var isChecked = $(this).prop('checked');
+               var openingId = $(this).val();
+
+               $.ajax({
+                  type: 'POST',
+                  url: '/admin/blog_status',
+                  data: { openingId: openingId, isChecked: isChecked },
+                  success: function (response) {
+                  },
+                  error: function (error) {
+                  }
+               });
+            });
+         });
+      </script>
+
+      <%- include('partials/footer.ejs') %>

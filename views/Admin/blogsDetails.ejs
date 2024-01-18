@@ -1,0 +1,205 @@
+<%- include('partials/nav.ejs') %>
+   <div class="layout-content">
+      <div class="container-fluid flex-grow-1 container-p-y">
+         <h4 class="font-weight-bold py-3 mb-0">
+            Blog Details
+            <!-- <?php //echo $_SESSION['division'];?> -->
+         </h4>
+         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+               <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+               <li class="breadcrumb-item"><a href="/admin/dashboard/blogs/all-blogs">All Blogs</a></li>
+               <li class="breadcrumb-item"><a href="# ">Blog Details</a>
+               </li>
+            </ol>
+         </div>
+         <section class="content-inner position-relative">
+            <div class="container">
+               <div class="row ">
+                  <div class="col-xl-8 col-lg-8">
+                     <div class="blog-single pt-20 sidebar dz-card">
+                        <div class="dz-media dz-media-rounded rounded">
+                           <img src="<%= blogs.blogimg.url %>" alt="">
+                        </div>
+                        <div class="dz-info m-b30">
+                           <div class="dz-meta">
+                              <ul>
+                                 <li class="post-author">
+                                    <a href="javascript:void(0);">
+                                       <img src="<%= blogs.blogProfile.url %>" alt="">
+                                       <span>By <span class="text-capitalize">
+                                             <%= blogs.blogBy %>
+                                          </span></span>
+                                    </a>
+                                 </li>
+                                 <li class="post-date"><a href="javascript:void(0);">
+                                       <%= blogs.createdAt.toLocaleDateString() %>
+                                    </a>
+                                 </li>
+                                 <li class="post-comment"><a href="javascript:void(0);">
+                                       <%= comments.length %> comment
+                                    </a>
+                                 </li>
+                              </ul>
+                           </div>
+                           <h3 class="dz-title">
+                              <%= blogs.blogHeading %>
+                           </h3>
+                           <div class="dz-post-text">
+                              <p>
+                                 <%= blogs.blogDescription1 %>
+                              </p>
+                              <blockquote class="block-quote  style-1">
+                                 <p>“<%= blogs.blogTitle %>”
+                                 </p>
+                                 <cite> <span class="text-capitalize">
+                                       <%= blogs.blogBy %>
+                                    </span> </cite>
+                              </blockquote>
+                              <ul class="m-b30">
+                                 <% blogs.blogPoints.forEach(function(blogPoints) { %>
+                                    <li class="mt-1">
+                                       <%= blogPoints %>
+                                    </li>
+                                    <% }); %>
+                              </ul>
+                              <p>
+                                 <%= blogs.blogDescription2 %>
+                              </p>
+                           </div>
+                           <div class="dz-share-post">
+                              <div class="post-tags">
+                                 <h6 class="m-b0 m-r10 d-inline">Tags:</h6>
+                                 <% var tagArray=blogs.blogTags.split(','); %>
+                                    <% tagArray.forEach(function(tag, index) { %>
+                                       <a href="javascript:void(0);">
+                                          <span class="text-capitalize">
+                                             <%= tag.trim() %>
+                                          </span>
+                                       </a>
+                                       <% }); %>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="clear" id="comment-list">
+                        <div class="comments-area" id="comments">
+                           <div class="widget-title style-1">
+                              <h4 class="title">Comments</h4>
+                           </div>
+                           <div class="clearfix">
+                              <!-- comment list END -->
+                              <ol class="comment-list">
+                                 <% if (comments.length> 0) { %>
+                                    <% comments.reverse().forEach(function(comment, index) { %>
+                                       <li class="comment">
+                                          <div class="comment-body">
+                                             <div class="comment-author vcard">
+                                                <img class="avatar photo"
+                                                   src="<%= index % 2 === 0 ? 'https://hirewell.co.in/public/assets/frontend/images/avatar/avatar1.jpg' : 'https://hirewell.co.in/public/assets/frontend/images/avatar/avatar2.jpg' %>"
+                                                   alt="">
+                                                <div class="row align-items-center">
+                                                   <div class="col-md-10">
+                                                      <cite class="fn text-capitalize">
+                                                         <%= comment.fullname %>
+                                                      </cite>
+                                                      <p>
+                                                         <a href="mailto:<%= comment.email %>" target="_blank">
+                                                            <%= comment.email %>
+                                                         </a>
+                                                      </p>
+                                                   </div>
+                                                   <div class="col-md-2 mb-3">
+                                                      <a href="/admin/comment_delete/<%= comment._id %>"
+                                                         class="btn btn-danger btn-sm delete-btn"
+                                                         data-comment-id="<%= comment._id %>"><i
+                                                            class="feather icon-trash-2"></i></a>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                             <p>
+                                                <%= comment.comment %>
+                                             </p>
+                                          </div>
+                                       </li>
+
+                                       <% }); %>
+                                          <% } else { %>
+                                             <p>No comments.</p>
+                                             <% } %>
+                              </ol>
+                              <!-- comment list END -->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-4 col-lg-4">
+                     <aside class="side-bar sticky-top right">
+                        <div class="widget recent-posts-entry">
+                           <div class="widget-title">
+                              <h4 class="title">Recent Blogs</h4>
+                           </div>
+                           <div class="widget-post-bx">
+                              <% blogss.reverse().forEach((blogs)=> { %>
+                                 <div class="widget-post clearfix">
+                                    <div class="dz-media dz-media1">
+                                       <img src="<%= blogs.blogimg.url %>" alt="">
+                                    </div>
+                                    <div class="dz-info">
+                                       <h6 class="title"><a
+                                             href="/admin/dashboard/blogs/all-blogs/blogs_details/<%= blogs._id %>">
+                                             <%= blogs.blogHeading %>
+                                          </a>
+                                       </h6>
+                                       <div class="dz-meta">
+                                          <ul>
+                                             <li class="post-date"><a href="javascript:void(0);">
+                                                   <%= blogs.createdAt.toLocaleDateString() %>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <% }); %>
+                           </div>
+                        </div>
+                     </aside>
+                  </div>
+               </div>
+            </div>
+         </section>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+      <script>
+         document.addEventListener('DOMContentLoaded', function () {
+            var deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(function (button) {
+               button.addEventListener('click', function (event) {
+                  event.preventDefault();
+
+                  var blogId = button.getAttribute('data-comment-id');
+
+                  // Show SweetAlert confirmation
+                  Swal.fire({
+                     title: 'Are you sure?',
+                     text: 'You won\'t be able to revert this!',
+                     icon: 'warning',
+                     showCancelButton: true,
+                     confirmButtonColor: '#d33',
+                     cancelButtonColor: '#3085d6',
+                     confirmButtonText: 'Yes, delete it!'
+                  }).then(function (result) {
+                     if (result.isConfirmed) {
+                        window.location.href = '/admin/comment_delete/' + blogId;
+                     }
+                  });
+               });
+            });
+         });
+      </script>
+
+      <%- include('partials/footer.ejs') %>

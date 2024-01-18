@@ -1,0 +1,443 @@
+<%- include('partials/nav.ejs') %>
+
+   <!----------------->
+   <!-- [ Layout content ] Start -->
+   <div class="layout-content">
+      <!-- [ content ] Start -->
+      <div class="container-fluid flex-grow-1 container-p-y">
+         <h4 class="font-weight-bold py-3 mb-0">Teacher Details</h4>
+         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="/admin/dashboard"><i class="feather icon-home"></i></a></li>
+               <li class="breadcrumb-item"><a href="/admin/teachers">Teachers</a></li>
+               <li class="breadcrumb-item active">Teacher</li>
+            </ol>
+         </div>
+         <div class="row">
+            <div class="col-xl-8">
+               <!-- Info Edits -->
+               <div class="card mb-4">
+                  <div class="card-body">
+                     <lable>Teacher Details</lable>
+                     <a style="float: right;" class="btn btn-primary btn-round"
+                        href="/admin/teacher_edit/<%= student._id %>">Edit</a>
+                     <hr>
+                     <div class="row mb-2 g-3 justify-content-between">
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Full Name:</div>
+                           <div class="td"><b>
+                                 <%= student.firstname %>
+                                    <%= student.lastname %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Phone Number:</div>
+                           <div><b>
+                                 <a href="tel:<%= student.contact %>" target="_blank">
+                                    <%= student.contact %>
+                                 </a>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Email Address:</div>
+                           <div><b>
+                                 <a href="mailto:<%= student.email %>" target="_blank">
+                                    <%= student.email %>
+                                 </a>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Gender:</div>
+                           <div><b>
+                                 <%= student.gender %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Date Of Birth:</div>
+                           <div><b>
+                                 <%= student.dateOfBirth.toLocaleDateString() %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Whatsapp Number:</div>
+                           <div>
+                              <b>
+                                 <a href="https://wa.me/<%= student.whatsappNumber %>?text=Hello!%20I%20want%20more%20details%20about%hirewell"
+                                    target="_blank">
+                                    <%= student.whatsappNumber %>
+                                 </a>
+                              </b>
+                           </div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Hear about Hirewell?:</div>
+                           <div><b>
+                                 <%= student.hirewellSource %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Address:</div>
+                           <div class="td"><b>
+                                 <%= student.address %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>City:</div>
+                           <div class="td"><b>
+                                 <%= student.city %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>State:</div>
+                           <div><b>
+                                 <%= student.state %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Pincode:</div>
+                           <div><b>
+                                 <%= student.pincode %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>School Type:</div>
+                           <div class="td"><b>
+                                 <%= student.schoolType %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Role:</div>
+                           <div class="td"><b>
+                                 <%= student.role %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Currently Working:</div>
+                           <div><b>
+                                 <%= student.isCurrentlyWorking %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Organization Name:</div>
+                           <div class="td"><b>
+                                 <%= student.organizationName %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Relevant Experience:</div>
+                           <div><b>
+                                 <%= student.relevantExperience %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Skills:</div>
+                           <div class="td"><b>
+                                 <%= student.skills %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Qualification Level:</div>
+                           <div class="td"><b>
+                                 <%= student.qualificationLevel %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Preferred Locations:</div>
+                           <div class="td"><b>
+                                 <%= student.preferredLocations %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Languages Known:</div>
+                           <div class="td"><b>
+                                 <%= student.languagesKnown %>
+                              </b></div>
+                        </div>
+
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Current CTC:</div>
+                           <div><b>
+                                 <%= student.currentctc%>
+                              </b></div>
+                        </div>
+
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Expected CTC:</div>
+                           <div><b>
+                                 <%= student.expectedctc %>
+                              </b></div>
+                        </div>
+                        <div class="col-md-5 d-flex gap-2">
+                           <div>Notice Period:</div>
+                           <div><b>
+                                 <%= student.noticePeriod %>
+                              </b></div>
+                        </div>
+
+                        <div class="col-md-12 gap-2">
+                           <div><b>Remark:</b></div>
+                           <div class="text-justify">
+                              <%= student.remark %>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!------------------------------------------->
+               <!-- Posts -->
+            </div>
+            <div class="col-xl-4">
+               <div class="card mb-4">
+                  <div class="card-header with-elements">
+                     <span class="card-header-title">Fills</span>
+                     <div class="card-header-elements ml-2">
+                        <small class="text-muted"></small>
+                     </div>
+                  </div>
+                  <div class="row no-gutters pt-1 pl-1 resume-img p-xl-3 p-3 g-2">
+                     <div class="col-xl-6 col-6">
+                        <a target="_blank" class="btn btn-primary" href="<%= student.teacherresume.url %>">Resume</a>
+                     </div>
+                     <div class="col-xl-6 col-6">
+                        <% if (student.certifications && student.certifications.url) { %>
+                           <a target="_blank" class="btn btn-success" href="<%= student.certifications.url %>">Other
+                              Documents</a>
+                           <% } else { %>
+                              <% } %>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
+
+         <div class="row">
+            <% const activeOpenings=openings.filter(opening=> opening.status === 'Active'); %>
+               <% const activeTrainings=training.filter(blog=> blog.status === 'Active'); %>
+                  <% if (activeOpenings.length> 0 || activeTrainings.length > 0) { %>
+                     <div class="col-md">
+                        <div class="card text-center mb-3">
+                           <div class="card-header">
+                              <ul class="nav nav-tabs card-header-tabs nav-responsive-md">
+                                 <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#navs-wc-home">Openings (<%=
+                                          openings.length %>)</a>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#navs-wc-profile">Training Events (<%=
+                                          training.length %>)</a>
+                                 </li>
+                              </ul>
+                           </div>
+                           <div class="tab-content">
+                              <div class="tab-pane fade show active" id="navs-wc-home">
+                                 <div class="card-body">
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                          <div class="section-head text-center">
+                                             <h3 class="subtitle wow fadeInUp" data-wow-delay="0.8s">
+                                                <% const activeOpenings=openings.filter(opening=>
+                                                   opening.status ==='Active'); %>
+                                                   <% if (activeOpenings.length> 0) { %>
+
+                                                      <% } else { %>
+                                                         <div class="col-12 d-flex justify-content-center">
+                                                            <h2 class="text-danger">No Jobs</h2>
+                                                         </div>
+                                                         <% } %>
+                                             </h3>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-12">
+                                          <div class="row">
+                                             <% openings.forEach((opening, index)=> { %>
+                                                <% if (opening.status==='Active' ) { %>
+                                                   <div class="col-xl-4 col-md-6  m-b30">
+                                                      <div class="career-open-card wow fadeInUp" data-wow-delay="1.0s">
+                                                         <span id="career-img">
+                                                            <img src="<%= opening.opnlogo.url %>" alt="">
+                                                            <div class="important">
+                                                               <% if (opening.opnPreference==='on' ) { %>
+                                                                  <img src="/Frontend/newimg/important.png" alt="">
+                                                                  <h5>urgent</h5>
+                                                                  <% } %>
+                                                            </div>
+                                                         </span>
+                                                         <div class="bottom-career-center">
+                                                            <h4>
+                                                               <%= opening.opnTitle %>
+                                                            </h4>
+                                                            <h5>
+                                                               <%= opening.opnCompney %>
+                                                            </h5>
+                                                            <h6><i class="ri-map-pin-fill"></i>
+                                                               <%= opening.opnLnocation %>
+                                                            </h6>
+                                                         </div>
+                                                         <span id="post-date">
+                                                            <p>Posted day: <span>
+                                                                  <%= new Date(opening.createdAt).toLocaleDateString()
+                                                                     %>
+                                                               </span>
+                                                            </p>
+                                                            <p>Last day: <span>
+                                                                  <%= new Date(opening.opnLastDate).toLocaleDateString()
+                                                                     %>
+                                                               </span>
+                                                            </p>
+                                                         </span>
+                                                         <div class="bottom-career-card">
+                                                            <p><i class="ri-bar-chart-line"></i>
+                                                               <%= opening.opnExp %>
+                                                            </p>
+                                                            <p><i class="ri-time-line"></i>
+                                                               <%= opening.opnType %>
+                                                            </p>
+                                                            <p><i class="ri-wallet-3-line"></i>₹<%= opening.opnMaxPrice
+                                                                  %> / <%= opening.opnPriceType %>
+                                                            </p>
+                                                            <p><i class="ri-door-open-fill"></i>Total
+                                                               Openings (<%= opening.opnTotalOpenings %>)
+                                                            </p>
+                                                         </div>
+                                                         <div class="row">
+                                                            <div class="col-md-12 d-flex">
+                                                               <div class="col-md-6">
+                                                               </div>
+                                                               <div class="col-md-6 text-end">
+                                                                  <a class="btn btn-primary"
+                                                                     href="/admin/dashboard/openings/create-details/<%= opening._id %>">
+                                                                     View More
+                                                                  </a>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <% } %>
+                                                      <% }); %>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="tab-pane fade" id="navs-wc-profile">
+                                 <div class="card-body">
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                          <div class="section-head text-center">
+                                             <h3 class="subtitle wow fadeInUp" data-wow-delay="0.8s">
+                                                <% const activeOpenings1=training.filter(opening=>
+                                                   opening.status ===
+                                                   'Active'); %>
+                                                   <% if (activeOpenings1.length> 0) { %>
+
+                                                      <% } else { %>
+                                                         <div class="col-12 d-flex justify-content-center">
+                                                            <h2 class="text-danger">No Training Events</h2>
+                                                         </div>
+                                                         </span>
+                                                         <% } %>
+                                             </h3>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-12">
+                                          <div class="row">
+                                             <% training.forEach((blog, index)=> { %>
+                                                <% if (blog.status==='Active' ) { %>
+                                                   <div class="col-xl-4 col-md-6 m-b30">
+                                                      <div
+                                                         class="dz-card style-1 overlay-shine wow fadeInUp blog-main-card">
+                                                         <div class="dz-media dz-media1 dz-media25">
+                                                            <img src="<%= blog.trainingBanner.url %>" alt="">
+                                                            <span class="date"><a href="javascript:void(0)">
+                                                                  <%= new
+                                                                     Date(blog.createdAt).toLocaleDateString('en-US', {
+                                                                     day: 'numeric' , month: 'short' , year: 'numeric'
+                                                                     }) %>
+                                                               </a></span>
+                                                         </div>
+                                                         <div class="dz-info">
+                                                            <h4 class="dz-title">
+                                                               <%= blog.trainingHeading %>
+                                                            </h4>
+                                                            <p class="limited-lines">
+                                                               <%= blog.trainingDescription1 %>
+                                                            </p>
+                                                            <div class="dz-meta mb-4" style="margin-top: -1vmax;">
+                                                               <ul>
+                                                                  <li class="post-author text-primary text-capitalize">
+                                                                     <span>
+                                                                        <i class="fa-solid fa-location-dot"></i>
+                                                                     </span>
+                                                                     <%= blog.trainingLocation %>
+                                                                  </li>
+                                                                  <li class="post-date text-primary">
+                                                                     <span>
+                                                                        <i class="fa-solid fa-calendar-days"></i>
+                                                                     </span>
+                                                                     <%= new
+                                                                        Date(blog.trainingStartDate).toLocaleDateString('en-US',
+                                                                        { day: 'numeric' , month: 'short' ,
+                                                                        year: 'numeric' }) %>
+                                                                        -
+                                                                        <%= new
+                                                                           Date(blog.trainingEndDate).toLocaleDateString('en-US',
+                                                                           { month: 'short' , day: 'numeric' ,
+                                                                           year: 'numeric' }) %>
+                                                                  </li>
+                                                                  <li class="post-date text-primary text-capitalize">
+                                                                     <span>
+                                                                        <i class="fa-solid fa-chalkboard-user"></i>
+                                                                     </span>
+                                                                     <% if (blog.trainingProgram==='Other Training' ) {
+                                                                        %>
+                                                                        <%= blog.otherTraining %>
+                                                                           <% } else { %>
+                                                                              <%= blog.trainingProgram %>
+                                                                                 <% } %>
+                                                                  </li>
+                                                               </ul>
+                                                            </div>
+                                                            <div class="row">
+                                                               <div class="col-md-12 d-flex">
+                                                                  <div class="col-md-6">
+                                                                  </div>
+                                                                  <div class="col-md-6 text-end">
+                                                                     <a class="btn btn-primary"
+                                                                        href="/admin/trainings/current-trainings/trainings_details/<%= blog._id %>">
+                                                                        View More
+                                                                     </a>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <% } %>
+                                                      <% }); %>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <% } else { %>
+                        <div class="col-md-12">
+                           <h3 class="subtitle wow fadeInUp text-center" data-wow-delay="0.8s">
+                              <span style="opacity: 0.8; text-transform: uppercase;">
+                                 Welcome <%= student.firstname %>
+                                    <%= student.lastname %> 😊
+                              </span>
+                           </h3>
+                        </div>
+                        <% } %>
+         </div>
+
+      </div>
+   </div>
+
+   <%- include('partials/footer.ejs') %>
