@@ -240,9 +240,8 @@ exports.teccontactUs = catchAsyncErrors(async (req, res, next) => {
   });
 });
 exports.contactUsdata = catchAsyncErrors(async (req, res, next) => {
-  const contactUs = new ContactUs(req.body);
-  const addresses = await Address.find();
-  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
+  const contactUs = new ContactUs(req.body);git push -u origin master
+
   await contactUs.save();
   sendmail(req, res, next);
   req.flash("success", "Thank You For Contact Us");
