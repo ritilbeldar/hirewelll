@@ -50,57 +50,81 @@ exports.homepage = catchAsyncErrors(async (req, res, next) => {
 
 exports.aboutUs = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/aboutUs", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "About Us",
+    uniqueStates,
+    addresses,
   });
 });
 exports.tecaboutUs = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/aboutUs", {
     messages: req.flash(),
     students,
     isAuthenticated: true,
     title: "About Us",
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.preSchoolSetups = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/preSchoolSetups", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Pre School Setups",
+    uniqueStates,
+    addresses,
   });
 });
 exports.tecpreSchoolSetups = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/preSchoolSetups", {
     messages: req.flash(),
     students,
     isAuthenticated: true,
     title: "Pre School Setups",
+    uniqueStates,
+    addresses,
   });
 });
 exports.recruitment = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/recruitment", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Recruitment",
+    uniqueStates,
+    addresses,
   });
 });
 exports.tecrecruitment = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/recruitment", {
     messages: req.flash(),
     students,
     isAuthenticated: true,
     title: "Recruitment",
+    uniqueStates,
+    addresses,
   });
 });
 
@@ -108,6 +132,8 @@ exports.blogDetails = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
   const blogsId = req.params.id;
   const blogss = await Blogs.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
 
   try {
     const blogs = await Blogs.findById(blogsId).populate("Comments").exec();
@@ -120,6 +146,8 @@ exports.blogDetails = catchAsyncErrors(async (req, res, next) => {
       blogs,
       comments: blogs.Comments,
       blogss,
+      uniqueStates,
+      addresses,
     });
   } catch (error) {
     next(error);
@@ -129,12 +157,16 @@ exports.blogDetails = catchAsyncErrors(async (req, res, next) => {
 exports.blogGrid = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
   const blogs = await Blogs.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/blogGrid", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Blogs",
     blogs,
+    uniqueStates,
+    addresses,
   });
 });
 
@@ -142,6 +174,8 @@ exports.tecblogDetails = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
   const blogsId = req.params.id;
   const blogss = await Blogs.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
 
   try {
     const blogs = await Blogs.findById(blogsId).populate("Comments").exec();
@@ -154,6 +188,8 @@ exports.tecblogDetails = catchAsyncErrors(async (req, res, next) => {
       blogs,
       comments: blogs.Comments,
       blogss,
+      uniqueStates,
+      addresses,
     });
   } catch (error) {
     next(error);
@@ -163,36 +199,50 @@ exports.tecblogDetails = catchAsyncErrors(async (req, res, next) => {
 exports.tecblogGrid = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
   const blogs = await Blogs.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/blogGrid", {
     messages: req.flash(),
     students,
     isAuthenticated: true,
     title: "Blogs",
     blogs,
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.contactUs = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/contactUs", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Contact Us",
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.teccontactUs = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/contactUs", {
     messages: req.flash(),
     students,
     isAuthenticated: true,
     title: "Contact Us",
+    uniqueStates,
+    addresses,
   });
 });
 exports.contactUsdata = catchAsyncErrors(async (req, res, next) => {
   const contactUs = new ContactUs(req.body);
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   await contactUs.save();
   sendmail(req, res, next);
   req.flash("success", "Thank You For Contact Us");
@@ -201,58 +251,80 @@ exports.contactUsdata = catchAsyncErrors(async (req, res, next) => {
 exports.events = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
   const trainingEvents = await TrainingEvents.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/events", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Events",
     trainingEvents,
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.founders = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/founders", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Founders",
+    uniqueStates,
+    addresses,
   });
 });
 exports.jobDescription = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/jobDescription", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Job Description",
+    uniqueStates,
+    addresses,
   });
 });
 exports.jollyPhonics = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/jollyPhonics", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Jolly Phonics",
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.openings = catchAsyncErrors(async (req, res, next) => {
   const openings = await Openings.find();
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/openings", {
     messages: req.flash(),
     students,
     openings,
     isAuthenticated: false,
     title: "Openings",
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.tecopenings = catchAsyncErrors(async (req, res, next) => {
   const student = await Student.findById(req.id).populate("openings").exec();
   const openings = await Openings.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
 
   const appliedOpeningsIds = student.openings.map((opening) =>
     opening._id.toString()
@@ -265,6 +337,8 @@ exports.tecopenings = catchAsyncErrors(async (req, res, next) => {
     appliedOpeningsIds,
     isAuthenticated: true,
     title: "Training Topics",
+    uniqueStates,
+    addresses,
   });
 });
 
@@ -276,6 +350,8 @@ exports.tecevents = catchAsyncErrors(async (req, res, next) => {
     event._id.toString()
   );
 
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/events", {
     messages: req.flash(),
     student,
@@ -283,26 +359,36 @@ exports.tecevents = catchAsyncErrors(async (req, res, next) => {
     title: "Events",
     trainingEvents,
     appliedTrainingIds,
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.training = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/training", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Training",
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.tectraining = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/training", {
     messages: req.flash(),
     students,
     isAuthenticated: true,
     title: "Training",
+    uniqueStates,
+    addresses,
   });
 });
 
@@ -313,11 +399,15 @@ exports.jobDescriptiondetails = catchAsyncErrors(async (req, res, next) => {
   if (!opening) {
     return res.status(404).send("Opening not found");
   }
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/jobDescription", {
     messages: req.flash(),
     opening,
     title: "Job Description",
     isAuthenticated: false,
+    uniqueStates,
+    addresses,
   });
 });
 
@@ -326,10 +416,10 @@ exports.trainingsEventsDetails = catchAsyncErrors(async (req, res, next) => {
   const eventId = req.params.id;
   const events = await TrainingEvents.find();
 
-  console.log(events);
-
   try {
     const event = await TrainingEvents.findById(eventId);
+    const addresses = await Address.find();
+    const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
 
     res.render("Frontend/trainingsEventsDetails", {
       messages: req.flash(),
@@ -338,6 +428,8 @@ exports.trainingsEventsDetails = catchAsyncErrors(async (req, res, next) => {
       title: "Trainings Events Details",
       event,
       events,
+      uniqueStates,
+      addresses,
     });
   } catch (error) {
     next(error);
@@ -347,12 +439,16 @@ exports.trainingsEventsDetails = catchAsyncErrors(async (req, res, next) => {
 exports.jobDescription = catchAsyncErrors(async (req, res, next) => {
   const opening = req.params.id;
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/jobDescription", {
     messages: req.flash(),
     opening,
     students,
     isAuthenticated: false,
     title: "Job Description",
+    uniqueStates,
+    addresses,
   });
 });
 
@@ -362,6 +458,9 @@ exports.tecjobDescription = catchAsyncErrors(async (req, res, next) => {
   const appliedOpeningsIds = student.openings.map((opening) =>
     opening._id.toString()
   );
+
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
 
   const openingId = req.params.id;
   const opening = await Openings.findById(openingId);
@@ -377,6 +476,8 @@ exports.tecjobDescription = catchAsyncErrors(async (req, res, next) => {
     opening,
     title: "Job Description",
     isAuthenticated: true,
+    uniqueStates,
+    addresses,
   });
 });
 
@@ -394,6 +495,9 @@ exports.tectrainingsEventsDetails = catchAsyncErrors(async (req, res, next) => {
     const eventId = req.params.id;
     const event = await TrainingEvents.findById(eventId);
 
+    const addresses = await Address.find();
+    const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
+
     res.render("Frontend/trainingsEventsDetails", {
       messages: req.flash(),
       student,
@@ -402,6 +506,8 @@ exports.tectrainingsEventsDetails = catchAsyncErrors(async (req, res, next) => {
       event,
       events,
       appliedOpeningsIds,
+      uniqueStates,
+      addresses,
     });
   } catch (error) {
     next(error);
@@ -410,59 +516,83 @@ exports.tectrainingsEventsDetails = catchAsyncErrors(async (req, res, next) => {
 
 exports.solutions = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/solutions", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Solutions",
+    uniqueStates,
+    addresses,
   });
 });
 exports.trainingTopics = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/trainingTopics", {
     messages: req.flash(),
     students,
     isAuthenticated: false,
     title: "Training Topics",
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.tecfounders = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/founders", {
     messages: req.flash(),
     students,
     isAuthenticated: true,
     title: "Founders",
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.tecjollyPhonics = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/jollyPhonics", {
     messages: req.flash(),
     students,
     isAuthenticated: true,
     title: "Jolly Phonics",
+    uniqueStates,
+    addresses,
   });
 });
 
 exports.tecsolutions = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/solutions", {
     messages: req.flash(),
     students,
     isAuthenticated: true,
     title: "Solutions",
+    uniqueStates,
+    addresses,
   });
 });
 exports.tectrainingTopics = catchAsyncErrors(async (req, res, next) => {
   const students = await Student.find();
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
   res.render("Frontend/trainingTopics", {
     messages: req.flash(),
     students,
     isAuthenticated: true,
     title: "Training Topics",
+    uniqueStates,
+    addresses,
   });
 });
 
@@ -481,6 +611,9 @@ exports.currentuser = catchAsyncErrors(async (req, res, next) => {
     event._id.toString()
   );
 
+  const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
+
   res.render("Frontend/index", {
     messages: req.flash(),
     student,
@@ -491,6 +624,8 @@ exports.currentuser = catchAsyncErrors(async (req, res, next) => {
     blogs,
     trainingEvents,
     appliedTrainingIds,
+    uniqueStates,
+    addresses,
   });
 });
 
