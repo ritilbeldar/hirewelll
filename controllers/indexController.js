@@ -748,6 +748,9 @@ exports.userdashboard = catchAsyncErrors(async (req, res, next) => {
 
     const student = await Student.findById(req.id);
 
+    const addresses = await Address.find();
+  const uniqueStates = Array.from(new Set(addresses.map(address => address.state)));
+
     res.render("Frontend/userDashboard", {
       messages: req.flash(),
       student,
@@ -755,6 +758,8 @@ exports.userdashboard = catchAsyncErrors(async (req, res, next) => {
       training,
       isAuthenticated: true,
       title: "Dashboard",
+      addresses,
+      uniqueStates
     });
   } catch (error) {
     console.error("Error fetching student by ID:", error);
