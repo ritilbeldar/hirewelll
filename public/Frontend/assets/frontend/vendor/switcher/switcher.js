@@ -68,21 +68,3 @@ $(document).ready(function () {
 });
 
 
-
-var app = document.getElementById("app");
-
-var typewriter = new Typewriter(app, {
-  loop: true,
-});
-
-typewriter
-  .typeString(" 200+ Schools have Enrolled !")
-  .pauseFor(2500)
-  .deleteAll()
-  .typeString("500+ Teachers placed successfully !")
-  .pauseFor(2500)
-  .deleteAll()
-  .typeString("1000+ candidates attended trainings!")
-  .pauseFor(2500)
-  .deleteAll()
-  .start();
